@@ -5,28 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未来庵 - Access Guide</title>
     <link rel="icon" href="https://esse-sense.com/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --text: #1a1a1a;
-            --text-sub: #555;
-            --bg: #fafafa;
-            --card: #fff;
-            --border: #e5e5e5;
-            --accent: #2d5a27;
+            --bg: #FFFFF0;
+            --card: #ffffff;
+            --text: #783C28;
+            --text-sub: #A0503C;
+            --accent: #A0503C;
+            --accent-light: #F6BDA1;
+            --accent-pale: #FAC8A0;
+            --border: #EAD8CE;
+            --warm-bg: #FDF6F0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
+            font-family: "M PLUS 1p", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.8;
+            line-height: 1.9;
             -webkit-font-smoothing: antialiased;
         }
 
         .page {
-            max-width: 600px;
+            max-width: 560px;
             margin: 0 auto;
             padding: 48px 24px 64px;
         }
@@ -34,71 +39,79 @@
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-logo {
+            height: 28px;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
         .header h1 {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            letter-spacing: 0.08em;
-            margin-bottom: 4px;
+            letter-spacing: 0.12em;
+            color: var(--text);
+            margin-bottom: 6px;
         }
 
         .header .sub {
-            font-size: 13px;
-            color: var(--text-sub);
-            letter-spacing: 0.04em;
-        }
-
-        .header .org {
             font-size: 12px;
+            font-weight: 300;
             color: var(--text-sub);
-            margin-top: 8px;
+            letter-spacing: 0.08em;
         }
 
         /* Section */
         .section {
-            margin-bottom: 32px;
+            margin-bottom: 36px;
         }
 
         .section-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-sub);
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
+            letter-spacing: 0.16em;
+            margin-bottom: 14px;
         }
 
         /* Info rows */
         .info-row {
             display: flex;
-            gap: 12px;
-            padding: 10px 0;
+            gap: 16px;
+            padding: 8px 0;
         }
 
         .info-label {
-            width: 80px;
+            width: 72px;
             flex-shrink: 0;
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: 500;
             color: var(--text-sub);
-            padding-top: 2px;
+            padding-top: 3px;
+            letter-spacing: 0.04em;
         }
 
         .info-value {
-            font-size: 15px;
+            font-size: 14px;
+            font-weight: 400;
             flex: 1;
+            line-height: 1.8;
         }
 
         .info-value a {
             color: var(--accent);
             text-decoration: none;
+            border-bottom: 1px solid var(--accent-light);
+            transition: border-color 0.2s;
         }
 
         .info-value a:hover {
-            text-decoration: underline;
+            border-color: var(--accent);
         }
 
         /* Map */
@@ -106,27 +119,35 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .map-wrap iframe {
             display: block;
             width: 100%;
-            height: 280px;
+            height: 260px;
             border: none;
+        }
+
+        .map-link {
+            font-size: 12px;
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-light);
         }
 
         /* Access steps */
         .steps {
             list-style: none;
             counter-reset: step;
+            margin-top: 16px;
         }
 
         .steps li {
             position: relative;
-            padding: 8px 0 8px 36px;
+            padding: 6px 0 6px 40px;
             font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .steps li::before {
@@ -134,84 +155,107 @@
             content: counter(step);
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 24px;
-            height: 24px;
-            background: var(--text);
-            color: #fff;
+            top: 8px;
+            width: 26px;
+            height: 26px;
+            background: var(--accent);
+            color: var(--bg);
             border-radius: 50%;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Notes */
+        /* Note box */
         .note {
-            background: #f5f5f0;
+            background: var(--warm-bg);
             border-radius: 10px;
-            padding: 16px 20px;
+            padding: 18px 22px;
             font-size: 13px;
             color: var(--text-sub);
-            line-height: 1.8;
+            line-height: 1.9;
+            border: 1px solid var(--border);
         }
 
         .note p {
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .note p:last-child {
             margin-bottom: 0;
         }
 
-        /* Copy button */
-        .copy-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: var(--text);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: inherit;
-            cursor: pointer;
-            margin-top: 8px;
-            transition: opacity 0.15s;
-        }
-
-        .copy-btn:hover { opacity: 0.8; }
-        .copy-btn.copied { background: var(--accent); }
-
         /* Divider */
         .divider {
             height: 1px;
             background: var(--border);
-            margin: 32px 0;
+            margin: 36px 0;
         }
+
+        /* Share */
+        .share-section {
+            text-align: center;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: opacity 0.15s;
+        }
+
+        .copy-btn:hover { opacity: 0.85; }
+        .copy-btn.copied { background: #783C28; }
 
         /* Footer */
         .footer {
             text-align: center;
-            font-size: 11px;
-            color: #aaa;
-            margin-top: 48px;
+            font-size: 10px;
+            font-weight: 300;
+            color: var(--accent-light);
+            margin-top: 56px;
+            letter-spacing: 0.06em;
+        }
+
+        /* Placeholder notice */
+        .placeholder-notice {
+            background: #FFF3CD;
+            border: 1px solid #FFEAA7;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #856404;
+            margin-bottom: 24px;
+            text-align: center;
+            display: none; /* hidden by default, enable for editing */
         }
 
         @media (max-width: 480px) {
             .page { padding: 32px 16px 48px; }
-            .header h1 { font-size: 24px; }
+            .header h1 { font-size: 26px; }
         }
     </style>
 </head>
 <body>
     <div class="page">
+        <!-- Header -->
         <div class="header">
+            <img src="https://emerging-future.org/wp-content/themes/miratuku/img/common/header-logo.png"
+                 alt="miratuku" class="header-logo">
             <h1>未来庵</h1>
             <div class="sub">Miraian - Access Guide</div>
-            <div class="org">NPO法人ミラツク / 株式会社エッセンス</div>
         </div>
 
         <!-- Address -->
@@ -220,9 +264,10 @@
             <div class="info-row">
                 <div class="info-label">住所</div>
                 <div class="info-value">
+                    <!-- TODO: 正しい住所に差し替え -->
                     〒600-8841<br>
                     京都府京都市下京区朱雀正会町1-1<br>
-                    KYOCA（京果会館）5F 504
+                    KYOCA 5F 504
                 </div>
             </div>
         </div>
@@ -238,7 +283,7 @@
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-            <a href="https://maps.google.com/maps?q=KYOCA+京果会館+京都市下京区朱雀正会町1-1" target="_blank" style="font-size:13px; color:var(--accent);">Google Mapsで開く</a>
+            <a href="https://maps.google.com/maps?q=KYOCA+京果会館+京都市下京区朱雀正会町1-1" target="_blank" class="map-link">Google Mapsで開く</a>
         </div>
 
         <!-- Access -->
@@ -251,8 +296,9 @@
             </div>
 
             <ol class="steps">
+                <!-- TODO: 正しいアクセス手順に差し替え -->
                 <li>JR「梅小路京都西」駅の改札を出て左（東方向）へ</li>
-                <li>線路沿いに進むと左手にKYOCA（京果会館）が見えます</li>
+                <li>線路沿いに進むと左手にKYOCAが見えます</li>
                 <li>建物に入り、エレベーターで5Fへ</li>
                 <li><strong>504号室</strong>が未来庵です</li>
             </ol>
@@ -262,7 +308,7 @@
 
         <!-- Alternative access -->
         <div class="section">
-            <div class="section-title">Alternative Access</div>
+            <div class="section-title">Alternative</div>
 
             <div class="info-row">
                 <div class="info-label">京都駅から</div>
@@ -279,16 +325,15 @@
             <div class="section-title">Notes</div>
             <div class="note">
                 <p>- 駐車場・駐輪場はありません。公共交通機関をご利用ください。</p>
-                <p>- 1〜3階は飲食店・イベントスペースのある複合施設です。</p>
-                <p>- 梅小路公園・京都水族館の近くです。</p>
+                <p>- 到着されましたらお気軽にお声がけください。</p>
             </div>
         </div>
 
         <!-- Share -->
-        <div class="section">
+        <div class="share-section">
             <button class="copy-btn" onclick="copyLink()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-                URLをコピー
+                このページのURLをコピー
             </button>
         </div>
 
@@ -302,7 +347,7 @@
                 btn.textContent = 'Copied!';
                 btn.classList.add('copied');
                 setTimeout(() => {
-                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg> URLをコピー';
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg> このページのURLをコピー';
                     btn.classList.remove('copied');
                 }, 2000);
             });
