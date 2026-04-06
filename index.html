@@ -4,96 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未来庵 - Access Guide</title>
-    <link rel="icon" href="https://esse-sense.com/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./favicon.ico">
     <style>
         :root {
-            --bg: #FFFFF0;
-            --card: #ffffff;
-            --text: #783C28;
-            --text-sub: #A0503C;
-            --accent: #A0503C;
-            --accent-light: #F6BDA1;
-            --accent-pale: #FAC8A0;
-            --border: #EAD8CE;
-            --warm-bg: #FDF6F0;
+            /* Miratuku CI - brown/terracotta palette */
+            --color-bg:       #FDFAF6;
+            --color-surface:  #F7F2EC;
+            --color-text:     #3D2B1F;
+            --color-text-sub: #6B5344;
+            --color-accent:   #A65D3F;
+            --color-accent-hover: #8B4D34;
+            --color-border:   #E0D5CA;
+            --color-white:    #FFFFFF;
+
+            /* Spacing - 8px grid */
+            --space-xs:  4px;
+            --space-sm:  8px;
+            --space-md:  16px;
+            --space-lg:  24px;
+            --space-xl:  32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: "M PLUS 1p", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.9;
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+                         "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
         }
 
         .page {
             max-width: 560px;
             margin: 0 auto;
-            padding: 48px 24px 64px;
+            padding: var(--space-2xl) var(--space-lg) var(--space-3xl);
         }
 
         /* Header */
         .header {
             text-align: center;
-            margin-bottom: 48px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: var(--space-2xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--color-border);
         }
 
         .header-logo {
-            height: 28px;
-            margin-bottom: 20px;
-            opacity: 0.8;
+            height: 24px;
+            margin-bottom: var(--space-lg);
+            opacity: 0.85;
         }
 
         .header h1 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--text);
-            margin-bottom: 6px;
+            letter-spacing: 0.1em;
+            color: var(--color-text);
+            margin-bottom: var(--space-xs);
         }
 
         .header .sub {
             font-size: 12px;
-            font-weight: 300;
-            color: var(--text-sub);
-            letter-spacing: 0.08em;
+            font-weight: 400;
+            color: var(--color-text-sub);
+            letter-spacing: 0.06em;
         }
 
         /* Section */
         .section {
-            margin-bottom: 36px;
+            margin-bottom: var(--space-xl);
         }
 
         .section-title {
-            font-size: 10px;
-            font-weight: 500;
-            color: var(--accent);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-accent);
             text-transform: uppercase;
-            letter-spacing: 0.16em;
-            margin-bottom: 14px;
+            letter-spacing: 0.14em;
+            margin-bottom: var(--space-md);
         }
 
         /* Info rows */
         .info-row {
             display: flex;
-            gap: 16px;
-            padding: 8px 0;
+            gap: var(--space-md);
+            padding: var(--space-sm) 0;
         }
 
         .info-label {
-            width: 72px;
+            width: 80px;
             flex-shrink: 0;
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text-sub);
-            padding-top: 3px;
-            letter-spacing: 0.04em;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-sub);
+            padding-top: 2px;
+            letter-spacing: 0.02em;
         }
 
         .info-value {
@@ -104,22 +112,22 @@
         }
 
         .info-value a {
-            color: var(--accent);
+            color: var(--color-accent);
             text-decoration: none;
-            border-bottom: 1px solid var(--accent-light);
-            transition: border-color 0.2s;
+            border-bottom: 1px solid var(--color-border);
+            transition: border-color 0.2s ease-out;
         }
 
         .info-value a:hover {
-            border-color: var(--accent);
+            border-color: var(--color-accent);
         }
 
         /* Map */
         .map-wrap {
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid var(--border);
-            margin-bottom: 10px;
+            border: 1px solid var(--color-border);
+            margin-bottom: var(--space-sm);
         }
 
         .map-wrap iframe {
@@ -131,16 +139,21 @@
 
         .map-link {
             font-size: 12px;
-            color: var(--accent);
+            color: var(--color-accent);
             text-decoration: none;
-            border-bottom: 1px solid var(--accent-light);
+            border-bottom: 1px solid var(--color-border);
+            transition: border-color 0.2s ease-out;
+        }
+
+        .map-link:hover {
+            border-color: var(--color-accent);
         }
 
         /* Access steps */
         .steps {
             list-style: none;
             counter-reset: step;
-            margin-top: 16px;
+            margin-top: var(--space-md);
         }
 
         .steps li {
@@ -156,13 +169,13 @@
             position: absolute;
             left: 0;
             top: 8px;
-            width: 26px;
-            height: 26px;
-            background: var(--accent);
-            color: var(--bg);
+            width: 24px;
+            height: 24px;
+            background: var(--color-accent);
+            color: var(--color-bg);
             border-radius: 50%;
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -170,17 +183,17 @@
 
         /* Note box */
         .note {
-            background: var(--warm-bg);
-            border-radius: 10px;
-            padding: 18px 22px;
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: var(--space-md) var(--space-lg);
             font-size: 13px;
-            color: var(--text-sub);
+            color: var(--color-text-sub);
             line-height: 1.9;
-            border: 1px solid var(--border);
+            border: 1px solid var(--color-border);
         }
 
         .note p {
-            margin-bottom: 4px;
+            margin-bottom: var(--space-xs);
         }
 
         .note p:last-child {
@@ -190,61 +203,59 @@
         /* Divider */
         .divider {
             height: 1px;
-            background: var(--border);
-            margin: 36px 0;
+            background: var(--color-border);
+            margin: var(--space-xl) 0;
         }
 
         /* Share */
         .share-section {
             text-align: center;
+            margin-top: var(--space-xl);
         }
 
         .copy-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background: var(--accent);
-            color: var(--bg);
+            gap: var(--space-sm);
+            padding: 10px var(--space-lg);
+            background: var(--color-text);
+            color: var(--color-bg);
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 13px;
             font-weight: 500;
             font-family: inherit;
             cursor: pointer;
-            letter-spacing: 0.04em;
-            transition: opacity 0.15s;
+            letter-spacing: 0.02em;
+            transition: opacity 0.2s ease-out;
         }
 
-        .copy-btn:hover { opacity: 0.85; }
-        .copy-btn.copied { background: #783C28; }
+        .copy-btn:hover {
+            opacity: 0.85;
+        }
+
+        .copy-btn.copied {
+            background: var(--color-accent);
+        }
 
         /* Footer */
         .footer {
             text-align: center;
-            font-size: 10px;
-            font-weight: 300;
-            color: var(--accent-light);
-            margin-top: 56px;
-            letter-spacing: 0.06em;
-        }
-
-        /* Placeholder notice */
-        .placeholder-notice {
-            background: #FFF3CD;
-            border: 1px solid #FFEAA7;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 12px;
-            color: #856404;
-            margin-bottom: 24px;
-            text-align: center;
-            display: none; /* hidden by default, enable for editing */
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--color-text-sub);
+            margin-top: var(--space-2xl);
+            letter-spacing: 0.04em;
+            opacity: 0.6;
         }
 
         @media (max-width: 480px) {
-            .page { padding: 32px 16px 48px; }
-            .header h1 { font-size: 26px; }
+            .page {
+                padding: var(--space-xl) var(--space-md) var(--space-2xl);
+            }
+            .header h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
@@ -264,10 +275,8 @@
             <div class="info-row">
                 <div class="info-label">住所</div>
                 <div class="info-value">
-                    <!-- TODO: 正しい住所に差し替え -->
-                    〒600-8841<br>
-                    京都府京都市下京区朱雀正会町1-1<br>
-                    KYOCA 5F 504
+                    〒606-8317<br>
+                    京都府京都市左京区吉田本町13
                 </div>
             </div>
         </div>
@@ -277,13 +286,13 @@
             <div class="section-title">Map</div>
             <div class="map-wrap">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.2!2d135.7369!3d34.9887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600108c44e0c1f67%3A0x4b7bcf9f6e8b2e1a!2sKYOCA!5e0!3m2!1sja!2sjp!4v1"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1634.0!2d135.7846307!3d35.0263201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600109001af17809%3A0x60dbdabd021454e3!2z44Of44Op44OE44Kv5pyq5p2l5bq1IC1NSVJBSS1BTi0!5e0!3m2!1sja!2sjp!4v1"
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-            <a href="https://maps.google.com/maps?q=KYOCA+京果会館+京都市下京区朱雀正会町1-1" target="_blank" class="map-link">Google Mapsで開く</a>
+            <a href="https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z" target="_blank" class="map-link">Google Mapsで開く</a>
         </div>
 
         <!-- Access -->
@@ -292,15 +301,14 @@
 
             <div class="info-row">
                 <div class="info-label">最寄り駅</div>
-                <div class="info-value">JR山陰本線「梅小路京都西」駅 徒歩1分</div>
+                <div class="info-value">京阪「出町柳」駅 徒歩約10分<br>京都大学から徒歩2分</div>
             </div>
 
             <ol class="steps">
-                <!-- TODO: 正しいアクセス手順に差し替え -->
-                <li>JR「梅小路京都西」駅の改札を出て左（東方向）へ</li>
-                <li>線路沿いに進むと左手にKYOCAが見えます</li>
-                <li>建物に入り、エレベーターで5Fへ</li>
-                <li><strong>504号室</strong>が未来庵です</li>
+                <li>京阪「出町柳」駅の出口3を出て、今出川通を東へ進みます</li>
+                <li>百万遍交差点を右折し、東大路通を南へ</li>
+                <li>京都大学正門を過ぎ、吉田本町エリアへ</li>
+                <li>吉田本町13が<strong>未来庵</strong>です</li>
             </ol>
         </div>
 
@@ -312,11 +320,11 @@
 
             <div class="info-row">
                 <div class="info-label">京都駅から</div>
-                <div class="info-value">塩小路通を西へ徒歩約15分</div>
+                <div class="info-value">市バスで約30分（206系統など）</div>
             </div>
             <div class="info-row">
                 <div class="info-label">バス</div>
-                <div class="info-value">市バス205・208・33号系統<br>「梅小路公園前」下車 徒歩2分</div>
+                <div class="info-value">市バス206・201・31号系統<br>「京大正門前」下車 徒歩2分</div>
             </div>
         </div>
 
