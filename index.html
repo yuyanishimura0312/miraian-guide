@@ -5,88 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>未来庵 - Access Guide</title>
     <link rel="icon" href="./favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-bg:       #F8F5F0;
-            --color-surface:  #EFEBE4;
-            --color-card:     #FFFFFF;
-            --color-text:     #2C1F14;
-            --color-text-sub: #7A6B5D;
-            --color-accent:   #9B5B3A;
-            --color-accent-soft: rgba(155, 91, 58, 0.08);
-            --color-border:   #DDD5CB;
-            --color-border-light: #EBE6DF;
-            --color-hero:     #3A2E24;
+            --color-bg:       #FFFFFF;
+            --color-surface:  #F9FAFB;
+            --color-text:     #1A1A1A;
+            --color-text-sub: #6B7280;
+            --color-accent:   #374151;
+            --color-border:   #E5E7EB;
+            --color-border-light: #F3F4F6;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Hiragino Sans",
-                         "Hiragino Kaku Gothic ProN", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+                         "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
             background: var(--color-bg);
             color: var(--color-text);
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Hero header */
+        /* Hero with photo */
         .hero {
-            background: var(--color-hero);
-            color: #F8F5F0;
-            text-align: center;
-            padding: 56px 24px 52px;
             position: relative;
+            height: 360px;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 60% at 50% 40%, rgba(155, 91, 58, 0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 80% at 80% 20%, rgba(200, 160, 120, 0.06) 0%, transparent 60%);
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .hero > * { position: relative; }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(26, 26, 26, 0.1) 0%,
+                rgba(26, 26, 26, 0.45) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 24px 36px;
+            text-align: center;
+        }
 
         .hero-logo {
-            height: 20px;
-            opacity: 0.5;
-            margin-bottom: 32px;
+            height: 18px;
+            opacity: 0.7;
+            margin-bottom: 16px;
             filter: brightness(10);
         }
 
         .hero h1 {
-            font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
-            font-size: 36px;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            margin-bottom: 8px;
-            color: #F8F5F0;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.15);
         }
 
         .hero .sub {
             font-size: 11px;
-            font-weight: 300;
-            letter-spacing: 0.18em;
-            color: rgba(248, 245, 240, 0.45);
-            text-transform: uppercase;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .hero-line {
-            width: 32px;
-            height: 1px;
-            background: rgba(248, 245, 240, 0.2);
-            margin: 20px auto 0;
-        }
-
-        /* Main content */
+        /* Content */
         .content {
             max-width: 520px;
             margin: 0 auto;
@@ -95,77 +89,106 @@
 
         /* Address card */
         .address-card {
-            background: var(--color-card);
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-top: -28px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-top: -32px;
             position: relative;
-            box-shadow: 0 2px 20px rgba(44, 31, 20, 0.06), 0 0 0 1px rgba(44, 31, 20, 0.03);
+            z-index: 1;
         }
 
         .address-card .label {
             font-size: 10px;
-            font-weight: 500;
-            color: var(--color-accent);
+            font-weight: 600;
+            color: var(--color-text-sub);
             text-transform: uppercase;
-            letter-spacing: 0.16em;
-            margin-bottom: 10px;
-        }
-
-        .address-card .address-text {
-            font-family: "Shippori Mincho", serif;
-            font-size: 15px;
-            font-weight: 400;
-            line-height: 1.9;
-            color: var(--color-text);
+            letter-spacing: 0.14em;
+            margin-bottom: 8px;
         }
 
         .address-card .postal {
-            font-family: "Inter", sans-serif;
             font-size: 12px;
             color: var(--color-text-sub);
             margin-bottom: 2px;
         }
 
+        .address-card .address-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Photo gallery */
+        .gallery {
+            margin-top: 32px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.2s;
+        }
+
+        .gallery-grid img:hover {
+            opacity: 0.9;
+        }
+
+        .gallery-grid img:first-child {
+            grid-column: 1 / -1;
+            height: 220px;
+        }
+
         /* Section */
         .section {
-            margin-top: 40px;
+            margin-top: 36px;
         }
 
         .section-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .section-header::after {
             content: '';
             flex: 1;
             height: 1px;
-            background: var(--color-border-light);
+            background: var(--color-border);
         }
 
         .section-title {
             font-size: 10px;
-            font-weight: 500;
-            color: var(--color-accent);
+            font-weight: 600;
+            color: var(--color-text-sub);
             text-transform: uppercase;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.14em;
             white-space: nowrap;
         }
 
         /* Map */
         .map-wrap {
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 16px rgba(44, 31, 20, 0.06), 0 0 0 1px rgba(44, 31, 20, 0.04);
+            border: 1px solid var(--color-border);
         }
 
         .map-wrap iframe {
             display: block;
             width: 100%;
-            height: 280px;
+            height: 260px;
             border: none;
         }
 
@@ -173,106 +196,90 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-top: 12px;
+            margin-top: 10px;
             font-size: 12px;
-            font-weight: 400;
             color: var(--color-text-sub);
             text-decoration: none;
             transition: color 0.2s;
         }
 
-        .map-link:hover {
-            color: var(--color-accent);
-        }
+        .map-link:hover { color: var(--color-text); }
+        .map-link svg { opacity: 0.4; }
 
-        .map-link svg {
-            opacity: 0.5;
-        }
-
-        /* Access info */
+        /* Station badge */
         .station-badge {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            background: var(--color-accent-soft);
-            border: 1px solid rgba(155, 91, 58, 0.1);
-            border-radius: 8px;
-            padding: 12px 18px;
-            margin-bottom: 8px;
-            width: 100%;
+            gap: 12px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 14px 18px;
         }
 
-        .station-badge .icon {
-            width: 32px;
-            height: 32px;
+        .station-icon {
+            width: 36px;
+            height: 36px;
             background: var(--color-accent);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            color: #FFFFFF;
         }
 
-        .station-badge .icon svg {
-            color: #F8F5F0;
-        }
-
-        .station-badge .station-info {
-            flex: 1;
-        }
-
-        .station-badge .station-name {
+        .station-name {
             font-size: 14px;
             font-weight: 500;
             color: var(--color-text);
             line-height: 1.4;
         }
 
-        .station-badge .station-note {
+        .station-note {
             font-size: 12px;
             color: var(--color-text-sub);
-            line-height: 1.4;
         }
 
         /* Steps */
         .steps {
             list-style: none;
-            margin-top: 20px;
+            counter-reset: step;
+            margin-top: 16px;
             position: relative;
         }
 
         .steps::before {
             content: '';
             position: absolute;
-            left: 13px;
-            top: 28px;
-            bottom: 16px;
+            left: 11px;
+            top: 24px;
+            bottom: 14px;
             width: 1px;
             background: var(--color-border);
         }
 
         .steps li {
             position: relative;
-            padding: 8px 0 8px 44px;
+            padding: 6px 0 6px 40px;
             font-size: 14px;
             line-height: 1.7;
-            color: var(--color-text);
         }
 
         .steps li::before {
             counter-increment: step;
             content: counter(step);
             position: absolute;
-            left: 4px;
-            top: 10px;
+            left: 2px;
+            top: 8px;
             width: 20px;
             height: 20px;
-            background: var(--color-card);
-            color: var(--color-accent);
-            border: 1.5px solid var(--color-accent);
+            background: var(--color-bg);
+            color: var(--color-text-sub);
+            border: 1.5px solid var(--color-border);
             border-radius: 50%;
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -281,38 +288,34 @@
 
         .steps li:last-child::before {
             background: var(--color-accent);
-            color: var(--color-card);
+            color: #FFFFFF;
             border-color: var(--color-accent);
         }
 
-        .steps {
-            counter-reset: step;
-        }
-
-        /* Alternative section */
+        /* Alt grid */
         .alt-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .alt-card {
-            background: var(--color-card);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
             border-radius: 10px;
-            padding: 18px 20px;
-            box-shadow: 0 1px 8px rgba(44, 31, 20, 0.04), 0 0 0 1px rgba(44, 31, 20, 0.03);
+            padding: 16px 18px;
         }
 
-        .alt-card .alt-label {
+        .alt-label {
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--color-text-sub);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 6px;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
         }
 
-        .alt-card .alt-value {
+        .alt-value {
             font-size: 13px;
             line-height: 1.7;
             color: var(--color-text);
@@ -322,11 +325,11 @@
         .note {
             background: var(--color-surface);
             border-radius: 10px;
-            padding: 20px 24px;
+            padding: 18px 22px;
             font-size: 13px;
             color: var(--color-text-sub);
             line-height: 1.9;
-            border: 1px solid var(--color-border-light);
+            border: 1px solid var(--color-border);
         }
 
         .note-item {
@@ -335,9 +338,7 @@
             align-items: baseline;
         }
 
-        .note-item + .note-item {
-            margin-top: 4px;
-        }
+        .note-item + .note-item { margin-top: 4px; }
 
         .note-item::before {
             content: '';
@@ -346,102 +347,101 @@
             background: var(--color-border);
             border-radius: 50%;
             flex-shrink: 0;
-            margin-top: 8px;
+            margin-top: 9px;
         }
 
         /* Share */
         .share-section {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 36px;
         }
 
         .copy-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 28px;
-            background: var(--color-hero);
-            color: #F8F5F0;
+            padding: 11px 28px;
+            background: var(--color-accent);
+            color: #FFFFFF;
             border: none;
             border-radius: 100px;
             font-size: 13px;
-            font-weight: 400;
+            font-weight: 500;
             font-family: inherit;
             cursor: pointer;
             letter-spacing: 0.02em;
-            transition: all 0.25s ease-out;
-            box-shadow: 0 2px 12px rgba(44, 31, 20, 0.12);
+            transition: all 0.2s ease-out;
         }
 
         .copy-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(44, 31, 20, 0.18);
-        }
-
-        .copy-btn:active {
-            transform: translateY(0);
+            opacity: 0.85;
         }
 
         .copy-btn.copied {
-            background: var(--color-accent);
+            background: #059669;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid var(--color-border-light);
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
         }
 
         .footer-org {
             font-size: 10px;
-            font-weight: 400;
             color: var(--color-text-sub);
-            letter-spacing: 0.06em;
+            letter-spacing: 0.04em;
             opacity: 0.5;
         }
 
-        /* Animations */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .address-card { animation: fadeUp 0.6s ease-out 0.1s both; }
-        .section:nth-child(2) { animation: fadeUp 0.6s ease-out 0.2s both; }
-        .section:nth-child(3) { animation: fadeUp 0.6s ease-out 0.3s both; }
-        .section:nth-child(4) { animation: fadeUp 0.6s ease-out 0.35s both; }
-        .section:nth-child(5) { animation: fadeUp 0.6s ease-out 0.4s both; }
-        .share-section { animation: fadeUp 0.6s ease-out 0.45s both; }
-
         /* Responsive */
         @media (max-width: 480px) {
-            .hero { padding: 44px 20px 44px; }
-            .hero h1 { font-size: 28px; }
+            .hero { height: 280px; }
+            .hero h1 { font-size: 24px; }
             .content { padding: 0 16px 48px; }
-            .address-card { padding: 22px 24px; margin-top: -24px; }
+            .address-card { padding: 20px 22px; margin-top: -28px; }
+            .gallery-grid img { height: 120px; }
+            .gallery-grid img:first-child { height: 180px; }
             .alt-grid { grid-template-columns: 1fr; }
-            .map-wrap iframe { height: 220px; }
         }
     </style>
 </head>
 <body>
-    <!-- Hero -->
+    <!-- Hero photo -->
     <header class="hero">
-        <img src="https://emerging-future.org/wp-content/themes/miratuku/img/common/header-logo.png"
-             alt="miratuku" class="hero-logo">
-        <h1>未来庵</h1>
-        <div class="sub">Miraian &mdash; Access Guide</div>
-        <div class="hero-line"></div>
+        <img src="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1200&height=600&fit=crop&quality=85&format=jpg"
+             alt="未来庵の庭園" class="hero-img" loading="eager">
+        <div class="hero-overlay">
+            <img src="https://emerging-future.org/wp-content/themes/miratuku/img/common/header-logo.png"
+                 alt="miratuku" class="hero-logo">
+            <h1>未来庵</h1>
+            <div class="sub">Miraian &mdash; Access Guide</div>
+        </div>
     </header>
 
     <div class="content">
-        <!-- Address card (floating) -->
+        <!-- Address -->
         <div class="address-card">
             <div class="label">Address</div>
             <div class="postal">〒606-8317</div>
             <div class="address-text">京都府京都市左京区吉田本町13</div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="gallery">
+            <div class="section-header">
+                <span class="section-title">Gallery</span>
+            </div>
+            <div class="gallery-grid">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=400&fit=crop&quality=80&format=jpg"
+                     alt="庭園の小径" loading="lazy">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=500&height=320&fit=crop&quality=80&format=jpg"
+                     alt="室内" loading="lazy">
+                <img src="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=500&height=320&fit=crop&quality=80&format=jpg"
+                     alt="庭の眺め" loading="lazy">
+            </div>
         </div>
 
         <!-- Map -->
@@ -470,10 +470,10 @@
             </div>
 
             <div class="station-badge">
-                <div class="icon">
+                <div class="station-icon">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/><path d="M9 15h0"/><path d="M15 15h0"/></svg>
                 </div>
-                <div class="station-info">
+                <div>
                     <div class="station-name">京阪「出町柳」駅 徒歩約10分</div>
                     <div class="station-note">京都大学から徒歩2分</div>
                 </div>
@@ -523,7 +523,6 @@
             </button>
         </div>
 
-        <!-- Footer -->
         <footer class="footer">
             <div class="footer-org">NPO法人ミラツク / 株式会社エッセンス</div>
         </footer>
