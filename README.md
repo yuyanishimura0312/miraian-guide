@@ -29,7 +29,7 @@ miraian-guide/
 - ミラツク正式CI（NOSIGNER 2011）。Web アクセント #783C28、地 #FAF8F5、文字 #1A1A1A。図の配色は CI 12色。赤白CI（#CC1400）は使わない
 - 書体は姉妹ページ `miraian-lp`（journal.emerging-future.org/miraian/）と同じ Zen Kaku Gothic New / Archivo / IBM Plex Mono
 - 構成: ヒーロー（庭の写真＋所在地カード）→ 所要時間 → 道順（概念図と手順が連動）→ ほかの来方 → 地図（押して読み込む）→ 写真（拡大表示つき）→ ご来訪の前に → 未来庵について → URL を送る
-- 純黒・イタリックは使わない。文字のコントラストはすべて WCAG AA 以上。prefers-reduced-motion で動きを止める
+- 純黒・イタリックは使わない。文字のコントラストは WCAG AA 以上を目標とし、写真の上の文字には暗い下地を敷く（2026-11-03 の独立採点で写真上の文字が未達と指摘され是正）。prefers-reduced-motion で動きを止める
 
 ## SEO
 
