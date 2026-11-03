@@ -43,7 +43,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"NGO","@id":"https://emerging-future.org/#org","name":"NPO法人ミラツク","alternateName":"Miratuku","url":"https://emerging-future.org/","email":"info@emerging-future.org","logo":"https://miraian.emerging-future.org/assets/miratuku-logo.png"},
-{"@type":"Place","@id":"https://miraian.emerging-future.org/#place","name":"未来庵","alternateName":["MIRAI-AN","ミラツク未来庵"],"description":"NPO法人ミラツクの京都拠点。京都大学（本部構内）の東側、吉田山の西のふもとにある、未来学（Futures Studies）研究の拠点であり、余白と文化のなかで未来をそうぞうする知の場。京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。","url":"https://journal.emerging-future.org/miraian/","address":{"@type":"PostalAddress","postalCode":"606-8317","addressCountry":"JP","addressRegion":"京都府","addressLocality":"京都市左京区","streetAddress":"吉田本町13"},"geo":{"@type":"GeoCoordinates","latitude":35.0263201,"longitude":135.7846307},"hasMap":"https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z","photo":[{"@type":"ImageObject","contentUrl":"https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1600&height=1000&fit=crop&quality=82&format=jpg","caption":"未来庵の庭園"},{"@type":"ImageObject","contentUrl":"https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=1200&quality=80&format=jpg","caption":"庭園の小径"}],"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"駐車場","value":false},{"@type":"LocationFeatureSpecification","name":"駐輪場","value":false}],"parentOrganization":{"@id":"https://emerging-future.org/#org"}},
+{"@type":"Place","@id":"https://miraian.emerging-future.org/#place","name":"未来庵","alternateName":["MIRAI-AN","ミラツク未来庵"],"description":"NPO法人ミラツクの京都拠点。京都大学（本部構内）の東側、吉田山の西のふもとにある、未来学（Futures Studies）研究の拠点であり、余白と文化のなかで未来をそうぞうする知の場。京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。","url":"https://journal.emerging-future.org/miraian/","address":{"@type":"PostalAddress","postalCode":"606-8317","addressCountry":"JP","addressRegion":"京都府","addressLocality":"京都市左京区","streetAddress":"吉田本町13"},"geo":{"@type":"GeoCoordinates","latitude":35.0263201,"longitude":135.7846307},"hasMap":"https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z","photo":[{"@type":"ImageObject","contentUrl":"https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1600&height=1000&fit=crop&quality=82&format=jpg","caption":"未来庵の庭園"},{"@type":"ImageObject","contentUrl":"https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=1200&quality=80&format=jpg","caption":"庭園の小径"}],"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"駐車場","value":false}],"parentOrganization":{"@id":"https://emerging-future.org/#org"}},
 {"@type":"WebPage","@id":"https://miraian.emerging-future.org/#page","url":"https://miraian.emerging-future.org/","name":"未来庵（MIRAI-AN）へのアクセス","inLanguage":"ja","about":{"@id":"https://miraian.emerging-future.org/#place"},"publisher":{"@id":"https://emerging-future.org/#org"},"dateModified":"2026-11-04","primaryImageOfPage":{"@type":"ImageObject","url":"https://miraian.emerging-future.org/assets/og-access.png"},"breadcrumb":{"@id":"https://miraian.emerging-future.org/#crumbs"}},
 {"@type":"BreadcrumbList","@id":"https://miraian.emerging-future.org/#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"NPO法人ミラツク","item":"https://emerging-future.org/"},{"@type":"ListItem","position":2,"name":"未来庵","item":"https://journal.emerging-future.org/miraian/"},{"@type":"ListItem","position":3,"name":"アクセス","item":"https://miraian.emerging-future.org/"}]}
 ]}
@@ -122,7 +122,7 @@ a{color:inherit}
 
 /* ---------- top bar ---------- */
 .bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);padding:0 var(--side);height:var(--bar-h);transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease);color:var(--paper-lt);border-bottom:1px solid transparent}
-.bar:not(.solid){background:linear-gradient(180deg,rgba(33,23,18,.78),rgba(33,23,18,.42) 70%,rgba(33,23,18,0))}
+.bar:not(.solid){background:linear-gradient(180deg,rgba(33,23,18,.78),rgba(33,23,18,.58) 70%,rgba(33,23,18,0))}
 .bar.solid{background:rgba(250,248,245,.94);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);color:var(--ink);border-bottom-color:var(--hairline)}
 .brand{display:flex;align-items:center;gap:var(--space-2);text-decoration:none;flex:none;min-width:0}
 .brand img{height:24px;width:auto}
@@ -153,7 +153,7 @@ a{color:inherit}
   linear-gradient(180deg,rgba(33,23,18,.42) 0%,rgba(33,23,18,0) 30%),
   linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.52) 40%,rgba(33,23,18,0) 70%)}
 .hero-inner{padding:calc(var(--bar-h) + var(--space-4)) var(--side) clamp(var(--space-5),6vw,var(--space-10));max-width:var(--inner);margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:end}
-.hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:rgba(253,252,250,.85);margin-bottom:var(--space-3)}
+.hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:#FDFCFA;text-shadow:0 0 12px rgba(33,23,18,.95),0 0 3px rgba(33,23,18,.9);margin-bottom:var(--space-3)}
 .hero .obs span+span::before{content:"·";margin-right:var(--space-2);opacity:.6}
 .hero h1{font-weight:900;font-size:var(--fs-h1);line-height:.96;letter-spacing:-.01em}
 .hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(13px,1.4vw,18px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star)}
@@ -168,7 +168,7 @@ a{color:inherit}
   .hero{min-height:0}
   .hero-inner{grid-template-columns:1fr;gap:var(--space-4);padding-top:calc(var(--bar-h) + 42vw)}
   .hero-card{min-width:0}
-  .hero .obs span:nth-child(2),.hero .obs span:nth-child(3){display:none}
+  .hero .obs{display:none}
   .hero::before{background:linear-gradient(180deg,rgba(33,23,18,.5) 0%,rgba(33,23,18,.1) 24%),linear-gradient(0deg,rgba(33,23,18,.94) 0%,rgba(33,23,18,.82) 50%,rgba(33,23,18,.15) 80%)}
 }
 
@@ -202,9 +202,9 @@ section.sec{padding:var(--section) 0;position:relative;scroll-margin-top:calc(va
 section.sec:focus{outline:none}
 section.sec+section.sec{border-top:1px solid var(--hairline)}
 .sec-grid>*{min-width:0}
-.sec-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
+.sec-grid{display:grid;grid-template-columns:minmax(0,3.2fr) minmax(0,8.8fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
 .sec-idx{position:sticky;top:calc(var(--bar-h) + var(--space-3))}
-.sec-idx .num{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent)}
+.sec-idx .num{text-transform:uppercase;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent)}
 .sec-idx .num span{color:var(--ink-mute);margin-left:var(--space-1)}
 .sec-idx h2{font-weight:700;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2)}
 .sec-idx p{color:var(--ink-soft);font-size:var(--fs-sm);line-height:1.9;margin-top:var(--space-3);max-width:20em}
@@ -259,7 +259,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .steps li.on{border-top-color:var(--accent)}
 .steps .n{display:flex;align-items:baseline;gap:var(--space-1);font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent);text-transform:uppercase}
 .steps .n span{color:var(--ink-mute)}
-.steps .t{font-size:var(--fs-base);line-height:1.9;margin-top:var(--space-1)}
+.steps .t{font-size:var(--fs-base);line-height:1.9;margin-top:var(--space-1);word-break:auto-phrase}
 .steps .t .m{display:block;font-family:var(--mono);font-size:var(--fs-xs);color:var(--ink-mute);margin-top:var(--space-1);letter-spacing:.06em}
 .steps strong{color:var(--accent);font-weight:700}
 @media(max-width:880px){.steps{grid-template-columns:1fr 1fr;gap:var(--space-3)}}
@@ -468,9 +468,9 @@ footer ul a:hover{color:var(--accent)}
       </figure>
 
       <ol class="steps" aria-label="出町柳駅からの道順">
-        <li class="rv" data-step="1"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong>出口3</strong>を出て、今出川通を東へ進みます。</p></li>
+        <li class="rv" data-step="1"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong class="nw">出口3</strong>を出て、今出川通を東へ進みます。</p></li>
         <li class="rv" data-step="2"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
-        <li class="rv" data-step="3"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong>京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、約230m進みます。<span class="m">停留所から 約300 m · 徒歩 約5分</span></p></li>
+        <li class="rv" data-step="3"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、約230m進みます。<span class="m">停留所から 約300 m · 徒歩 約5分</span></p></li>
         <li class="rv" data-step="4"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">約 1.4 km · 徒歩 約18分</span></p></li>
       </ol>
       <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
@@ -678,7 +678,7 @@ footer ul a:hover{color:var(--accent)}
   }
   var steps=document.querySelectorAll('.steps li');
   function mark(n){stops.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)}); steps.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)});}
-  steps.forEach(function(li){li.addEventListener('mouseenter',function(){mark(li.dataset.step)}); li.addEventListener('mouseleave',function(){mark('')});});
+  steps.forEach(function(li){li.addEventListener('mouseenter',function(){mark(li.dataset.step)}); li.addEventListener('mouseleave',function(){mark('')}); li.tabIndex=0; li.addEventListener('focusin',function(){mark(li.dataset.step)}); li.addEventListener('focusout',function(){mark('')});});
 
   var live=document.getElementById('live');
   function copyText(t){
