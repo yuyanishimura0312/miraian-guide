@@ -51,16 +51,17 @@
 
 <style>
 /* ============================================================
-   未来庵 Access Guide — v3 (2026-11-04)
+   未来庵 Access Guide — v4 (2026-11-04)
    Miratuku official CI (NOSIGNER 2011): 12-colour earth palette,
    Web accent #783C28, off-white #FAF8F5, text #1A1A1A.
-   Type shared with miraian-lp: Zen Kaku Gothic New / Archivo / IBM Plex Mono.
+   Type: Zen Kaku Gothic New / Archivo / IBM Plex Mono.
    No pure black, no italics, single accent used sparingly.
+   Editorial, quiet layout: a running index column on the left,
+   hairline rules instead of boxes, weight contrast instead of size.
    Route map = OpenStreetMap data compiled by tools/map/build_map.py (ODbL).
    This file is generated from tools/index.template.html by tools/build_index.py.
 ============================================================ */
 :root{
-  /* --- colour --- */
   --paper:#FAF8F5;
   --paper-lt:#FDFCFA;
   --paper-dp:#F3EBDE;
@@ -68,42 +69,36 @@
   --ink-soft:#56504A;
   --ink-mute:#6E675D;          /* 5.0:1 on paper (AA) */
   --hairline:#E5DDD0;
+  --hairline-dk:#D6CBB9;
   --night:#211712;
   --night-2:#2A1D15;
   --star:#F2E6D4;
   --accent:#783C28;
   --accent-dp:#5E2E1F;
   --accent-wash:rgba(120,60,40,.08);
-  /* CI 12 colours (route map / small marks only) */
   --ci-orange:#F0A671; --ci-beige:#F2C792; --ci-camel:#CEA26F; --ci-peach:#F8CDAC;
   --ci-terracotta:#DC8766; --ci-amber:#B07256; --ci-brown:#966D5E; --ci-deep:#7A4033;
-  /* --- type --- */
   --ja:"Zen Kaku Gothic New","Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;
   --latin:"Archivo","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono","SF Mono",Menlo,monospace;
   --fs-xs:11px;
   --fs-sm:13px;
   --fs-base:clamp(14px,1.05vw,16px);
-  --fs-md:clamp(15px,1.2vw,18px);
-  --fs-lg:clamp(18px,1.6vw,21px);
-  --fs-h2:clamp(28px,4vw,52px);
-  --fs-h1:clamp(56px,10.5vw,136px);
-  --fs-num:clamp(44px,5.6vw,80px);
+  --fs-md:clamp(16px,1.3vw,19px);
+  --fs-lg:clamp(19px,1.7vw,24px);
+  --fs-h2:clamp(24px,2.6vw,36px);
+  --fs-h1:clamp(52px,9vw,116px);
   --tracking-label:.16em;
-  --tracking-head:-.01em;
-  --lh-body:1.9;
-  --lh-tight:1.25;
-  /* --- space (8pt) --- */
+  --tracking-head:-.005em;
+  --lh-body:1.95;
+  --lh-tight:1.35;
   --space-1:8px; --space-2:16px; --space-3:24px; --space-4:32px; --space-5:40px;
   --space-6:48px; --space-7:56px; --space-8:64px; --space-10:80px; --space-12:96px;
-  --section:clamp(var(--space-10),11vw,152px);
-  --head-gap:clamp(var(--space-5),6vw,var(--space-10));
-  --card-pad:clamp(var(--space-3),3vw,var(--space-5));
-  /* --- layout --- */
-  --inner:1160px;
-  --measure:36em;
+  --section:clamp(var(--space-8),9vw,128px);
+  --inner:1200px;
+  --measure:34em;
   --side:clamp(20px,5.5vw,72px);
-  --bar-h:72px;
+  --bar-h:64px;
   --radius-pill:999px;
   --radius-sm:2px;
   --ease:cubic-bezier(.16,1,.3,1);
@@ -115,66 +110,67 @@ body{font-family:var(--ja);background:var(--paper);color:var(--ink);line-height:
 img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--radius-sm)}
-.about :focus-visible,.facts :focus-visible,.bar:not(.solid) :focus-visible{outline-color:var(--ci-beige)}
+.night :focus-visible,.bar:not(.solid) :focus-visible{outline-color:var(--ci-beige)}
 .skip{position:absolute;left:-9999px;top:var(--space-1);background:var(--ink);color:var(--paper);padding:var(--space-1) var(--space-2);z-index:100}
 .skip:focus{left:var(--space-1)}
 .wrap{max-width:var(--inner);margin:0 auto;padding:0 var(--side)}
 .mono{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);text-transform:uppercase}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .nw{white-space:nowrap}
+.tlink{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.tlink:hover{color:var(--accent-dp)}
 
 /* ---------- top bar ---------- */
-.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);padding:var(--space-2) var(--side);min-height:var(--bar-h);transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease);color:var(--paper-lt);border-bottom:1px solid transparent}
-.bar:not(.solid){background:linear-gradient(180deg,rgba(33,23,18,.82),rgba(33,23,18,.5) 70%,rgba(33,23,18,0))}
+.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);padding:0 var(--side);height:var(--bar-h);transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease);color:var(--paper-lt);border-bottom:1px solid transparent}
+.bar:not(.solid){background:linear-gradient(180deg,rgba(33,23,18,.78),rgba(33,23,18,.42) 70%,rgba(33,23,18,0))}
 .bar.solid{background:rgba(250,248,245,.94);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);color:var(--ink);border-bottom-color:var(--hairline)}
-.brand{display:flex;align-items:center;gap:var(--space-2);text-decoration:none;flex:none}
-.brand img{height:26px;width:auto}
+.brand{display:flex;align-items:center;gap:var(--space-2);text-decoration:none;flex:none;min-width:0}
+.brand img{height:24px;width:auto}
 .brand .lg-light{display:block}.brand .lg-dark{display:none}
 .bar.solid .brand .lg-light{display:none}.bar.solid .brand .lg-dark{display:block}
-.brand .bt{display:flex;flex-direction:column;line-height:1.2;padding-left:var(--space-2);border-left:1px solid rgba(253,252,250,.35)}
+.brand .bt{display:flex;align-items:baseline;gap:8px;line-height:1.2;padding-left:var(--space-2);border-left:1px solid rgba(253,252,250,.35)}
 .bar.solid .brand .bt{border-left-color:var(--hairline)}
 .brand .bt b{font-weight:700;font-size:var(--fs-sm);letter-spacing:.14em}
 .brand .bt span{font-family:var(--latin);font-size:10px;letter-spacing:.24em;opacity:.8}
 .bar nav{display:flex;gap:2px}
-.bar nav a{font-size:12px;text-decoration:none;padding:6px 12px;border-radius:var(--radius-pill);letter-spacing:.08em;transition:background var(--dur-fast);white-space:nowrap}
+.bar nav a{font-size:12px;text-decoration:none;padding:6px 11px;border-radius:var(--radius-pill);letter-spacing:.08em;transition:background var(--dur-fast);white-space:nowrap}
 .bar nav a:hover{background:var(--accent-wash)}
 .bar.solid nav a[aria-current="true"]{color:var(--accent);background:var(--accent-wash)}
 @media(max-width:760px){
-  :root{--bar-h:96px}
-  .bar{flex-wrap:wrap;gap:var(--space-1);padding-bottom:var(--space-1)}
+  :root{--bar-h:56px}
   .brand .bt{display:none}
-  .bar nav{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 calc(-1*var(--side));padding:0 var(--side)}
-  .bar nav::-webkit-scrollbar{display:none}
-  .bar nav a{padding:6px 10px}
+  .bar nav{gap:0}
+  .bar nav a{padding:6px 6px;font-size:11.5px;letter-spacing:0}
+  .bar nav a[href="#map"]{display:none}
+  .brand img{height:20px}
 }
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:min(100vh,940px);min-height:min(100svh,940px);display:grid;align-items:end;color:var(--paper-lt);overflow:hidden;isolation:isolate;background:#7B7A40}
+.hero{position:relative;min-height:min(100vh,900px);min-height:min(100svh,900px);display:grid;align-items:end;color:var(--paper-lt);overflow:hidden;isolation:isolate;background:#7B7A40}
 .hero .hero-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.05);animation:settle 2.4s var(--ease) forwards;background:#7B7A40}
 @keyframes settle{to{transform:scale(1)}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
-  linear-gradient(180deg,rgba(33,23,18,.46) 0%,rgba(33,23,18,0) 28%),
-  linear-gradient(0deg,rgba(33,23,18,.9) 0%,rgba(33,23,18,.58) 36%,rgba(33,23,18,0) 68%)}
-.hero-inner{padding:calc(var(--bar-h) + var(--space-4)) var(--side) clamp(var(--space-5),7vw,var(--space-12));max-width:var(--inner);margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:end}
-.hero .obs{display:inline-flex;flex-wrap:wrap;gap:4px var(--space-2);color:var(--paper-lt);background:rgba(33,23,18,.72);padding:6px 12px;margin-bottom:var(--space-3)}
-.hero h1{font-weight:900;font-size:var(--fs-h1);line-height:.96;letter-spacing:var(--tracking-head)}
-.hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(14px,1.6vw,21px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star)}
-.hero .lede{margin-top:var(--space-4);max-width:var(--measure);font-size:var(--fs-md);font-weight:400;color:rgba(253,252,250,.92);line-height:2}
+  linear-gradient(180deg,rgba(33,23,18,.42) 0%,rgba(33,23,18,0) 30%),
+  linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.52) 40%,rgba(33,23,18,0) 70%)}
+.hero-inner{padding:calc(var(--bar-h) + var(--space-4)) var(--side) clamp(var(--space-5),6vw,var(--space-10));max-width:var(--inner);margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:end}
+.hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:rgba(253,252,250,.85);margin-bottom:var(--space-3)}
+.hero .obs span+span::before{content:"·";margin-right:var(--space-2);opacity:.6}
+.hero h1{font-weight:900;font-size:var(--fs-h1);line-height:.96;letter-spacing:-.01em}
+.hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(13px,1.4vw,18px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star)}
+.hero .lede{margin-top:var(--space-4);max-width:var(--measure);font-size:var(--fs-md);font-weight:400;color:rgba(253,252,250,.9);line-height:1.95}
 .hero .lede strong{font-weight:700;color:#fff}
-.hero-card{background:rgba(250,248,245,.96);color:var(--ink);padding:var(--card-pad);min-width:320px;border-top:3px solid var(--accent);box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.hero-card{background:rgba(250,248,245,.96);color:var(--ink);padding:clamp(var(--space-3),2.4vw,var(--space-4));min-width:300px;border-top:1px solid var(--accent)}
 .hero-card .mono{color:var(--ink-mute)}
-.hero-card .zip{font-family:var(--mono);font-size:var(--fs-sm);color:var(--ink-soft);margin-top:var(--space-1)}
-.hero-card .addr{font-size:var(--fs-lg);font-weight:700;line-height:1.55;letter-spacing:.04em}
-.hero-card .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-2)}
-.hero-card .quick{list-style:none;margin-top:var(--space-3);padding-top:var(--space-2);border-top:1px solid var(--hairline);display:grid;gap:6px;font-size:var(--fs-sm);color:var(--ink-soft)}
-.hero-card .quick li{display:flex;justify-content:space-between;gap:var(--space-2)}
-.hero-card .quick b{font-family:var(--latin);font-weight:500;color:var(--ink);white-space:nowrap}
-@media(max-width:880px){.hero-inner{grid-template-columns:1fr;gap:var(--space-4)}.hero-card{min-width:0}
-  .hero::before{background:linear-gradient(180deg,rgba(33,23,18,.55) 0%,rgba(33,23,18,.1) 24%),linear-gradient(0deg,rgba(33,23,18,.94) 0%,rgba(33,23,18,.8) 50%,rgba(33,23,18,.15) 80%)}}
-.scroll-cue{position:absolute;right:var(--side);top:50%;writing-mode:vertical-rl;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(253,252,250,.7)}
-.scroll-cue::after{content:"";display:block;width:1px;height:var(--space-7);margin:var(--space-2) auto 0;background:linear-gradient(var(--ci-beige),transparent);animation:drip 2.2s var(--ease) infinite}
-@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-@media(max-width:880px){.scroll-cue{display:none}}
+.hero-card .zip{font-family:var(--mono);font-size:var(--fs-sm);color:var(--ink-soft);margin-top:var(--space-2)}
+.hero-card .addr{font-size:var(--fs-lg);font-weight:700;line-height:1.5;letter-spacing:.03em}
+.hero-card .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-3)}
+@media(max-width:880px){
+  .hero{min-height:0}
+  .hero-inner{grid-template-columns:1fr;gap:var(--space-4);padding-top:calc(var(--bar-h) + 42vw)}
+  .hero-card{min-width:0}
+  .hero .obs span:nth-child(2),.hero .obs span:nth-child(3){display:none}
+  .hero::before{background:linear-gradient(180deg,rgba(33,23,18,.5) 0%,rgba(33,23,18,.1) 24%),linear-gradient(0deg,rgba(33,23,18,.94) 0%,rgba(33,23,18,.82) 50%,rgba(33,23,18,.15) 80%)}
+}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:var(--space-1);font-family:inherit;font-size:var(--fs-sm);font-weight:500;letter-spacing:.04em;padding:10px 18px;min-height:44px;border-radius:var(--radius-pill);text-decoration:none;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:background var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease)}
@@ -184,37 +180,39 @@ a{color:inherit}
 .btn svg{width:15px;height:15px;flex:none}
 .btn.done{background:var(--accent-dp);border-color:var(--accent-dp);color:#fff}
 
-/* ---------- facts band ---------- */
-.facts{background:var(--night);color:var(--star);position:relative;overflow:hidden}
-.facts::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 120% at 85% 0%,rgba(220,135,102,.16),transparent 60%);pointer-events:none}
-.facts ul{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:relative}
-.facts li{padding:clamp(var(--space-4),4vw,var(--space-6)) clamp(var(--space-2),3vw,var(--space-5));border-left:1px solid rgba(242,221,196,.16)}
-.facts li:first-child{border-left:0;padding-left:0}
-.facts .k{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ci-beige)}
-.facts .v{display:flex;align-items:baseline;gap:6px;margin:var(--space-1) 0 4px}
-.facts .v b{font-family:var(--latin);font-weight:300;font-size:var(--fs-num);line-height:1;color:var(--paper-lt);letter-spacing:-.02em}
-.facts .v span{font-size:14px}
-.facts .d{font-size:var(--fs-sm);color:rgba(242,230,212,.84);line-height:1.7}
-@media(max-width:760px){.facts ul{grid-template-columns:1fr}.facts li{border-left:0;border-top:1px solid rgba(242,221,196,.16);padding-left:0;padding-right:0}.facts li:first-child{border-top:0}}
+/* ---------- intro (positioning) ---------- */
+.intro{padding:var(--section) 0 clamp(var(--space-6),6vw,var(--space-10));border-bottom:1px solid var(--hairline)}
+.intro-grid>*{min-width:0}
+.intro-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-5),6vw,var(--space-12));align-items:start}
+.intro .lead{font-size:clamp(20px,2.1vw,30px);font-weight:500;line-height:1.75;letter-spacing:.01em;max-width:22em}
+.intro .lead strong{font-weight:700}
+.intro .side p{color:var(--ink-soft);font-size:var(--fs-base);line-height:2}
+.intro .side p+p{margin-top:var(--space-2)}
+.glance{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(var(--space-6),6vw,var(--space-10));border-top:1px solid var(--hairline)}
+.glance li{padding:var(--space-3) var(--space-3) 0 0;border-left:1px solid var(--hairline);padding-left:var(--space-3)}
+.glance li:first-child{border-left:0;padding-left:0}
+.glance .k{font-size:var(--fs-sm);color:var(--ink-mute)}
+.glance .v{font-size:var(--fs-lg);font-weight:700;line-height:1.4;margin-top:2px}
+.glance .v small{font-size:var(--fs-sm);font-weight:400;color:var(--ink-soft);margin-left:6px}
+@media(max-width:880px){.intro-grid{grid-template-columns:1fr;gap:var(--space-4)}
+  .glance{grid-template-columns:1fr}.glance li{border-left:0;padding-left:0;border-top:1px solid var(--hairline)}.glance li:first-child{border-top:0}}
 
-/* ---------- sections ---------- */
-section.sec{padding:var(--section) 0;position:relative;scroll-margin-top:calc(var(--bar-h) + var(--space-1));isolation:isolate}
+/* ---------- sections: running index column ---------- */
+section.sec{padding:var(--section) 0;position:relative;scroll-margin-top:calc(var(--bar-h) + var(--space-1))}
 section.sec:focus{outline:none}
-.sec-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--space-6);margin-bottom:var(--head-gap);align-items:end}
-@media(max-width:880px){.sec-head{grid-template-columns:1fr;gap:var(--space-2)}}
-.kicker{display:flex;align-items:center;gap:var(--space-2);color:var(--ink-soft)}
-.kicker .idx{color:var(--accent);font-weight:500}
-.kicker::after{content:"";flex:1;height:1px;background:var(--hairline);max-width:120px}
-.sec-head h2{font-weight:900;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2)}
-.sec-head p{color:var(--ink-soft);font-size:var(--fs-base);max-width:var(--measure)}
-.sec-head p a{color:var(--accent)}
-.watermark{position:absolute;right:var(--side);top:clamp(var(--space-5),6vw,var(--space-10));font-weight:900;font-size:clamp(120px,18vw,260px);line-height:1;color:var(--paper-dp);z-index:-1;user-select:none;pointer-events:none}
+section.sec+section.sec{border-top:1px solid var(--hairline)}
+.sec-grid>*{min-width:0}
+.sec-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
+.sec-idx{position:sticky;top:calc(var(--bar-h) + var(--space-3))}
+.sec-idx .num{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent)}
+.sec-idx .num span{color:var(--ink-mute);margin-left:var(--space-1)}
+.sec-idx h2{font-weight:700;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2)}
+.sec-idx p{color:var(--ink-soft);font-size:var(--fs-sm);line-height:1.9;margin-top:var(--space-3);max-width:20em}
+.sec-idx p a{color:var(--accent)}
+@media(max-width:880px){.sec-grid{grid-template-columns:1fr;gap:var(--space-4)}.sec-idx{position:static}.sec-idx p{max-width:var(--measure)}}
 
-/* ---------- route (OSM map + steps) ---------- */
-.route{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-4),4vw,var(--space-8));align-items:start}
-@media(min-width:961px){.route .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4)}.route .steps::before{display:none}.route .steps li{grid-template-columns:1fr;border-bottom:0;border-top:1px solid var(--hairline)}}
+/* ---------- route ---------- */
 .mapfig{background:var(--paper-lt);border:1px solid var(--hairline);padding:clamp(var(--space-2),2vw,var(--space-3))}
-@media(max-width:960px){.mapfig{position:relative;top:0}}
 .mapfig figcaption{display:flex;justify-content:space-between;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-2);color:var(--ink-mute);font-size:12px}
 .mapfig figcaption a{color:var(--accent);padding:4px 0}
 .legend{list-style:none;display:flex;flex-wrap:wrap;gap:4px var(--space-2);margin-top:var(--space-2);font-size:12px;color:var(--ink-soft)}
@@ -255,52 +253,48 @@ section.sec:focus{outline:none}
 .m-sub circle{fill:var(--paper);stroke:var(--ci-terracotta);stroke-width:3}
 .m-pt-s{font-size:13.5px;font-weight:700;fill:#5A4A40;paint-order:stroke;stroke:#F6F1EA;stroke-width:5}
 
-.steps{list-style:none;position:relative}
-.steps::before{content:"";position:absolute;left:23px;top:var(--space-4);bottom:var(--space-4);width:1px;background:var(--hairline)}
-.steps li{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);cursor:default}
-.steps li:last-child{border-bottom:0}
-.steps .n{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid var(--hairline);font-family:var(--latin);font-weight:500;font-size:15px;color:var(--accent);position:relative;z-index:1;transition:background .3s var(--ease),color .3s,border-color .3s}
-.steps li.on .n,.steps li:last-child .n{background:var(--accent);color:#fff;border-color:var(--accent)}
-.steps .t{font-size:var(--fs-base);line-height:1.85;padding-top:var(--space-1)}
-.steps .t small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:var(--tracking-label);color:var(--ink-mute);text-transform:uppercase;margin-bottom:2px}
-.steps .t .m{display:block;font-family:var(--mono);font-size:var(--fs-xs);color:var(--ink-mute);margin-top:4px;letter-spacing:.08em}
+/* steps: four quiet columns, number and text share one baseline */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4);margin-top:clamp(var(--space-5),5vw,var(--space-8))}
+.steps li{border-top:1px solid var(--hairline-dk);padding-top:var(--space-2);transition:border-color .3s var(--ease)}
+.steps li.on{border-top-color:var(--accent)}
+.steps .n{display:flex;align-items:baseline;gap:var(--space-1);font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent);text-transform:uppercase}
+.steps .n span{color:var(--ink-mute)}
+.steps .t{font-size:var(--fs-base);line-height:1.9;margin-top:var(--space-1)}
+.steps .t .m{display:block;font-family:var(--mono);font-size:var(--fs-xs);color:var(--ink-mute);margin-top:var(--space-1);letter-spacing:.06em}
 .steps strong{color:var(--accent);font-weight:700}
-.route-note{margin-top:var(--space-3);font-size:var(--fs-sm);color:var(--ink-mute);line-height:1.8}
+@media(max-width:880px){.steps{grid-template-columns:1fr 1fr;gap:var(--space-3)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.route-note{margin-top:var(--space-4);font-size:var(--fs-sm);color:var(--ink-mute);line-height:1.9;max-width:var(--measure)}
 
-/* ---------- other ways ---------- */
-.way .btn{margin-top:var(--space-2);align-self:flex-start}
-.ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
-@media(max-width:960px){.ways{grid-template-columns:1fr}}
-.way{background:var(--paper-lt);padding:var(--card-pad);display:flex;flex-direction:column;gap:var(--space-2);transition:background .3s var(--ease)}
-.way:hover{background:#fff}
-.way .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--paper-dp);color:var(--accent)}
-.way .ico svg{width:20px;height:20px}
-.way h3{font-size:var(--fs-lg);font-weight:700;line-height:1.5}
-.way .big{font-family:var(--latin);font-weight:300;font-size:clamp(34px,4vw,48px);line-height:1;color:var(--accent-dp);letter-spacing:-.02em}
-.way .big small{font-family:var(--ja);font-size:var(--fs-sm);font-weight:500;color:var(--ink-soft);letter-spacing:.04em;margin-left:4px}
-.way p{font-size:14px;color:var(--ink-soft);line-height:1.85}
-.way .tag{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.way .tag span{font-family:var(--latin);font-size:12px;font-weight:600;padding:3px 10px;border-radius:var(--radius-pill);background:var(--paper-dp);color:var(--accent-dp)}
-.ways-note{margin-top:var(--space-3);font-size:var(--fs-sm);color:var(--ink-mute);line-height:1.8;max-width:var(--measure)}
+/* Google map strip (supplement to the route map) */
+.gmap{margin-top:clamp(var(--space-5),5vw,var(--space-8));border-top:1px solid var(--hairline);padding-top:var(--space-3);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-4);align-items:start}
+.gmap>*{min-width:0}
+.gmap .num{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent);text-transform:uppercase}
+.gmap h3{font-weight:700;font-size:var(--fs-md);line-height:1.5;margin-top:var(--space-1)}
+.gmap p{color:var(--ink-soft);font-size:var(--fs-sm);line-height:1.9;margin-top:var(--space-1);max-width:24em}
+.gmap .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-2)}
+.map-frame{position:relative;height:clamp(240px,28vw,360px);width:100%;background:var(--paper-dp);border:1px solid var(--hairline)}
+.map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.75) sepia(.12)}
+.map-frame .load{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:var(--space-3)}
+.map-frame .load p{font-size:var(--fs-sm);color:var(--ink-soft);max-width:22em}
+@media(max-width:880px){.gmap{grid-template-columns:1fr}}
+
+/* ---------- ways (bus / car): a quiet list ---------- */
+.ways{list-style:none;border-top:1px solid var(--hairline-dk)}
+.ways li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);align-items:baseline}
+.ways h3{font-size:var(--fs-md);font-weight:700;line-height:1.5}
+.ways .tag{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.ways .tag span{font-family:var(--latin);font-size:11px;font-weight:600;padding:2px 9px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);color:var(--accent-dp)}
+.ways p{font-size:var(--fs-base);color:var(--ink-soft);line-height:1.9}
+.ways p a{color:var(--accent)}
+.ways .time{font-size:var(--fs-base);font-weight:700;text-align:right;white-space:nowrap}
+.ways .time small{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--ink-mute);letter-spacing:.04em}
+@media(max-width:760px){.ways li{grid-template-columns:1fr;gap:var(--space-1)}.ways .time{text-align:left}.ways .time small{display:inline;margin-left:6px}}
+.ways-note{margin-top:var(--space-4);font-size:var(--fs-sm);color:var(--ink-mute);line-height:1.9;max-width:var(--measure)}
 .ways-note a{color:var(--accent)}
 
-/* ---------- map ---------- */
-.sec-map{background:var(--paper-dp)}
-.map{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0;border:1px solid var(--hairline);background:var(--paper-lt)}
-@media(max-width:900px){.map{grid-template-columns:1fr}}
-.map-frame{position:relative;min-height:440px;background:#EDE6DA}
-.map-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.75) sepia(.12)}
-.map-frame .load{position:absolute;inset:0;display:grid;place-items:center;text-align:center;gap:var(--space-2);padding:var(--space-3);background:repeating-linear-gradient(0deg,transparent 0 39px,rgba(150,109,94,.12) 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,rgba(150,109,94,.12) 39px 40px),var(--paper-dp)}
-.map-frame .load p{font-size:var(--fs-sm);color:var(--ink-soft);max-width:22em}
-.map-side{padding:var(--card-pad);display:flex;flex-direction:column;gap:var(--space-3)}
-.map-side dl{display:grid;gap:var(--space-2)}
-.map-side dt{font-family:var(--mono);font-size:10px;letter-spacing:var(--tracking-label);color:var(--ink-mute);text-transform:uppercase}
-.map-side dd{font-size:var(--fs-base);line-height:1.75;margin-top:2px}
-.map-side dd.big{font-size:var(--fs-lg);font-weight:700}
-.map-side .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:auto}
-
 /* ---------- gallery ---------- */
-.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(120px,14vw,190px);gap:clamp(var(--space-1),1vw,14px)}
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(110px,12vw,170px);gap:clamp(var(--space-1),1vw,14px)}
 .gallery figure{position:relative;min-height:0}
 .gallery button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative;overflow:hidden;background:var(--lqip,var(--paper-dp))}
 .gallery button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -312,70 +306,59 @@ section.sec:focus{outline:none}
 .g2{grid-column:8/13;grid-row:1/3}
 .g3{grid-column:8/13;grid-row:3/5}
 .g4{grid-column:1/8;grid-row:4/5}
-@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.g1{grid-column:1/3;grid-row:1/3}.g2{grid-column:1/2;grid-row:3/4}.g3{grid-column:2/3;grid-row:3/4}.g4{grid-column:1/3;grid-row:4/5}}
-.credit{margin-top:var(--space-2);font-size:12px;color:var(--ink-mute)}
+@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:140px}.g1{grid-column:1/3;grid-row:1/3}.g2{grid-column:1/2;grid-row:3/4}.g3{grid-column:2/3;grid-row:3/4}.g4{grid-column:1/3;grid-row:4/5}}
 dialog.lb{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh;margin:auto}
 dialog.lb::backdrop{background:rgba(33,23,18,.88)}
 dialog.lb img{max-width:min(1200px,94vw);max-height:84vh;width:auto;height:auto;margin:0 auto}
 dialog.lb p{color:var(--star);font-size:var(--fs-sm);text-align:center;margin-top:var(--space-1)}
 dialog.lb .x{position:fixed;top:var(--space-2);right:var(--space-2);width:44px;height:44px;border-radius:50%;border:1px solid rgba(242,230,212,.4);background:rgba(33,23,18,.6);color:var(--star);font-size:22px;cursor:pointer}
 
+/* ---------- night: about + course ---------- */
+.night{background:var(--night);color:var(--star)}
+.night .sec-idx .num{color:var(--ci-orange)}.night .sec-idx .num span{color:rgba(242,230,212,.55)}
+.night .sec-idx h2{color:var(--paper-lt)}
+.night .sec-idx p{color:rgba(242,230,212,.7)}
+.about p{font-size:var(--fs-base);line-height:2.1;color:rgba(242,230,212,.88);max-width:var(--measure)}
+.about p+p{margin-top:var(--space-3)}
+.about .pull{font-size:clamp(19px,1.9vw,26px);font-weight:500;line-height:1.7;color:var(--paper-lt);max-width:22em;margin-bottom:var(--space-4)}
+.about .note{font-size:var(--fs-sm);color:rgba(242,230,212,.7);margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(242,221,196,.18);max-width:var(--measure)}
+.night .btn{background:var(--ci-beige);border-color:var(--ci-beige);color:var(--night)}
+.night .btn:hover{background:var(--paper-lt)}
+.night .btn.ghost{background:transparent;color:var(--ci-beige)}
+.night .btn.ghost:hover{background:rgba(242,199,146,.12)}
+.about .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-4)}
 
-.note{padding:var(--card-pad);border:1px solid var(--hairline);background:var(--paper-lt);display:grid;grid-template-columns:44px minmax(0,1fr);gap:var(--space-2);align-items:start}
-.note .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--hairline);color:var(--accent)}
-.note .ico svg{width:20px;height:20px}
-.note h3{font-size:17px;font-weight:700;line-height:1.5}
-.note p{font-size:14px;color:var(--ink-soft);margin-top:4px}
+.course{border-top:1px solid rgba(242,221,196,.18)}
+.course-grid>*{min-width:0}
+.course-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
+.course .status{display:inline-block;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ci-orange);border:1px solid rgba(240,166,113,.5);padding:3px 10px;border-radius:var(--radius-pill)}
+.course h3{font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.4;margin-top:var(--space-3);color:var(--paper-lt)}
+.course h3 span{display:block;font-size:var(--fs-md);font-weight:500;color:var(--ci-beige);margin-top:6px;letter-spacing:.06em}
+.course .lead{margin-top:var(--space-3);font-size:var(--fs-base);line-height:2.05;color:rgba(242,230,212,.86);max-width:var(--measure)}
+.course .cb-facts{display:grid;gap:var(--space-2)}
+.course .cb-facts div{border-top:1px solid rgba(242,221,196,.18);padding-top:var(--space-2)}
+.course dt{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.12em;color:rgba(242,230,212,.6);text-transform:uppercase}
+.course dd{font-size:var(--fs-base);font-weight:700;line-height:1.7;margin-top:4px;color:var(--paper-lt)}
+.course dd small{display:block;font-weight:400;color:rgba(242,230,212,.75);font-size:var(--fs-sm)}
+.course .acts{margin-top:var(--space-4)}
+@media(max-width:880px){.course-grid{grid-template-columns:1fr;gap:var(--space-4)}}
 
-/* ---------- about (night) ---------- */
-.about{background:var(--night);color:var(--star);overflow:hidden}
-.about .watermark{color:var(--night-2)}
-.about .kicker{color:rgba(242,230,212,.6)}
-.about .kicker .idx{color:var(--ci-orange)}
-.about .kicker::after{background:rgba(242,221,196,.18)}
-.about-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(var(--space-4),6vw,var(--space-12));align-items:center}
-@media(max-width:880px){.about-grid{grid-template-columns:1fr}}
-.about h2{font-weight:900;font-size:clamp(26px,3.4vw,44px);line-height:1.4;margin-top:var(--space-2);color:var(--paper-lt);letter-spacing:var(--tracking-head)}
-.about p{font-size:var(--fs-base);line-height:2.05;color:rgba(242,230,212,.86);margin-top:var(--space-3);max-width:32em}
-.about .btn{margin-top:var(--space-4);background:var(--ci-beige);border-color:var(--ci-beige);color:var(--night)}
-.about .btn:hover{background:var(--paper-lt)}
-.about-photo{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--lqip,var(--night-2))}
-.about-photo img{width:100%;height:100%;object-fit:cover}
-.about-photo figcaption{position:absolute;left:0;bottom:0;padding:var(--space-1) var(--space-2);font-family:var(--mono);font-size:10px;letter-spacing:var(--tracking-label);color:var(--star);background:linear-gradient(transparent,rgba(33,23,18,.7));width:100%}
-
-/* ---------- course banner ---------- */
-.course-banner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:end;padding:clamp(var(--space-5),5vw,var(--space-10));background:var(--paper-lt);border:1px solid var(--hairline);border-top:3px solid var(--accent);color:var(--ink);text-decoration:none;transition:background .3s var(--ease),border-color .3s}
-.course-banner:hover{background:#fff;border-color:var(--accent)}
-.cb-status{display:inline-block;margin-top:var(--space-2);padding:4px 12px;border-radius:999px;background:var(--accent);color:#fff;font-size:11px;letter-spacing:.12em}
-.course-banner h2{font-weight:900;font-size:clamp(28px,3.6vw,48px);line-height:1.3;margin-top:var(--space-2);letter-spacing:var(--tracking-head)}
-.cb-sub{display:block;font-size:clamp(15px,1.4vw,19px);font-weight:500;color:var(--accent);margin-top:var(--space-1);letter-spacing:.08em}
-.cb-lead{margin-top:var(--space-3);font-size:var(--fs-base);line-height:2;color:var(--ink-soft);max-width:34em}
-.cb-facts{display:grid;gap:var(--space-2)}
-.cb-facts div{border-top:1px solid var(--hairline);padding-top:var(--space-2)}
-.cb-facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-mute)}
-.cb-facts dd{font-size:var(--fs-base);font-weight:700;line-height:1.7;margin-top:2px}
-.cb-facts small{font-weight:400;color:var(--ink-soft)}
-.cb-cta{grid-column:1/-1;display:inline-flex;align-items:center;gap:var(--space-1);justify-self:start;font-weight:700;color:var(--accent);border-bottom:1px solid currentColor;padding-bottom:2px}
-.cb-cta svg{width:18px;height:18px;transition:transform .3s var(--ease)}
-.course-banner:hover .cb-cta svg{transform:translateX(4px)}
-@media(max-width:880px){.course-banner{grid-template-columns:1fr}}
-.lede-sub{display:block;margin-top:var(--space-2);font-size:var(--fs-sm);opacity:.9}
-.about-note{font-size:var(--fs-sm)!important;opacity:.85}
-/* ---------- share / footer ---------- */
-.share{text-align:center;padding:clamp(var(--space-8),8vw,var(--space-12)) var(--side);border-bottom:1px solid var(--hairline)}
-.share h2{font-weight:900;font-size:clamp(22px,2.6vw,32px);line-height:1.5}
-.share p{color:var(--ink-soft);font-size:14px;margin-top:var(--space-1)}
-.share .acts{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-3)}
-footer{padding:var(--space-5) var(--side) var(--space-7);display:flex;flex-wrap:wrap;gap:var(--space-3);justify-content:space-between;align-items:center;max-width:var(--inner);margin:0 auto;font-size:12px;color:var(--ink-mute)}
-footer .lock{display:flex;align-items:center;gap:var(--space-2);text-decoration:none;color:var(--ink-soft)}
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--hairline);padding:clamp(var(--space-6),6vw,var(--space-10)) 0 var(--space-6);font-size:var(--fs-sm);color:var(--ink-soft)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,5fr) repeat(3,minmax(0,2fr));gap:var(--space-5)}
+footer .lock{display:inline-block;text-decoration:none}
 footer .lock img{height:28px;width:auto}
-footer .lock span{line-height:1.5}
-footer nav{display:flex;gap:var(--space-2);flex-wrap:wrap}
-footer nav a{text-decoration:none;display:inline-block;padding:6px 0}
-footer nav a:hover{color:var(--accent)}
+footer .org{margin-top:var(--space-3);line-height:1.9}
+footer .org b{font-weight:700;color:var(--ink)}
+footer h4{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ink-mute);text-transform:uppercase;font-weight:500;margin-bottom:var(--space-2)}
+footer ul{list-style:none;display:grid;gap:6px}
+footer ul a{text-decoration:none;display:inline-block;padding:2px 0;overflow-wrap:anywhere}
+footer ul a:hover{color:var(--accent)}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2);margin-top:clamp(var(--space-5),5vw,var(--space-8));padding-top:var(--space-3);border-top:1px solid var(--hairline);font-size:12px;color:var(--ink-mute)}
+@media(max-width:880px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}}
 
 /* ---------- reveal ---------- */
-.js .rv{opacity:0;transform:translateY(22px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
 .js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
@@ -386,15 +369,15 @@ footer nav a:hover{color:var(--accent)}
   .m-goal-pulse{display:none}
 }
 @media print{
-  .bar,.scroll-cue,.map-frame,dialog{display:none!important}
+  .bar,.map-frame,dialog{display:none!important}
   .hero{min-height:auto;color:var(--ink)}.hero::before,.hero .hero-img{display:none}
-  .hero .lede,.hero h1 .en{color:var(--ink)}
-  .facts,.about{background:#fff;color:var(--ink)}.facts .v b,.about h2{color:var(--ink)}
+  .hero .lede,.hero h1 .en,.hero .obs{color:var(--ink)}
+  .night{background:#fff;color:var(--ink)}.night .sec-idx h2,.about .pull,.course h3,.course dd{color:var(--ink)}
   .js .rv{opacity:1;transform:none}
   .js .gallery img{opacity:1}
   .js .m-route.draw{stroke-dashoffset:0;stroke-dasharray:none}
   section.sec{padding:var(--space-4) 0}
-  .mapfig{position:static}
+  .sec-idx{position:static}
 }
 </style>
 </head>
@@ -409,11 +392,11 @@ footer nav a:hover{color:var(--accent)}
   </a>
   <nav aria-label="ページ内">
     <a href="#route">道順</a>
-    <a href="#ways">バスで</a>
+    <a href="#ways">バス・車</a>
     <a href="#map">地図</a>
     <a href="#photos">写真</a>
-    <a href="#parking">お車の方</a>
-    <a href="#course">未来学講座</a>
+    <a href="#about">未来庵</a>
+    <a href="#course">講座</a>
   </nav>
 </header>
 
@@ -427,9 +410,9 @@ footer nav a:hover{color:var(--accent)}
        sizes="100vw" alt="未来庵の庭。黄葉した木々のあいだを石畳の小径が入口へ続く" fetchpriority="high" referrerpolicy="no-referrer" width="1600" height="1000">
   <div class="hero-inner">
     <div>
-      <p class="obs mono"><span>Futures Studies · Access</span><span>N 35.0263°</span><span>E 135.7846°</span><span>Kyoto · Sakyo</span></p>
+      <p class="obs mono"><span>Access</span><span>N 35.0263°</span><span>E 135.7846°</span><span>Kyoto · Sakyo</span></p>
       <h1 id="h1">未来庵<span class="en">MIRAI-AN</span></h1>
-      <p class="lede">NPO法人ミラツクの<strong class="nw">未来学研究の拠点</strong>です。<span class="nw">余白と文化に身を置き、</span><span class="nw">未来をそうぞうする知の場へ。</span><span class="lede-sub">クライアント、パートナー、ワークショップ参加者、研究者の方をお迎えしています。このページは行き方のご案内です。</span></p>
+      <p class="lede">NPO法人ミラツクの<strong class="nw">未来学研究の拠点</strong>へ、<span class="nw">お越しいただくための</span><span class="nw">行き方のご案内です。</span></p>
     </div>
     <div class="hero-card rv">
       <p class="mono">Address — 所在地</p>
@@ -441,39 +424,37 @@ footer nav a:hover{color:var(--accent)}
         <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=35.0263201,135.7846307&travelmode=transit" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>経路を調べる</a>
       </div>
-      <ul class="quick" aria-label="所要時間の目安">
-        <li><span>京阪「出町柳」駅から</span><b>徒歩 約18分</b></li>
-        <li><span>市バス「京大農学部前」から</span><b>徒歩 約5分</b></li>
-      </ul>
     </div>
   </div>
-  <span class="scroll-cue" aria-hidden="true">SCROLL</span>
 </section>
 
-<!-- ================= FACTS ================= -->
-<section class="facts" aria-label="所要時間の目安">
+<!-- ================= INTRO ================= -->
+<section class="intro" aria-labelledby="h-intro">
   <div class="wrap">
-    <ul>
-      <li class="rv"><p class="k">京阪「出町柳」駅から</p><p class="v"><b>18</b><span>分</span></p><p class="d">徒歩 約1.4km。出口3から今出川通を東へ</p></li>
-      <li class="rv"><p class="k">市バス「京大農学部前」から</p><p class="v"><b>5</b><span>分</span></p><p class="d">徒歩 約300m。7・203系統が停まります</p></li>
-      <li class="rv"><p class="k">JR京都駅から</p><p class="v"><b>35</b><span>分（目安）</span></p><p class="d">京都駅前 A2のりばから市バス7系統で「京大農学部前」まで。そこから徒歩約5分</p></li>
+    <div class="intro-grid">
+      <p class="lead rv" id="h-intro">未来庵は、未来学（Futures Studies）<span class="nw">研究の拠点</span>であり、<strong>余白と文化のなかで未来をそうぞうする</strong>知の場です。</p>
+      <div class="side rv">
+        <p>京都大学の東側、吉田山の西のふもと。クライアント、パートナー、ワークショップの参加者、研究者の方をお迎えしています。</p>
+        <p>見学・プログラムへの参加・場所のご利用は、事前のご相談制です。</p>
+      </div>
+    </div>
+    <ul class="glance rv" aria-label="所要時間の目安">
+      <li><p class="k">京阪「出町柳」駅から</p><p class="v">徒歩 約18分<small>約1.4km</small></p></li>
+      <li><p class="k">市バス「京大農学部前」から</p><p class="v">徒歩 約5分<small>約300m</small></p></li>
+      <li><p class="k">JR京都駅から</p><p class="v">市バス7系統 約35分<small>目安</small></p></li>
     </ul>
   </div>
 </section>
 
 <!-- ================= ROUTE ================= -->
 <section class="sec" id="route" tabindex="-1" aria-labelledby="h-route">
-  <span class="watermark" aria-hidden="true">道</span>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="kicker mono rv"><span class="idx">01</span><span>Route</span></p>
-        <h2 id="h-route" class="rv"><span class="nw">出町柳駅から、</span><br><span class="nw">歩いて未来庵へ。</span></h2>
-      </div>
-      <p class="rv">京阪「出町柳」駅からは、今出川通をまっすぐ東へ進み、百万遍を越えて京都大学の北側を歩きます。約1.4km、徒歩約18分です。地図は OpenStreetMap の道路データから作った、縮尺のある正確なものです。</p>
+  <div class="wrap sec-grid">
+    <div class="sec-idx">
+      <p class="num rv">01<span>Route</span></p>
+      <h2 id="h-route" class="rv"><span class="nw">出町柳駅から、</span><span class="nw">歩いて。</span></h2>
+      <p class="rv">京阪「出町柳」駅から今出川通をまっすぐ東へ。百万遍を越え、京都大学の北側を歩きます。約1.4km、徒歩約18分。地図は OpenStreetMap の道路データから作った、縮尺のあるものです。</p>
     </div>
-
-    <div class="route">
+    <div>
       <figure class="mapfig rv">
         <div class="mapscroll" role="region" tabindex="0" aria-label="道順の地図（狭い画面では横にスクロールできます）">
         {{MAP_SVG}}
@@ -487,111 +468,85 @@ footer nav a:hover{color:var(--accent)}
       </figure>
 
       <ol class="steps" aria-label="出町柳駅からの道順">
-        <li class="rv" data-step="1"><span class="n" aria-hidden="true">1</span><p class="t"><small>Start</small>京阪「出町柳」駅の<strong>出口3</strong>を出て、今出川通を東へ進みます。</p></li>
-        <li class="rv" data-step="2"><span class="n" aria-hidden="true">2</span><p class="t"><small>Straight</small><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
-        <li class="rv" data-step="3"><span class="n" aria-hidden="true">3</span><p class="t"><small>Turn</small>市バス「<strong>京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、約230m進みます。<span class="m">停留所から 約300 m · 徒歩 約5分</span></p></li>
-        <li class="rv" data-step="4"><span class="n" aria-hidden="true">4</span><p class="t"><small>Arrive</small>吉田本町13が<strong>未来庵</strong>です。<span class="m">約 1.4 km · 徒歩 約18分</span></p></li>
+        <li class="rv" data-step="1"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong>出口3</strong>を出て、今出川通を東へ進みます。</p></li>
+        <li class="rv" data-step="2"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
+        <li class="rv" data-step="3"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong>京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、約230m進みます。<span class="m">停留所から 約300 m · 徒歩 約5分</span></p></li>
+        <li class="rv" data-step="4"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">約 1.4 km · 徒歩 約18分</span></p></li>
       </ol>
-    </div>
-    <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
-  </div>
-</section>
+      <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
 
-<!-- ================= OTHER WAYS ================= -->
-<section class="sec" id="ways" aria-labelledby="h-ways" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="kicker mono rv"><span class="idx">02</span><span>By bus</span></p>
-        <h2 id="h-ways" class="rv"><span class="nw">バスでも、</span><span class="nw">京都駅からも。</span></h2>
-      </div>
-      <p class="rv">最寄りの停留所は、今出川通の「京大農学部前」です。7系統と203系統が停まります。</p>
-    </div>
-    <div class="ways">
-      <article class="way rv">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg></span>
-        <h3>JR京都駅から</h3>
-        <p class="big">35<small>分（目安）</small></p>
-        <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。</p>
-        <div class="tag"><span>7</span></div>
-      </article>
-      <article class="way rv">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 10h16M8 21v-3M16 21v-3"/><circle cx="8" cy="14" r="1"/><circle cx="16" cy="14" r="1"/></svg></span>
-        <h3>出町柳駅前から</h3>
-        <p class="big">8<small>分</small></p>
-        <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。</p>
-        <div class="tag"><span>7</span><span>203</span></div>
-      </article>
-      <article class="way rv">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-        <h3>「京大正門前」で降りたら</h3>
-        <p class="big">11<small>分</small></p>
-        <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
-        <div class="tag"><span>東大路通</span></div>
-      </article>
-      <article class="way rv" id="parking">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 17V8h3a2.5 2.5 0 010 5h-3"/></svg></span>
-        <h3>お車でお越しの場合</h3>
-        <p>未来庵には駐車場がありません。周辺のコインパーキングをご利用ください。空き状況や料金は地図でご確認いただけます。</p>
-        <a class="btn ghost" href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキングを探す</a>
-      </article>
-    </div>
-    <p class="ways-note">バスの乗車時間は京都大学の案内資料にもとづく目安、徒歩の時間は地図データでの計測と実際に歩いた目安です。ダイヤ・のりばは変わることがあります。最新の運行は<a href="https://www.city.kyoto.lg.jp/kotsu/" target="_blank" rel="noopener">京都市交通局</a>でご確認ください。</p>
-  </div>
-</section>
-
-<!-- ================= MAP ================= -->
-<section class="sec sec-map" id="map" aria-labelledby="h-map">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="kicker mono rv"><span class="idx">03</span><span>Map</span></p>
-        <h2 id="h-map" class="rv">Google マップで見る。</h2>
-      </div>
-      <p class="rv">Google マップでは「ミラツク未来庵」で表示されます。スマートフォンでは「経路を調べる」から、現在地からの道順を開けます。</p>
-    </div>
-    <div class="map rv">
-      <div class="map-frame" id="mapframe">
-        <div class="load">
-          <div>
-            <p>地図を表示すると、Google マップの内容を読み込みます。</p>
-            <p style="margin-top:var(--space-2)"><button class="btn" type="button" id="loadmap">地図を表示する</button></p>
+      <div class="gmap rv" id="map" tabindex="-1">
+        <div>
+          <p class="num">Google Maps</p>
+          <h3>Google マップで見る</h3>
+          <p>「ミラツク未来庵」で表示されます。スマートフォンでは「経路を調べる」から、現在地からの道順を開けます。</p>
+          <div class="acts">
+            <a class="btn ghost" href="https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">Google マップで開く</a>
+            <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=35.0263201,135.7846307&travelmode=transit" target="_blank" rel="noopener">経路を調べる</a>
+          </div>
+        </div>
+        <div class="map-frame" id="mapframe">
+          <div class="load">
+            <div>
+              <p>地図を表示すると、Google マップの内容を読み込みます。</p>
+              <p style="margin-top:var(--space-2)"><button class="btn" type="button" id="loadmap">地図を表示する</button></p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="map-side">
-        <dl>
-          <div><dt>Name</dt><dd class="big">未来庵 MIRAI-AN</dd></div>
-          <div><dt>Address</dt><dd>〒606-8317<br>京都府京都市左京区吉田本町13</dd></div>
-          <div><dt>Nearest</dt><dd>京阪「出町柳」駅 徒歩約18分<br>市バス「京大農学部前」徒歩約5分</dd></div>
-          <div><dt>Parking</dt><dd>駐車場はありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください</dd></div>
-        </dl>
-        <div class="acts">
-          <a class="btn" href="https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Google マップで開く</a>
-          <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=35.0263201,135.7846307&travelmode=transit" target="_blank" rel="noopener">経路を調べる</a>
-        </div>
-      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WAYS ================= -->
+<section class="sec" id="ways" tabindex="-1" aria-labelledby="h-ways">
+  <div class="wrap sec-grid">
+    <div class="sec-idx">
+      <p class="num rv">02<span>By bus · By car</span></p>
+      <h2 id="h-ways" class="rv"><span class="nw">バスでも、</span><span class="nw">京都駅からも。</span></h2>
+      <p class="rv">最寄りの停留所は、今出川通の「京大農学部前」です。7系統と203系統が停まります。</p>
+    </div>
+    <div>
+      <ul class="ways">
+        <li class="rv">
+          <div><h3>JR京都駅から</h3><div class="tag"><span>7</span></div></div>
+          <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。</p>
+          <p class="time">約35分<small>目安</small></p>
+        </li>
+        <li class="rv">
+          <div><h3>出町柳駅前から</h3><div class="tag"><span>7</span><span>203</span></div></div>
+          <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。</p>
+          <p class="time">約8分</p>
+        </li>
+        <li class="rv">
+          <div><h3>「京大正門前」で降りたら</h3><div class="tag"><span>東大路通</span></div></div>
+          <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
+          <p class="time">徒歩 約11分</p>
+        </li>
+        <li class="rv" id="parking">
+          <div><h3>お車でお越しの場合</h3></div>
+          <p>未来庵には駐車場がありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください。空き状況や料金は地図でご確認いただけます。</p>
+          <p class="time">駐車場なし</p>
+        </li>
+      </ul>
+      <p class="ways-note">バスの乗車時間は京都大学の案内資料にもとづく目安、徒歩の時間は地図データでの計測と実際に歩いた目安です。ダイヤ・のりばは変わることがあります。最新の運行は<a href="https://www.city.kyoto.lg.jp/kotsu/" target="_blank" rel="noopener">京都市交通局</a>でご確認ください。</p>
     </div>
   </div>
 </section>
 
 <!-- ================= PHOTOS ================= -->
-<section class="sec" id="photos" aria-labelledby="h-photos">
-  <span class="watermark" aria-hidden="true">庭</span>
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="kicker mono rv"><span class="idx">04</span><span>Photos</span></p>
-        <h2 id="h-photos" class="rv"><span class="nw">積み上げられてきた</span><br><span class="nw">庭と共に、</span></h2>
-      </div>
+<section class="sec" id="photos" tabindex="-1" aria-labelledby="h-photos">
+  <div class="wrap sec-grid">
+    <div class="sec-idx">
+      <p class="num rv">03<span>Photos</span></p>
+      <h2 id="h-photos" class="rv"><span class="nw">積み上げられて</span><span class="nw">きた庭と共に、</span></h2>
       <p class="rv">石畳の小径を抜けた先が、ミラツクの京都拠点・未来庵の入口です。到着の目印にご覧ください。</p>
     </div>
     <div class="gallery">
-      <figure class="g1 rv" style="--lqip:#7B7A40"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：庭と入口への小径"><img src="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1100&height=760&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1100&height=760&fit=crop&quality=80&format=jpg 1100w, https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=2200&height=1520&fit=crop&quality=76&format=jpg 2200w" sizes="(max-width:760px) 100vw, 58vw" alt="黄葉した木々の下、石畳の小径が入口へ続く庭" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="1100" height="760"><figcaption>庭と入口への小径</figcaption></button></figure>
-      <figure class="g2 rv" style="--lqip:#889059"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：庭園の小径"><img src="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg 800w, https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=1600&height=1000&fit=crop&quality=76&format=jpg 1600w" sizes="(max-width:760px) 50vw, 42vw" alt="苔と石灯籠のある庭を抜ける石畳の小径" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="800" height="500"><figcaption>庭園の小径</figcaption></button></figure>
-      <figure class="g3 rv" style="--lqip:#7A7D6D"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：庭に面した室内"><img src="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg 800w, https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=1600&height=1000&fit=crop&quality=76&format=jpg 1600w" sizes="(max-width:760px) 50vw, 42vw" alt="大きなガラス戸から庭が見える室内と木のテーブル" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="800" height="500"><figcaption>庭に面した室内</figcaption></button></figure>
-      <figure class="g4 rv" style="--lqip:#8A7357"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：煉瓦の壁のある部屋"><img src="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=1100&height=300&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=1100&height=300&fit=crop&quality=80&format=jpg 1100w, https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=2200&height=600&fit=crop&quality=76&format=jpg 2200w" sizes="(max-width:760px) 100vw, 58vw" alt="煉瓦の壁とソファ、木のテーブルのある部屋" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="1100" height="300"><figcaption>煉瓦の壁のある部屋</figcaption></button></figure>
+      <figure class="g1 rv" style="--lqip:#7B7A40"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：庭と入口への小径"><img src="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1100&height=760&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=1100&height=760&fit=crop&quality=80&format=jpg 1100w, https://cdnspacemarket.com/uploads/attachments/1105566/image.jpg?width=2200&height=1520&fit=crop&quality=76&format=jpg 2200w" sizes="(max-width:760px) 100vw, 44vw" alt="黄葉した木々の下、石畳の小径が入口へ続く庭" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="1100" height="760"><figcaption>庭と入口への小径</figcaption></button></figure>
+      <figure class="g2 rv" style="--lqip:#889059"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：庭園の小径"><img src="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg 800w, https://cdnspacemarket.com/uploads/attachments/1105567/image.jpg?width=1600&height=1000&fit=crop&quality=76&format=jpg 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="苔と石灯籠のある庭を抜ける石畳の小径" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="800" height="500"><figcaption>庭園の小径</figcaption></button></figure>
+      <figure class="g3 rv" style="--lqip:#7A7D6D"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：庭に面した室内"><img src="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=800&height=500&fit=crop&quality=80&format=jpg 800w, https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=1600&height=1000&fit=crop&quality=76&format=jpg 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="大きなガラス戸から庭が見える室内と木のテーブル" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="800" height="500"><figcaption>庭に面した室内</figcaption></button></figure>
+      <figure class="g4 rv" style="--lqip:#8A7357"><button type="button" data-full="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=2000&quality=82&format=jpg" aria-label="写真を拡大：煉瓦の壁のある部屋"><img src="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=1100&height=300&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=1100&height=300&fit=crop&quality=80&format=jpg 1100w, https://cdnspacemarket.com/uploads/attachments/1105569/image.jpg?width=2200&height=600&fit=crop&quality=76&format=jpg 2200w" sizes="(max-width:760px) 100vw, 44vw" alt="煉瓦の壁とソファ、木のテーブルのある部屋" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="1100" height="300"><figcaption>煉瓦の壁のある部屋</figcaption></button></figure>
     </div>
   </div>
   <dialog class="lb" id="lb" aria-label="写真の拡大表示">
@@ -600,62 +555,92 @@ footer nav a:hover{color:var(--accent)}
   </dialog>
 </section>
 
-
-
-<!-- ================= COURSE ================= -->
-<section class="sec course" id="course" aria-labelledby="h-course" style="padding-top:0">
-  <div class="wrap">
-    <a class="course-banner rv" href="https://journal.emerging-future.org/futures-studies/">
-      <div class="cb-head">
-        <p class="kicker mono"><span class="idx">05</span><span>Futures Studies Course</span></p>
-        <p class="cb-status mono">第二期 受付中</p>
-        <h2 id="h-course">未来学入門講座<span class="cb-sub">未来に、手を伸ばす。</span></h2>
-        <p class="cb-lead">ミラツクが開く、未来学に正面から向き合う講座です。ウェンデル・ベル『Foundations of Futures Studies vol.1』を参考文献に、オンラインの3回で未来学の成立と前提、認識論、手法論を学び、ワークショップ回ではここ未来庵で、その視点を実際に使います。</p>
+<!-- ================= ABOUT (night) ================= -->
+<section class="sec night about" id="about" tabindex="-1" aria-labelledby="h-about">
+  <div class="wrap sec-grid">
+    <div class="sec-idx">
+      <p class="num rv">04<span>About Mirai-an</span></p>
+      <h2 id="h-about" class="rv"><span class="nw">未来学の拠点、</span><span class="nw">余白と文化の</span><span class="nw">知の場。</span></h2>
+    </div>
+    <div>
+      <p class="pull rv">すでに現れている未来の兆しを観測し、対話を通じて意味を与え、選び取るべき<span class="nw">未来の像を結ぶ。</span></p>
+      <p class="rv">未来庵は、NPO法人ミラツクが2024年11月に京都・吉田に開いた、未来学（Futures Studies）研究の拠点です。世界の研究機関で磨かれてきた未来学の方法論を、ここでの対話に実装しています。</p>
+      <p class="rv">縁側や障子で外とやわらかくつながる建物と、時間をかけて積み上げられてきた庭。会議室にはない余白と、千年の都に重なる文化の層のなかで、肩書きを離れて問いを深め、まだかたちのない未来を想像し、創造する。クライアントやパートナー、ワークショップの参加者、研究者が集う知的空間です。</p>
+      <p class="note rv">見学・プログラムへの参加・場所のご利用は、事前のご相談制です。</p>
+      <div class="acts rv">
+        <a class="btn" href="https://journal.emerging-future.org/miraian/">未来庵について詳しく
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <dl class="cb-facts">
-        <div><dt>オンライン</dt><dd>2026年12月8日・22日、2027年1月5日<br><small>各回19:00〜21:00 ／ 定員30名（先着順）</small></dd></div>
-        <div><dt>ワークショップ回</dt><dd>2027年1月24日（日）13:00〜17:00<br><small>対面・京都 未来庵 ／ 定員10名（先着順）</small></dd></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COURSE (night) ================= -->
+<section class="sec night course" id="course" tabindex="-1" aria-labelledby="h-course">
+  <div class="wrap sec-grid">
+    <div class="sec-idx">
+      <p class="num rv">05<span>Futures Studies Course</span></p>
+      <h2 id="h-course" class="rv"><span class="nw">ここで、</span><span class="nw">未来学を学ぶ。</span></h2>
+      <p class="rv">未来庵は未来学入門講座のワークショップ回の会場でもあります。</p>
+    </div>
+    <div class="course-grid">
+      <div class="rv">
+        <p class="status">第二期 受付中</p>
+        <h3>未来学入門講座<span>未来に、手を伸ばす。</span></h3>
+        <p class="lead">ミラツクが開く、未来学に正面から向き合う講座です。ウェンデル・ベル『Foundations of Futures Studies vol.1』を参考文献に、オンラインの3回で未来学の成立と前提、認識論、手法論を学び、ワークショップ回ではここ未来庵で、その視点を実際に使います。</p>
+        <div class="acts">
+          <a class="btn" href="https://journal.emerging-future.org/futures-studies/">講座の詳細と参加登録
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <dl class="cb-facts rv">
+        <div><dt>オンライン</dt><dd>2026年12月8日・22日、2027年1月5日<small>各回19:00〜21:00 ／ 定員30名（先着順）</small></dd></div>
+        <div><dt>ワークショップ回</dt><dd>2027年1月24日（日）13:00〜17:00<small>対面・京都 未来庵 ／ 定員10名（先着順）</small></dd></div>
         <div><dt>主催</dt><dd>NPO法人ミラツク</dd></div>
       </dl>
-      <span class="cb-cta">講座の詳細と参加登録<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-    </a>
-  </div>
-</section>
-
-<!-- ================= ABOUT ================= -->
-<section class="sec about" aria-labelledby="h-about">
-  <span class="watermark" aria-hidden="true">庵</span>
-  <div class="wrap about-grid">
-    <div>
-      <p class="kicker mono rv"><span class="idx">06</span><span>About Mirai-an</span></p>
-      <h2 id="h-about" class="rv"><span class="nw">未来学の拠点、</span><br><span class="nw">余白と文化の知の場。</span></h2>
-      <p class="rv">未来庵は、NPO法人ミラツクが2024年11月に京都・吉田に開いた、未来学（Futures Studies）研究の拠点です。すでに現れている未来の兆しを観測し、対話を通じて意味を与え、選び取るべき未来の像を結ぶ。世界の研究機関で磨かれてきた未来学の方法論を、ここでの対話に実装しています。</p>
-      <p class="rv">縁側や障子で外とやわらかくつながる建物と、時間をかけて積み上げられてきた庭。会議室にはない余白と、千年の都に重なる文化の層のなかで、肩書きを離れて問いを深め、まだかたちのない未来を想像し、創造する。クライアントやパートナー、ワークショップの参加者、研究者が集う知的空間です。</p>
-      <p class="rv about-note">見学・プログラムへの参加・場所のご利用は、事前のご相談制です。</p>
-      <a class="btn rv" href="https://journal.emerging-future.org/miraian/">未来庵について詳しく
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
-    <figure class="about-photo rv" style="--lqip:#7A7D6D">
-      <img src="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=1000&height=750&fit=crop&quality=80&format=jpg" srcset="https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=1000&height=750&fit=crop&quality=80&format=jpg 1000w, https://cdnspacemarket.com/uploads/attachments/1105568/image.jpg?width=2000&height=1500&fit=crop&quality=76&format=jpg 2000w" sizes="(max-width:880px) 100vw, 50vw" alt="大きなガラス戸から庭が見える室内と木のテーブル" loading="lazy" decoding="async" referrerpolicy="no-referrer" width="1000" height="750">
-      <figcaption>Mirai-an — Kyoto, Sakyo</figcaption>
-    </figure>
   </div>
 </section>
-
-
 </main>
 
 <footer>
-  <a class="lock" href="https://emerging-future.org/">
-    <img src="./assets/miratuku-logo-h.png" alt="MIRATUKU" width="448" height="96">
-    <span>NPO法人ミラツク</span>
-  </a>
-  <nav aria-label="関連リンク">
-    <a href="https://journal.emerging-future.org/miraian/">未来庵について</a>
-    <a href="https://journal.emerging-future.org/miraian/en/" hreflang="en">English</a>
-    <a href="https://emerging-future.org/">NPO法人ミラツク</a>
-  </nav>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="lock" href="https://emerging-future.org/"><img src="./assets/miratuku-logo-h.png" alt="MIRATUKU" width="448" height="96"></a>
+        <p class="org"><b>NPO法人ミラツク</b><br>未来庵 MIRAI-AN<br>〒606-8317 京都府京都市左京区吉田本町13</p>
+      </div>
+      <div>
+        <h4>Mirai-an</h4>
+        <ul>
+          <li><a href="https://journal.emerging-future.org/miraian/">未来庵について</a></li>
+          <li><a href="https://journal.emerging-future.org/miraian/en/" hreflang="en">English</a></li>
+          <li><a href="https://journal.emerging-future.org/futures-studies/">未来学入門講座</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Access</h4>
+        <ul>
+          <li><a href="#route">道順</a></li>
+          <li><a href="#ways">バス・お車</a></li>
+          <li><a href="#map">Google マップ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Miratuku</h4>
+        <ul>
+          <li><a href="https://emerging-future.org/">NPO法人ミラツク</a></li>
+          <li><a href="mailto:info@emerging-future.org">info@emerging-future.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© NPO法人ミラツク</span>
+      <span>地図データ © OpenStreetMap contributors（ODbL）</span>
+    </div>
+  </div>
 </footer>
+<p class="sr" id="live" aria-live="polite"></p>
 
 <script>
 (function(){
@@ -663,7 +648,6 @@ footer nav a:hover{color:var(--accent)}
   function onScroll(){bar.classList.toggle('solid', window.scrollY > hero.offsetHeight-96);}
   onScroll(); addEventListener('scroll',onScroll,{passive:true});
 
-  // reveal
   var rv=document.querySelectorAll('.rv');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
@@ -673,17 +657,15 @@ footer nav a:hover{color:var(--accent)}
   addEventListener('load',function(){setTimeout(revealAll,1800)});
   setTimeout(revealAll,4000);
 
-  // LQIP: dominant colour stays until the photo has decoded
-  document.querySelectorAll('.gallery img, .about-photo img').forEach(function(im){
+  document.querySelectorAll('.gallery img').forEach(function(im){
     function ok(){im.classList.add('ok')}
     if(im.complete&&im.naturalWidth) ok(); else{im.addEventListener('load',ok);im.addEventListener('error',ok);}
   });
 
-  // nav current section
   var links=[].slice.call(document.querySelectorAll('.bar nav a'));
   if('IntersectionObserver' in window){
     var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id?'true':'false')});}})},{rootMargin:'-45% 0px -50% 0px'});
-    ['route','ways','map','photos'].forEach(function(id){var s=document.getElementById(id); if(s) so.observe(s);});
+    ['route','ways','map','photos','about','course'].forEach(function(id){var s=document.getElementById(id); if(s) so.observe(s);});
   }
 
   // step <-> map link (stops 1..3 are emitted in route order by build_map.py; goal pin = 4)
@@ -697,12 +679,7 @@ footer nav a:hover{color:var(--accent)}
   var steps=document.querySelectorAll('.steps li');
   function mark(n){stops.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)}); steps.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)});}
   steps.forEach(function(li){li.addEventListener('mouseenter',function(){mark(li.dataset.step)}); li.addEventListener('mouseleave',function(){mark('')});});
-  if('IntersectionObserver' in window && matchMedia('(min-width: 961px)').matches){
-    var sto=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) mark(e.target.dataset.step)})},{rootMargin:'-48% 0px -48% 0px'});
-    steps.forEach(function(li){sto.observe(li)});
-  }
 
-  // copy helpers
   var live=document.getElementById('live');
   function copyText(t){
     if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
@@ -711,15 +688,12 @@ footer nav a:hover{color:var(--accent)}
   function flash(btn){var html=btn.innerHTML;btn.classList.add('done');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>'+btn.dataset.done;live.textContent=btn.dataset.done;setTimeout(function(){btn.innerHTML=html;btn.classList.remove('done')},2200);}
   document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(b.dataset.copy).then(function(){flash(b)},function(){prompt('コピーしてください',b.dataset.copy)})})});
 
-
-  // map (click to load)
   document.getElementById('loadmap').addEventListener('click',function(){
     var f=document.getElementById('mapframe');
     f.innerHTML='<p class="load" style="place-items:center">地図を読み込んでいます…</p><iframe onload="this.previousSibling.remove()" title="未来庵の地図（Google マップ）" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1634.0!2d135.7846307!3d35.0263201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600109001af17809%3A0x60dbdabd021454e3!2z44Of44Op44OE44Kv5pyq5p2l5bq1IC1NSVJBSS1BTi0!5e0!3m2!1sja!2sjp!4v1" loading="lazy" allowfullscreen referrerpolicy="no-referrer"></iframe>';
     f.querySelector('iframe').focus();
   });
 
-  // lightbox
   var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbCap=lb.querySelector('p');
   document.querySelectorAll('.gallery button').forEach(function(b){b.addEventListener('click',function(){
     var im=b.querySelector('img'); lbImg.src=b.dataset.full; lbImg.alt=im.alt; lbCap.textContent=b.querySelector('figcaption').textContent;
