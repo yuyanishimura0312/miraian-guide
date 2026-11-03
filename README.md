@@ -1,34 +1,52 @@
 # miraian-guide
 
-未来庵（Miraian）へのアクセスガイドページ。住所・地図・交通案内・ギャラリーを1ページにまとめた静的サイト。
+未来庵（MIRAI-AN）へのアクセスガイドページ。住所・所要時間・道順の概念図・地図・写真・ご来訪時の注意を1ページにまとめた静的サイト。
 
 ## 公開URL
 
 https://miraian.emerging-future.org
 
+GitHub Pages（`main` ブランチのルート）で公開している。push すると公開が更新される。
+
 ## ファイル構成
 
 ```
 miraian-guide/
-├── index.html   # ページ本体（単一ファイル構成）
-├── favicon.ico  # ファビコン
-├── CNAME        # GitHub Pages カスタムドメイン設定
-└── .gitignore
+├── index.html            ページ本体（単一ファイル。CSS と JS を内包）
+├── assets/
+│   ├── og-access.png     共有用画像（1200x630）。build/og.html から生成
+│   ├── miratuku-mark.png ミラツク CI シンボル（miraian-lp の正規ロゴを縮小）
+│   ├── miratuku-logo.png 構造化データのロゴ
+│   └── apple-touch-icon.png
+├── build/og.html         共有用画像の元
+├── robots.txt / sitemap.xml / llms.txt
+├── favicon.ico
+└── CNAME
 ```
 
-## 更新方法
+## デザイン（v2・2026-11-03 全面改訂）
 
-`index.html` を直接編集し、GitHub にプッシュすると自動で公開が更新される。
-GitHub Pages（`main` ブランチルート）でホスティングしている。
+- ミラツク正式CI（NOSIGNER 2011）。Web アクセント #783C28、地 #FAF8F5、文字 #1A1A1A。図の配色は CI 12色。赤白CI（#CC1400）は使わない
+- 書体は姉妹ページ `miraian-lp`（journal.emerging-future.org/miraian/）と同じ Zen Kaku Gothic New / Archivo / IBM Plex Mono
+- 構成: ヒーロー（庭の写真＋所在地カード）→ 所要時間 → 道順（概念図と手順が連動）→ ほかの来方 → 地図（押して読み込む）→ 写真（拡大表示つき）→ ご来訪の前に → 未来庵について → URL を送る
+- 純黒・イタリックは使わない。文字のコントラストはすべて WCAG AA 以上。prefers-reduced-motion で動きを止める
+
+## SEO
+
+- title / description / canonical / OGP / Twitter カード / geo メタ
+- 構造化データ（JSON-LD）: NGO・Place（住所・座標・地図）・WebPage・BreadcrumbList
+- robots.txt・sitemap.xml・llms.txt
+
+## 共有用画像の作り直し
 
 ```bash
-git add index.html
-git commit -m "update: <変更内容>"
-git push origin main
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+  --window-size=1200,630 --virtual-time-budget=6000 \
+  --screenshot=assets/og-access.png "file://$PWD/build/og.html"
 ```
 
 ## 注意事項
 
-- ギャラリー画像は現在 Spacemarket CDN の直リンクを使用している。
-  画像の差し替えが必要な場合は `index.html` の `<img src="...">` を自前の画像パスに変更すること。
-- 「徒歩約10分」などの所要時間は実際の現地状況に合わせて適宜更新すること。
+- 写真は Spacemarket CDN への直リンク。差し替えるときは `index.html` の `cdnspacemarket.com` の URL を自前の画像に変える
+- 所要時間（「徒歩約10分」「徒歩2分」「約30分」）は現地の実態に合わせて更新すること。地図上の位置から測った道のりは約1.4km あり、2026-11-03 時点で確認待ち
+- 事実を変えたら、本文・所要時間の帯・地図の横の一覧・構造化データ・llms.txt の5か所を揃える

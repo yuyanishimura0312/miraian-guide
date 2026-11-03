@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://miraian.emerging-future.org/sitemap.xml
