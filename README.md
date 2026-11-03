@@ -14,11 +14,11 @@ GitHub Pages（`main` ブランチのルート）で公開している。push �
 miraian-guide/
 ├── index.html            ページ本体（単一ファイル。CSS と JS を内包）
 ├── assets/
-│   ├── og-access.png     共有用画像（1200x630）。build/og.html から生成
+│   ├── og-access.png     共有用画像（1200x630）。tools/og.html から生成
 │   ├── miratuku-mark.png ミラツク CI シンボル（miraian-lp の正規ロゴを縮小）
 │   ├── miratuku-logo.png 構造化データのロゴ
 │   └── apple-touch-icon.png
-├── build/og.html         共有用画像の元
+├── tools/og.html         共有用画像の元
 ├── robots.txt / sitemap.xml / llms.txt
 ├── favicon.ico
 └── CNAME
@@ -42,7 +42,7 @@ miraian-guide/
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
   --window-size=1200,630 --virtual-time-budget=6000 \
-  --screenshot=assets/og-access.png "file://$PWD/build/og.html"
+  --screenshot=assets/og-access.png "file://$PWD/tools/og.html"
 ```
 
 ## 注意事項
