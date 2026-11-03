@@ -34,3 +34,14 @@
 - 原本: ~/Documents/ミラツク事業/ミラツク/NPO法人運営/広報・ブランド/ミラツクデザイン統一用/ミラツクロゴ/MIRATUKU/miratuku_pdf/miratuku_logos_f.pdf（p.3 TYPE）
 - assets/miratuku-logo-h.png（パターンC 横型・ヘッダー用）／ miratuku-logo-h-white.png（白抜き版・暗い地用）／ miratuku-mark.png（パターンB シンボル）／ miratuku-logo.png（パターンA 縦型）／ apple-touch-icon.png ／ favicon.ico
 - ★ロゴを生成・描き直し・色替えしない。渦や種の図柄を装飾として自作しない（偽物に見える）。
+
+## 位置づけ（2026-11-04 西村さん指示）
+- ミラツクの拠点の案内。訪れるのは、クライアント・パートナー・ワークショップ参加者・研究者
+- 知的空間であること、未来学研究の拠点であること、余白と文化による「そうぞう（想像・創造）」の場であることを伝える
+- 未来学の方法論の記述は姉妹ページ（journal.emerging-future.org/miraian/）の「天文学から未来学へ」節に揃える
+
+## 未来学入門講座（出典: https://journal.emerging-future.org/futures-studies/ と同リポジトリ data.js・2026-11-04 照合）
+- 第二期 受付中。オンライン 2026年12月8日・22日、2027年1月5日（各19:00〜21:00・定員30名先着）
+- ワークショップ回 2027年1月24日（日）13:00〜17:00 対面・京都 未来庵（定員10名先着）
+- 参考文献: Wendell Bell『Foundations of Futures Studies vol.1』／主催 NPO法人ミラツク
+- ★期が変わったらバナーの日程を直す（第二期が終わったら古い日程を残さない）
