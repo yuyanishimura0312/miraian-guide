@@ -1,6 +1,6 @@
 # miraian-guide
 
-未来庵（MIRAI-AN）へのアクセスガイドページ。住所・所要時間・道順の概念図・地図・写真・ご来訪時の注意を1ページにまとめた静的サイト。
+未来庵（MIRAI-AN）へのアクセスガイドページ。住所・所要時間・道順の地図（OpenStreetMap 実データ）・Google マップ・写真・ご来訪時の注意を1ページにまとめた静的サイト。
 
 ## 公開URL
 
@@ -8,28 +8,50 @@ https://miraian.emerging-future.org
 
 GitHub Pages（`main` ブランチのルート）で公開している。push すると公開が更新される。
 
+## 事実の正本
+
+ページに書く事実（住所・座標・所要時間・バス系統・ロゴの扱い）は **`docs/FACTS.md`** だけから取る。ここに無い事実を足さない。
+事実を変えたら、`docs/FACTS.md` → `tools/index.template.html`（本文・所要時間の帯・地図の横の一覧・JSON-LD・meta description）→ `llms.txt` → 本 README の順で揃え、`python3 tools/build_index.py` で `index.html` を作り直す。
+
 ## ファイル構成
 
 ```
 miraian-guide/
-├── index.html            ページ本体（単一ファイル。CSS と JS を内包）
+├── index.html                 ページ本体（生成物。tools/build_index.py が作る。直接編集しない）
+├── docs/FACTS.md              事実の正本
+├── tools/
+│   ├── index.template.html    ページの原稿（CSS と JS を内包。{{MAP_SVG}} に地図が入る）
+│   ├── build_index.py         template + route-map.svg → index.html
+│   ├── map/
+│   │   ├── build_map.py       OpenStreetMap データから道順地図 SVG を生成（道路・経路・ピンの座標はここが正本）
+│   │   ├── data/osm.json      Overpass 抽出（© OpenStreetMap contributors, ODbL）
+│   │   └── out/route-map.svg  生成された地図（1000x653）／ route.json（距離）
+│   └── og.html                共有用画像の元
 ├── assets/
-│   ├── og-access.png     共有用画像（1200x630）。tools/og.html から生成
-│   ├── miratuku-mark.png ミラツク CI シンボル（miraian-lp の正規ロゴを縮小）
-│   ├── miratuku-logo.png 構造化データのロゴ
-│   └── apple-touch-icon.png
-├── tools/og.html         共有用画像の元
+│   ├── miratuku-logo-h.png        正規ロゴ 横型（ヘッダー・フッター用。NOSIGNER 2011）
+│   ├── miratuku-logo-h-white.png  同 白抜き（暗い地の上のヘッダー用）
+│   ├── miratuku-mark.png / miratuku-logo.png / apple-touch-icon.png
+│   └── og-access.png          共有用画像（1200x630）
 ├── robots.txt / sitemap.xml / llms.txt
 ├── favicon.ico
 └── CNAME
 ```
 
-## デザイン（v2・2026-11-03 全面改訂）
+## 作り直し
 
-- ミラツク正式CI（NOSIGNER 2011）。Web アクセント #783C28、地 #FAF8F5、文字 #1A1A1A。図の配色は CI 12色。赤白CI（#CC1400）は使わない
+```bash
+python3 tools/map/build_map.py     # 地図を作り直す（OSM データから）
+python3 tools/build_index.py       # index.html を組み直す
+```
+
+## デザイン（v3・2026-11-04）
+
+- ミラツク正式CI（NOSIGNER 2011）。Web アクセント #783C28、地 #FAF8F5、文字 #1A1A1A。地図の配色は CI 12色。赤白CI（#CC1400）は使わない
+- ロゴは正規ファイルから書き出した PNG をそのまま使う。生成・描き直し・色替え・種や渦の図柄の自作はしない
 - 書体は姉妹ページ `miraian-lp`（journal.emerging-future.org/miraian/）と同じ Zen Kaku Gothic New / Archivo / IBM Plex Mono
-- 構成: ヒーロー（庭の写真＋所在地カード）→ 所要時間 → 道順（概念図と手順が連動）→ ほかの来方 → 地図（押して読み込む）→ 写真（拡大表示つき）→ ご来訪の前に → 未来庵について → URL を送る
-- 純黒・イタリックは使わない。文字のコントラストは WCAG AA 以上を目標とし、写真の上の文字には暗い下地を敷く（2026-11-03 の独立採点で写真上の文字が未達と指摘され是正）。prefers-reduced-motion で動きを止める
+- 構成: ヒーロー（庭の写真＋所在地カード・所要時間）→ 所要時間の帯 → 道順（OSM 地図と手順が連動）→ バスで → Google マップ（押して読み込む）→ 写真（拡大表示つき・LQIP）→ ご来訪の前に → 未来庵について → URL を送る
+- 余白・寸法・色は `:root` のトークン（`--space-*` `--fs-*` ほか）から引く。純黒・イタリックは使わない。文字のコントラストは WCAG AA 以上。写真の上の文字には暗い下地を敷く。prefers-reduced-motion で動きを止める
+- 390px 幅でもページ内ナビ（横スクロール）を残す。CDN 画像は 2x の srcset を持つ
 
 ## SEO
 
@@ -47,6 +69,5 @@ miraian-guide/
 
 ## 注意事項
 
-- 写真は Spacemarket CDN への直リンク。差し替えるときは `index.html` の `cdnspacemarket.com` の URL を自前の画像に変える
-- 所要時間（出町柳駅から「徒歩約5分」・京大正門前から「徒歩2分」・京都駅から「約30分」）は 2026-11-04 に西村さんが確認した値。変えるときは下の5か所を揃える
-- 事実を変えたら、本文・所要時間の帯・地図の横の一覧・構造化データ・llms.txt の5か所を揃える
+- 写真は Spacemarket CDN への直リンク（4枚のみ）。差し替えるときは `tools/index.template.html` の `cdnspacemarket.com` の URL を自前の画像に変える
+- 所要時間（出町柳駅から徒歩約18分・京大農学部前から徒歩約5分・京都駅から市バス7系統で約35分の目安 ほか）は `docs/FACTS.md` が正本。ページ側には同じ値が ヒーローのカード・帯・道順の手順・バスの節・地図の横の一覧・JSON-LD・meta description に出ている

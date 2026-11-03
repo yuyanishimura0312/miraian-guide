@@ -11,21 +11,14 @@ h1{font-weight:900;font-size:150px;line-height:1;letter-spacing:-.01em}
 .a{font-size:30px;font-weight:700;line-height:1.5}
 .a span{display:block;font-size:22px;font-weight:400;color:#56504A}
 .bar{position:absolute;left:0;top:0;width:12px;height:100%;background:#783C28}
-svg{position:absolute;right:-40px;top:55px;width:540px;height:540px}
-.mk{position:absolute;right:70px;bottom:60px;font-family:Archivo,sans-serif;font-weight:500;letter-spacing:.32em;font-size:20px;color:#7A4033}
+.sym{position:absolute;right:96px;top:84px;width:380px;height:auto}
+.logo{position:absolute;right:80px;bottom:64px;height:40px;width:auto}
 </style></head><body>
 <div class="bar"></div>
 <div class="l">
   <p class="k">ACCESS GUIDE — 行き方のご案内</p>
   <div><h1>未来庵</h1><p class="en">MIRAI-AN</p></div>
-  <p class="a">京都市左京区吉田本町13<span>京阪「出町柳」駅・市バス「京大正門前」から</span></p>
+  <p class="a">京都市左京区吉田本町13<span>京阪「出町柳」駅 徒歩約18分・市バス「京大農学部前」徒歩約5分</span></p>
 </div>
-<svg viewBox="0 0 400 400" id="s"></svg>
-<p class="mk">MIRA TUKU</p>
-<script>
-var cols=['#F0A671','#F2C792','#F1C189','#CEA26F','#F8CDAC','#F0BE83','#EFC4A4','#F7BEA2','#DC8766','#B07256','#966D5E','#7A4033'],s=2011,o='';
-function r(){s=(s*9301+49297)%233280;return s/233280}
-for(var i=0;i<96;i++){var a=i*0.5+r()*0.25,R=14+i*1.75+r()*6,x=200+Math.cos(a)*R,y=200+Math.sin(a)*R,t=(a*180/Math.PI)+90+r()*30;
-o+='<ellipse cx="'+x+'" cy="'+y+'" rx="7.5" ry="13.5" fill="'+cols[i%12]+'" transform="rotate('+t+' '+x+' '+y+')"/>';}
-document.getElementById('s').innerHTML=o;
-</script></body></html>
+<img class="sym" src="../assets/miratuku-mark.png" alt="">
+<img class="logo" src="../assets/miratuku-logo-h.png" alt="MIRA TUKU"></body></html>
