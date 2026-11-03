@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>未来庵（MIRAI-AN）へのアクセス｜京都・左京区吉田本町 出町柳駅・京大農学部前から｜NPO法人ミラツク</title>
-<meta name="description" content="ミラツクの京都拠点「未来庵（MIRAI-AN）」への行き方。京都市左京区吉田本町13。京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分、京都駅からは市バス7系統。地図・道順・写真・ご来訪時の注意をまとめています。">
+<meta name="description" content="ミラツクの京都拠点「未来庵（MIRAI-AN）」への行き方。京都市左京区吉田本町13。京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分、京都駅からは市バス7系統。地図・道順・写真、お車の方への周辺駐車場の案内をまとめています。">
 <link rel="canonical" href="https://miraian.emerging-future.org/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#FAF8F5">
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="未来庵 MIRAI-AN｜NPO法人ミラツク">
 <meta property="og:title" content="未来庵（MIRAI-AN）へのアクセス｜京都・左京区吉田本町">
-<meta property="og:description" content="京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。地図・道順・写真とご来訪時の注意。">
+<meta property="og:description" content="京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。地図・道順・写真。">
 <meta property="og:url" content="https://miraian.emerging-future.org/">
 <meta property="og:image" content="https://miraian.emerging-future.org/assets/og-access.png">
 <meta property="og:image:width" content="1200">
@@ -25,7 +25,7 @@
 <meta property="og:image:alt" content="未来庵 MIRAI-AN アクセスガイド 京都市左京区吉田本町13">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="未来庵（MIRAI-AN）へのアクセス｜京都・左京区吉田本町">
-<meta name="twitter:description" content="京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。地図・道順・写真とご来訪時の注意。">
+<meta name="twitter:description" content="京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。地図・道順・写真。">
 <meta name="twitter:image" content="https://miraian.emerging-future.org/assets/og-access.png">
 
 <meta name="geo.region" content="JP-26">
@@ -268,7 +268,8 @@ section.sec:focus{outline:none}
 .route-note{margin-top:var(--space-3);font-size:var(--fs-sm);color:var(--ink-mute);line-height:1.8}
 
 /* ---------- other ways ---------- */
-.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
+.way .btn{margin-top:var(--space-2);align-self:flex-start}
+.ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
 @media(max-width:960px){.ways{grid-template-columns:1fr}}
 .way{background:var(--paper-lt);padding:var(--card-pad);display:flex;flex-direction:column;gap:var(--space-2);transition:background .3s var(--ease)}
 .way:hover{background:#fff}
@@ -319,9 +320,7 @@ dialog.lb img{max-width:min(1200px,94vw);max-height:84vh;width:auto;height:auto;
 dialog.lb p{color:var(--star);font-size:var(--fs-sm);text-align:center;margin-top:var(--space-1)}
 dialog.lb .x{position:fixed;top:var(--space-2);right:var(--space-2);width:44px;height:44px;border-radius:50%;border:1px solid rgba(242,230,212,.4);background:rgba(33,23,18,.6);color:var(--star);font-size:22px;cursor:pointer}
 
-/* ---------- notes ---------- */
-.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(var(--space-2),2vw,var(--space-3))}
-@media(max-width:760px){.notes{grid-template-columns:1fr}}
+
 .note{padding:var(--card-pad);border:1px solid var(--hairline);background:var(--paper-lt);display:grid;grid-template-columns:44px minmax(0,1fr);gap:var(--space-2);align-items:start}
 .note .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--hairline);color:var(--accent)}
 .note .ico svg{width:20px;height:20px}
@@ -369,7 +368,7 @@ footer nav a:hover{color:var(--accent)}
   .m-goal-pulse{display:none}
 }
 @media print{
-  .bar,.scroll-cue,.share,.map-frame,dialog{display:none!important}
+  .bar,.scroll-cue,.map-frame,dialog{display:none!important}
   .hero{min-height:auto;color:var(--ink)}.hero::before,.hero .hero-img{display:none}
   .hero .lede,.hero h1 .en{color:var(--ink)}
   .facts,.about{background:#fff;color:var(--ink)}.facts .v b,.about h2{color:var(--ink)}
@@ -395,7 +394,7 @@ footer nav a:hover{color:var(--accent)}
     <a href="#ways">バスで</a>
     <a href="#map">地図</a>
     <a href="#photos">写真</a>
-    <a href="#notes">ご来訪時に</a>
+    <a href="#parking">お車の方</a>
   </nav>
 </header>
 
@@ -472,7 +471,7 @@ footer nav a:hover{color:var(--accent)}
         <li class="rv" data-step="1"><span class="n" aria-hidden="true">1</span><p class="t"><small>Start</small>京阪「出町柳」駅の<strong>出口3</strong>を出て、今出川通を東へ進みます。</p></li>
         <li class="rv" data-step="2"><span class="n" aria-hidden="true">2</span><p class="t"><small>Straight</small><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
         <li class="rv" data-step="3"><span class="n" aria-hidden="true">3</span><p class="t"><small>Turn</small>市バス「<strong>京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、約230m進みます。<span class="m">停留所から 約300 m · 徒歩 約5分</span></p></li>
-        <li class="rv" data-step="4"><span class="n" aria-hidden="true">4</span><p class="t"><small>Arrive</small>吉田本町13が<strong>未来庵</strong>です。到着されましたら、お気軽にお声がけください。<span class="m">約 1.4 km · 徒歩 約18分</span></p></li>
+        <li class="rv" data-step="4"><span class="n" aria-hidden="true">4</span><p class="t"><small>Arrive</small>吉田本町13が<strong>未来庵</strong>です。<span class="m">約 1.4 km · 徒歩 約18分</span></p></li>
       </ol>
     </div>
     <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
@@ -511,6 +510,12 @@ footer nav a:hover{color:var(--accent)}
         <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
         <div class="tag"><span>東大路通</span></div>
       </article>
+      <article class="way rv" id="parking">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 17V8h3a2.5 2.5 0 010 5h-3"/></svg></span>
+        <h3>お車でお越しの場合</h3>
+        <p>未来庵には駐車場がありません。周辺のコインパーキングをご利用ください。空き状況や料金は地図でご確認いただけます。</p>
+        <a class="btn ghost" href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキングを探す</a>
+      </article>
     </div>
     <p class="ways-note">バスの乗車時間は京都大学の案内資料にもとづく目安、徒歩の時間は地図データでの計測と実際に歩いた目安です。ダイヤ・のりばは変わることがあります。最新の運行は<a href="https://www.city.kyoto.lg.jp/kotsu/" target="_blank" rel="noopener">京都市交通局</a>でご確認ください。</p>
   </div>
@@ -540,7 +545,7 @@ footer nav a:hover{color:var(--accent)}
           <div><dt>Name</dt><dd class="big">未来庵 MIRAI-AN</dd></div>
           <div><dt>Address</dt><dd>〒606-8317<br>京都府京都市左京区吉田本町13</dd></div>
           <div><dt>Nearest</dt><dd>京阪「出町柳」駅 徒歩約18分<br>市バス「京大農学部前」徒歩約5分</dd></div>
-          <div><dt>Parking</dt><dd>駐車場・駐輪場はありません</dd></div>
+          <div><dt>Parking</dt><dd>駐車場はありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください</dd></div>
         </dl>
         <div class="acts">
           <a class="btn" href="https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">
@@ -576,27 +581,7 @@ footer nav a:hover{color:var(--accent)}
   </dialog>
 </section>
 
-<!-- ================= NOTES ================= -->
-<section class="sec" id="notes" aria-labelledby="h-notes" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <p class="kicker mono rv"><span class="idx">05</span><span>Notes</span></p>
-        <h2 id="h-notes" class="rv"><span class="nw">ご来訪の前に。</span></h2>
-      </div>
-    </div>
-    <div class="notes">
-      <div class="note rv">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span>
-        <div><h3>駐車場・駐輪場はありません</h3><p>公共交通機関をご利用ください。</p></div>
-      </div>
-      <div class="note rv">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 20V10l8-6 8 6v10z"/><path d="M10 20v-5h4v5"/></svg></span>
-        <div><h3>到着されたら、お声がけください</h3><p>未来庵に着かれましたら、お気軽にお声がけください。</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ================= ABOUT ================= -->
 <section class="sec about" aria-labelledby="h-about">
@@ -616,17 +601,7 @@ footer nav a:hover{color:var(--accent)}
   </div>
 </section>
 
-<!-- ================= SHARE ================= -->
-<section class="share" aria-labelledby="h-share">
-  <h2 id="h-share"><span class="nw">このページを、</span><span class="nw">ご一緒する方へ。</span></h2>
-  <p>同行される方やご招待する方に、このページのURLを送れます。</p>
-  <div class="acts">
-    <button class="btn" type="button" id="sharebtn" data-done="URLをコピーしました">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-      <span>このページのURLを送る</span></button>
-  </div>
-  <p class="sr" aria-live="polite" id="live"></p>
-</section>
+
 </main>
 
 <footer>
@@ -667,7 +642,7 @@ footer nav a:hover{color:var(--accent)}
   var links=[].slice.call(document.querySelectorAll('.bar nav a'));
   if('IntersectionObserver' in window){
     var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id?'true':'false')});}})},{rootMargin:'-45% 0px -50% 0px'});
-    ['route','ways','map','photos','notes'].forEach(function(id){var s=document.getElementById(id); if(s) so.observe(s);});
+    ['route','ways','map','photos'].forEach(function(id){var s=document.getElementById(id); if(s) so.observe(s);});
   }
 
   // step <-> map link (stops 1..3 are emitted in route order by build_map.py; goal pin = 4)
@@ -694,12 +669,7 @@ footer nav a:hover{color:var(--accent)}
   }
   function flash(btn){var html=btn.innerHTML;btn.classList.add('done');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>'+btn.dataset.done;live.textContent=btn.dataset.done;setTimeout(function(){btn.innerHTML=html;btn.classList.remove('done')},2200);}
   document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(b.dataset.copy).then(function(){flash(b)},function(){prompt('コピーしてください',b.dataset.copy)})})});
-  var sb=document.getElementById('sharebtn');
-  sb.addEventListener('click',function(){
-    var url=location.origin+location.pathname;
-    if(navigator.share){navigator.share({title:document.title,url:url}).catch(function(){});return;}
-    copyText(url).then(function(){flash(sb)},function(){prompt('URLをコピーしてください',url)});
-  });
+
 
   // map (click to load)
   document.getElementById('loadmap').addEventListener('click',function(){
