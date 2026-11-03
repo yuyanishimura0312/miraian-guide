@@ -128,7 +128,7 @@ svg = [f'<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" role="img
        lbl(35.0272, 135.7812, "京都大学", "m-area"),
        lbl(35.0272, 135.7812, "KYOTO UNIVERSITY", "m-area-en", dy=22),
        lbl(35.0247, 135.7872, "吉田山", "m-area"),
-       lbl(35.0247, 135.7872, "吉田神社", "m-area-en", dy=20),
+       lbl(35.02435, 135.78464, "吉田神社", "m-area-s"),
        lbl(35.0300, 135.7712, "鴨川", "m-water-l", dx=-14, rot=-78),
        lbl(35.0318, 135.7738, "高野川", "m-water-l", dx=18, rot=-62),
        lbl(35.02885, 135.7755, "今出川通", "m-road", dy=-13),
