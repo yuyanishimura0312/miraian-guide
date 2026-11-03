@@ -154,6 +154,7 @@ a{color:inherit}
   linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.52) 40%,rgba(33,23,18,0) 70%)}
 .hero-inner{padding:calc(var(--bar-h) + var(--space-4)) var(--side) clamp(var(--space-5),6vw,var(--space-10));max-width:var(--inner);margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:end}
 .hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:#FDFCFA;text-shadow:0 0 12px rgba(33,23,18,.95),0 0 3px rgba(33,23,18,.9);margin-bottom:var(--space-3)}
+@media(max-height:820px){.hero .obs{display:none}}
 .hero .obs span+span::before{content:"·";margin-right:var(--space-2);opacity:.6}
 .hero h1{font-weight:900;font-size:var(--fs-h1);line-height:.96;letter-spacing:-.01em}
 .hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(13px,1.4vw,18px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star)}
@@ -512,7 +513,7 @@ footer ul a:hover{color:var(--accent)}
       <ol class="steps" aria-label="出町柳駅からの道順">
         <li class="rv" data-step="1"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong class="nw">出口3</strong>を出て、今出川通を東へ進みます。</p></li>
         <li class="rv" data-step="2"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
-        <li class="rv" data-step="3"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、約230m進みます。<span class="m">停留所から 約300 m · 徒歩 約5分</span></p></li>
+        <li class="rv" data-step="3"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、<span class="nw">約230m</span>進みます。<span class="m"><span class="nw">停留所から 約300 m</span> · <span class="nw">徒歩 約5分</span></span></p></li>
         <li class="rv" data-step="4"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">約 1.4 km · 徒歩 約18分</span></p></li>
       </ol>
       <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
