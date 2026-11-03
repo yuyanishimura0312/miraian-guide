@@ -220,12 +220,13 @@ section.sec:focus{outline:none}
 .legend{list-style:none;display:flex;flex-wrap:wrap;gap:4px var(--space-2);margin-top:var(--space-2);font-size:12px;color:var(--ink-soft)}
 .legend li{display:flex;align-items:center;gap:6px}
 .legend .ln{display:inline-block;width:22px;height:0;border-top:4px solid var(--accent);border-radius:2px}
+.legend .ln.last{border-top:3px dotted var(--accent)}
 .legend .ln.sub{border-top:3px dotted var(--ci-amber)}
 @media(max-width:600px){.legend{flex-direction:column}.mapfig{max-width:100%;min-width:0}}
 /* OSM route map — geometry from tools/map/build_map.py; only presentation lives here */
 .mapscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .routemap{width:100%;height:auto;display:block;font-family:var(--ja)}
-@media(max-width:600px){.routemap{min-width:640px}.mapscroll::after{content:"← 横にスクロールして地図全体を見られます";display:block;position:sticky;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
+@media(max-width:600px){.routemap{min-width:860px}.mapscroll::after{content:"← 横にスクロールして地図全体を見られます";display:block;position:sticky;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
 .m-bg{fill:#F6F1EA}.m-wood path{fill:#E9E3D3}.m-campus path{fill:#EFE6D8;stroke:#E2D6C4;stroke-width:1}.m-shrine path{fill:#E6DCC9}
 .m-water path{fill:#D9E2E0}.m-river path{fill:none;stroke:#CFDCDA;stroke-width:3;stroke-linecap:round}.m-river path.river{stroke-width:5}
 .m-minor path{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -462,6 +463,7 @@ footer nav a:hover{color:var(--accent)}
         <ul class="legend" aria-label="凡例">
           <li><span class="ln" aria-hidden="true"></span>出町柳駅からの徒歩経路</li>
           <li><span class="ln sub" aria-hidden="true"></span>市バス「京大正門前」からの経路</li>
+          <li><span class="ln last" aria-hidden="true"></span>道路から建物まで（道路データ外）</li>
         </ul>
         <figcaption><span>地図データ © OpenStreetMap contributors（ODbL）</span><a href="#map">Google マップで見る</a></figcaption>
       </figure>
