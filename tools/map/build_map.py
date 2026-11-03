@@ -124,6 +124,9 @@ svg = [f'<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" role="img
        '<g class="m-major">' + "".join(f'<path d="{d}" style="stroke-width:{ROAD_W[hw]}"/>' for d, hw in layers["major"]) + '</g>',
        f'<path class="m-route-bus" d="{line(r_seimon)}"/>',
        f'<path class="m-route" d="{line(r_station)}"/>',
+       # last few tens of metres from the street to the pin: not on the OSM street graph, drawn dotted, not counted in the distances
+       f'<path class="m-route-last" d="M{P(*r_station[-1])[0]:.1f} {P(*r_station[-1])[1]:.1f} L{vx:.1f} {vy:.1f}"/>',
+       f'<path class="m-route-last" d="M{P(*r_seimon[-1])[0]:.1f} {P(*r_seimon[-1])[1]:.1f} L{vx:.1f} {vy:.1f}"/>',
        # labels
        lbl(35.0272, 135.7812, "京都大学", "m-area"),
        lbl(35.0272, 135.7812, "KYOTO UNIVERSITY", "m-area-en", dy=22),
