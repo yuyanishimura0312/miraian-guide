@@ -191,6 +191,40 @@
    ]
   ]
  },
+ "morning-table": {
+  "w": 2400,
+  "h": 1602,
+  "color": "#656350",
+  "files": [
+   [
+    "assets/photos/morning-table-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/morning-table-1600.webp",
+    1600,
+    1068
+   ]
+  ]
+ },
+ "sofa-table": {
+  "w": 2400,
+  "h": 1561,
+  "color": "#5C4F39",
+  "files": [
+   [
+    "assets/photos/sofa-table-640.webp",
+    640,
+    416
+   ],
+   [
+    "assets/photos/sofa-table-1600.webp",
+    1600,
+    1041
+   ]
+  ]
+ },
  "gate": {
   "w": 2400,
   "h": 1600,
