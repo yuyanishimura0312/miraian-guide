@@ -123,7 +123,7 @@
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--bar-h) + var(--space-1))} /* focused elements never sit under the fixed bar (WCAG 2.4.11) */
 body{font-family:var(--ja);background:var(--paper);color:var(--ink);line-height:var(--lh-body);letter-spacing:.02em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:var(--fs-base)}
 img{display:block;max-width:100%}
 /* paper grain: a fixed SVG-noise veil, multiplied at low opacity. Not on phones (fixed blend layers cost scroll performance) */
@@ -154,6 +154,7 @@ a{color:inherit}
 .brand .bt b{font-weight:700;font-size:var(--fs-sm);letter-spacing:.14em}
 .brand .bt span{font-family:var(--latin);font-size:var(--fs-micro);letter-spacing:.24em;opacity:.8}
 .bar nav{display:flex;gap:2px}
+.bar:not(.solid) nav a,.bar:not(.solid) .brand .bt{text-shadow:0 0 10px rgba(33,23,18,.9),0 0 3px rgba(33,23,18,.85)}
 .bar nav a{font-size:var(--fs-cap);text-decoration:none;padding:6px 11px;border-radius:var(--radius-pill);letter-spacing:.08em;transition:background var(--dur-ui) var(--ease),color var(--dur-ui) var(--ease);white-space:nowrap}
 .bar nav a:hover{background:var(--accent-wash)}
 .bar:not(.solid) nav a:hover{background:rgba(253,252,250,.14)}
@@ -304,7 +305,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 /* OSM route map — geometry from tools/map/build_map.py; only presentation lives here */
 .mapscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .routemap{width:100%;height:auto;display:block;font-family:var(--ja)}
-@media(max-width:600px){.routemap{min-width:860px}.mapscroll::after{content:"← 横にスクロールして地図全体を見られます";display:block;position:sticky;left:0;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
+@media(max-width:600px){.routemap{min-width:860px}.mapscroll::after{content:"横にスクロールすると、未来庵まで見られます →";display:block;position:sticky;left:0;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
 .m-bg{fill:var(--map-bg)}.m-wood path{fill:var(--map-wood)}.m-campus path{fill:var(--map-campus);stroke:var(--map-campus-edge);stroke-width:1}.m-shrine path{fill:var(--map-shrine)}
 .m-water path{fill:var(--map-water)}.m-river path{fill:none;stroke:var(--map-river);stroke-width:3;stroke-linecap:round}.m-river path.river{stroke-width:5}
 .m-minor path{fill:none;stroke:var(--white);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -380,6 +381,9 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .ways .tag span{font-family:var(--latin);font-size:11px;font-weight:600;padding:2px 9px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);color:var(--accent-dp)}
 .ways p{font-size:var(--fs-base);color:var(--ink-soft);line-height:1.9}
 .ways p a{color:var(--accent)}
+.ways li:focus{outline:none}
+.ways .to-arrive{display:inline-flex;align-items:center;min-height:32px;margin-left:.4em;font-size:var(--fs-sm);font-weight:500;white-space:nowrap}
+.ways .to-arrive::after{content:"↓";margin-left:4px}
 .ways .time{font-size:var(--fs-base);font-weight:700;text-align:right;white-space:nowrap}
 .ways .time small{display:block;font-weight:400;font-size:var(--fs-xs);color:var(--ink-mute);letter-spacing:.04em}
 @media(max-width:760px){.ways li{grid-template-columns:1fr;gap:var(--space-1)}.ways .time{text-align:left}.ways .time small{display:inline;margin-left:6px}}
@@ -405,10 +409,10 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .g1{grid-column:1/8;grid-row:1/4}
 .g2{grid-column:8/13;grid-row:1/3}
 .g3{grid-column:8/13;grid-row:3/6}
-.landmarks .g1{grid-row:1/5}.landmarks .g3{grid-row:3/5}
+.landmarks .g1{grid-row:1/5}.landmarks .g1 img{object-position:72% 50%}.landmarks .g3{grid-row:3/5}
 .gallery .lm-n{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:var(--accent);color:var(--white);font:600 var(--fs-xs)/1 var(--latin);vertical-align:1px}
 .arrive-note{margin-top:var(--space-3);font-size:var(--fs-sm);color:var(--ink-soft);line-height:1.9;padding-left:var(--space-2);border-left:2px solid var(--accent)}
-@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:140px}.landmarks .g1{grid-column:1/3;grid-row:1/3}.g2{grid-column:1/2;grid-row:3/4}.g3{grid-column:2/3;grid-row:3/4}}
+@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:140px}.landmarks .g1{grid-column:1/3;grid-row:1/3}.landmarks .g2{grid-column:1/2;grid-row:3/4}.landmarks .g3{grid-column:2/3;grid-row:3/4}} /* class-pair selectors: the all-width .landmarks .g3 rule otherwise wins and leaves a 148px hole (audit 2026-11-07) */
 /* Lightbox: open = scale .96 + fade, 300ms emphasized-decelerate; close = 180ms accelerate (MID design_rule 1/2, 61 backdrop in sync).
    Done with @starting-style + allow-discrete so the close animates while the dialog is already closed for scripts;
    browsers without it get an instant open/close. */
@@ -471,6 +475,7 @@ dialog.lb .lb-n{color:var(--star-soft)}
 .album-more[data-on]{display:block}
 
 /* ---------- about (paper) ---------- */
+.about p,.course .lead,.sec-idx p{text-wrap:pretty}
 .about p{font-size:var(--fs-base);line-height:2.1;color:var(--ink-soft);max-width:var(--measure)}
 .about p+p{margin-top:var(--space-3)}
 .about .pull{font-size:clamp(19px,1.9vw,26px);font-weight:500;line-height:1.7;color:var(--ink);max-width:22em;margin-bottom:var(--space-4);padding-left:var(--space-3);border-left:2px solid var(--accent)}
@@ -517,6 +522,7 @@ section.sec+section.sec.night{border-top-color:transparent}
   .dock .btn{justify-content:center;min-height:44px;padding:8px 10px;background:var(--accent);color:var(--white)}
   .dock .btn.ghost{background:var(--paper-lt);color:var(--accent)}
   .js body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+  html.js{scroll-padding-bottom:calc(72px + env(safe-area-inset-bottom))} /* focused elements stop above the dock (WCAG 2.4.11, audit 2026-11-07) */
 }
 
 /* ---------- footer ---------- */
@@ -748,14 +754,14 @@ footer ul a:hover{color:var(--accent)}
       <div class="leg" id="ways" tabindex="-1">
         <h3 class="leg-h rv"><span class="mono">By bus · By car</span>市バスで、お車で<small>最寄りの停留所は「京大農学部前」。7系統と203系統が停まります</small></h3>
         <ul class="ways">
-          <li class="rv rl rl-b" style="--i:0" id="bus-kyoto">
+          <li class="rv rl rl-b" style="--i:0" id="bus-kyoto" tabindex="-1">
             <div><h4>JR京都駅から</h4><div class="tag"><span>7</span></div></div>
-            <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。</p>
+            <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。<a class="to-arrive" href="#arrive">降りてからの道順（02）</a></p>
             <p class="time">約35分<small>目安</small></p>
           </li>
-          <li class="rv rl rl-b" style="--i:1" id="bus-demachi">
+          <li class="rv rl rl-b" style="--i:1" id="bus-demachi" tabindex="-1">
             <div><h4>出町柳駅前から</h4><div class="tag"><span>7</span><span>203</span></div></div>
-            <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。</p>
+            <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。<a class="to-arrive" href="#arrive">降りてからの道順（02）</a></p>
             <p class="time">約8分</p>
           </li>
           <li class="rv rl rl-b" style="--i:2">
@@ -763,7 +769,7 @@ footer ul a:hover{color:var(--accent)}
             <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
             <p class="time">徒歩 約11分</p>
           </li>
-          <li class="rv rl rl-b" style="--i:3" id="car">
+          <li class="rv rl rl-b" style="--i:3" id="car" tabindex="-1">
             <div><h4>お車でお越しの場合</h4></div>
             <p>未来庵には駐車場がありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください。空き状況や料金は地図でご確認いただけます。</p>
             <p class="time">駐車場なし</p>
@@ -1015,7 +1021,7 @@ footer ul a:hover{color:var(--accent)}
 
   // step <-> map link (stops 1..3 are emitted in route order by build_map.py; goal pin = 4)
   var rm=document.querySelector('.routemap'), stops=[];
-  (function(){var sc=document.querySelector('.mapscroll');if(sc&&sc.scrollWidth>sc.clientWidth+4){sc.scrollLeft=sc.scrollWidth-sc.clientWidth;}})();
+  // the narrow-screen map starts at its left edge (出町柳駅): the leg it sits in is "walk from Demachiyanagi"
   if(rm){
     rm.querySelectorAll('.m-stop').forEach(function(g,i){g.dataset.step=String(i+1);g.style.setProperty('--k',String(i));stops.push(g)});
     var goal=rm.querySelector('.m-goal'); if(goal){goal.dataset.step='4';stops.push(goal)}
