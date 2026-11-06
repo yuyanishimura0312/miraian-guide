@@ -81,6 +81,8 @@
   --ci-orange:#F0A671; --ci-beige:#F2C792; --ci-camel:#CEA26F; --ci-peach:#F8CDAC;
   --ci-terracotta:#DC8766; --ci-amber:#B07256; --ci-brown:#966D5E; --ci-deep:#7A4033;
   --white:#fff;
+  --hero-ground:#7B7A40;           /* average colour of the hero photograph (LQIP) */
+  --star-88:rgba(242,230,212,.88); --star-86:rgba(242,230,212,.86); --star-75:rgba(242,230,212,.75); --star-60:rgba(242,230,212,.6);
   --rule-night:rgba(242,221,196,.18);  /* hairlines on the dark ground */
   --star-soft:rgba(242,230,212,.7); --star-mute:rgba(242,230,212,.55); --star-line:rgba(242,230,212,.4);
   /* route map (OSM) — presentation colours; geometry comes from tools/map/build_map.py */
@@ -97,7 +99,7 @@
   --fs-lg:clamp(19px,1.7vw,24px);
   --fs-h2:clamp(24px,2.6vw,36px);
   --fs-h1:clamp(52px,9vw,116px);
-  --tracking-label:.16em;
+  --tracking-label:.18em;
   --tracking-head:-.005em;
   --lh-body:1.95;
   --lh-tight:1.35;
@@ -110,13 +112,23 @@
   --bar-h:64px;
   --radius-pill:999px;
   --radius-sm:2px;
+  /* motion — grounded in MID-DB: enter = emphasized decelerate 250-300ms (design_rule 1 / decision_rule 1),
+     exit = accelerate 150-200ms (design_rule 2 / decision_rule 2), hover 150-200ms (design_rule 5),
+     press 100ms (design_rule 6), list stagger 60-100ms (design_rule 7 / case_rule 15), ease-out default (case_rule 5) */
   --ease:cubic-bezier(.16,1,.3,1);
-  --dur:.6s; --dur-fast:.25s;
+  --ease-in:cubic-bezier(.05,.7,.1,1);
+  --ease-exit:cubic-bezier(.3,0,.8,.15);
+  --dur:.6s; --dur-fast:.15s; --dur-ui:.26s; --dur-rv:.9s; --dur-img:1.2s;
+  --stagger:90ms;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--ja);background:var(--paper);color:var(--ink);line-height:var(--lh-body);letter-spacing:.02em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:var(--fs-base)}
 img{display:block;max-width:100%}
+/* paper grain: a fixed SVG-noise veil, multiplied at low opacity. Not on phones (fixed blend layers cost scroll performance) */
+body::after{content:"";position:fixed;inset:0;z-index:40;pointer-events:none;background:var(--grain);background-size:180px 180px;opacity:.07;mix-blend-mode:multiply}
+@media(max-width:760px){body::after{display:none}}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--radius-sm)}
 .night :focus-visible,.bar:not(.solid) :focus-visible{outline-color:var(--ci-beige)}
@@ -142,8 +154,12 @@ a{color:inherit}
 .brand .bt b{font-weight:700;font-size:var(--fs-sm);letter-spacing:.14em}
 .brand .bt span{font-family:var(--latin);font-size:var(--fs-micro);letter-spacing:.24em;opacity:.8}
 .bar nav{display:flex;gap:2px}
-.bar nav a{font-size:var(--fs-cap);text-decoration:none;padding:6px 11px;border-radius:var(--radius-pill);letter-spacing:.08em;transition:background var(--dur-fast);white-space:nowrap}
+.bar nav a{font-size:var(--fs-cap);text-decoration:none;padding:6px 11px;border-radius:var(--radius-pill);letter-spacing:.08em;transition:background var(--dur-ui) var(--ease),color var(--dur-ui) var(--ease);white-space:nowrap}
 .bar nav a:hover{background:var(--accent-wash)}
+.bar:not(.solid) nav a:hover{background:rgba(253,252,250,.14)}
+/* reading line: 2px of accent that follows scroll progress (scroll-driven, no JS; MID decision_rule 6) */
+.bar .prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent);transform-origin:left;transform:scaleX(0);display:none}
+.bar:not(.solid) .prog{background:var(--ci-beige)}
 .bar.solid nav a[aria-current="true"]{color:var(--accent);background:var(--accent-wash)}
 @media(max-width:760px){
   :root{--bar-h:56px}
@@ -155,21 +171,40 @@ a{color:inherit}
 }
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:min(100vh,900px);min-height:min(100svh,900px);display:grid;align-items:end;color:var(--paper-lt);overflow:hidden;isolation:isolate;background:#7B7A40}
-.hero .hero-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.05);animation:settle 2.4s var(--ease) forwards;background:#7B7A40}
+.hero{position:relative;min-height:min(100vh,900px);min-height:min(100svh,900px);display:grid;align-items:end;color:var(--paper-lt);overflow:hidden;isolation:isolate;background:var(--hero-ground)}
+/* Entrance choreography (jo-ha-kyu, MID concept 81; the stillness after = ma, concept 80):
+   jo  0.1s  coordinates line fades in
+   ha  0.3s  the title rises from under a mask while the Latin letters settle their tracking (.60em -> .42em)
+   kyu 0.6s  lede, 0.8s the address card lands (the address is what people come for, so it never waits past ~1.7s from first paint); the photograph keeps settling for 2.4s so the page comes to rest after the text.
+   Every keyframe starts from opacity 0 inside the keyframe only, so with animations off (reduced motion / print) all text is simply visible. */
+.hero .hero-img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:scale(1.05);animation:settle 2.4s var(--ease) forwards;background:var(--hero-ground)}
 @keyframes settle{to{transform:scale(1)}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
   linear-gradient(180deg,rgba(33,23,18,.42) 0%,rgba(33,23,18,0) 30%),
-  linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.52) 40%,rgba(33,23,18,0) 70%)}
+  linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.52) 40%,rgba(33,23,18,0) 70%);animation:scrim 1.6s var(--ease) both}
+@keyframes scrim{from{opacity:.55}to{opacity:1}}
 .hero-inner{padding:calc(var(--bar-h) + var(--space-4)) var(--side) clamp(var(--space-5),6vw,var(--space-10));max-width:var(--inner);margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:end}
-.hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:#FDFCFA;text-shadow:0 0 12px rgba(33,23,18,.95),0 0 3px rgba(33,23,18,.9);margin-bottom:var(--space-3)}
+.hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:var(--paper-lt);text-shadow:0 0 12px rgba(33,23,18,.95),0 0 3px rgba(33,23,18,.9);margin-bottom:var(--space-3);animation:fadeup .9s var(--ease) .1s both}
 @media(max-height:820px){.hero .obs{display:none}}
 .hero .obs span+span::before{content:"·";margin-right:var(--space-2);opacity:.6}
 .hero h1{font-weight:900;font-size:var(--fs-h1);line-height:.96;letter-spacing:-.01em}
-.hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(13px,1.4vw,18px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star)}
-.hero .lede{margin-top:var(--space-4);max-width:var(--measure);font-size:var(--fs-md);font-weight:400;color:rgba(253,252,250,.9);line-height:1.95}
+.hero h1 .ja{display:block;animation:rise 1.2s var(--ease) .3s both}
+.hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(13px,1.4vw,18px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star);animation:track 1.6s var(--ease) .5s both}
+.hero .lede{margin-top:var(--space-4);max-width:var(--measure);font-size:var(--fs-md);font-weight:400;color:rgba(253,252,250,.9);line-height:1.95;animation:fadeup 1s var(--ease) .6s both}
 .hero .lede strong{font-weight:700;color:var(--white)}
-.hero-card{background:rgba(250,248,245,.96);color:var(--ink);padding:clamp(var(--space-3),2.4vw,var(--space-4));min-width:300px;border-top:1px solid var(--accent)}
+.hero-card{background:rgba(250,248,245,.96);color:var(--ink);padding:clamp(var(--space-3),2.4vw,var(--space-4));min-width:300px;border-top:1px solid var(--accent);animation:land .9s var(--ease) .8s both}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(.35em);clip-path:inset(0 0 100% 0)}60%{opacity:1}to{opacity:1;transform:none;clip-path:inset(-10% 0 -10% 0)}}
+@keyframes track{from{opacity:0;letter-spacing:.6em}to{opacity:1;letter-spacing:.42em}}
+@keyframes land{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+/* a thin cue at the foot of the hero: one hairline that breathes (periphery, 300-700ms+ reads as calm — MID concept 161) */
+.hero .cue{position:absolute;left:var(--side);bottom:calc(var(--space-2) + env(safe-area-inset-bottom));display:flex;align-items:center;gap:var(--space-1);color:var(--star);font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;animation:fadeup 1s var(--ease) 1.6s both}
+.hero .cue i{display:block;width:1px;height:28px;background:var(--star-line);overflow:hidden;position:relative}
+.hero .cue i::after{content:"";position:absolute;inset:0;background:var(--ci-beige);transform:translateY(-100%);animation:cue 2.6s var(--ease) 2.6s infinite}
+@keyframes cue{0%{transform:translateY(-100%)}45%{transform:none}100%{transform:translateY(100%)}}
+@media(max-width:880px),(max-height:700px){.hero .cue{display:none}}
+/* phones: the card holds the address, so the choreography is tighter (nothing waits past 0.9s) */
+@media(max-width:880px){.hero h1 .ja{animation-delay:.2s}.hero h1 .en{animation-delay:.45s}.hero .lede{animation-delay:.65s}.hero-card{animation-delay:.9s;animation-duration:.8s}}
 .hero-card .mono{color:var(--ink-mute)}
 .hero-card .zip{font-family:var(--mono);font-size:var(--fs-sm);color:var(--ink-soft);margin-top:var(--space-2)}
 .hero-card .addr{font-size:var(--fs-lg);font-weight:700;line-height:1.5;letter-spacing:.03em}
@@ -183,18 +218,23 @@ a{color:inherit}
 }
 
 /* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:var(--space-1);font-family:inherit;font-size:var(--fs-sm);font-weight:500;letter-spacing:.04em;padding:10px 18px;min-height:44px;border-radius:var(--radius-pill);text-decoration:none;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--white);transition:background var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease)}
-.btn:hover{background:var(--accent-dp);transform:translateY(-1px)}
+.btn{display:inline-flex;align-items:center;gap:var(--space-1);font-family:inherit;font-size:var(--fs-sm);font-weight:500;letter-spacing:.04em;padding:10px 18px;min-height:44px;border-radius:var(--radius-pill);text-decoration:none;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:var(--white);transition:background var(--dur-ui) var(--ease),color var(--dur-ui) var(--ease),transform var(--dur-ui) var(--ease),box-shadow var(--dur-ui) var(--ease)}
+.btn:hover{background:var(--accent-dp);transform:translateY(-1px);box-shadow:0 6px 18px -10px rgba(33,23,18,.5)}
+.btn:active{transform:translateY(0) scale(.97);transition-duration:var(--dur-fast);box-shadow:none}
 .btn.ghost{background:transparent;color:var(--accent)}
-.btn.ghost:hover{background:var(--accent-wash)}
-.btn svg{width:15px;height:15px;flex:none}
+.btn.ghost:hover{background:var(--accent-wash);box-shadow:none}
+.btn svg{width:15px;height:15px;flex:none;transition:transform var(--dur-ui) var(--ease)}
+.btn:hover svg:last-child{transform:translateX(3px)}
+.tlink{transition:color var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease)}
 .btn.done{background:var(--accent-dp);border-color:var(--accent-dp);color:var(--white)}
 
 /* ---------- intro (positioning) ---------- */
 .intro{padding:var(--section) 0 clamp(var(--space-6),6vw,var(--space-10));border-bottom:1px solid var(--hairline)}
 .intro-grid>*{min-width:0}
 .intro-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-5),6vw,var(--space-12));align-items:start}
-.intro .lead{font-size:clamp(20px,2.1vw,30px);font-weight:500;line-height:1.75;letter-spacing:.01em;max-width:22em;word-break:auto-phrase}
+.intro .lead{font-size:clamp(20px,2.1vw,30px);font-weight:500;line-height:1.75;letter-spacing:.01em;max-width:22em;word-break:auto-phrase;position:relative;padding-top:var(--space-3)}
+.intro .lead::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;background:var(--accent);transform-origin:left;transform:scaleX(0);transition:transform var(--dur-rv) var(--ease) .2s}
+.intro .lead.in::before,html:not(.js) .intro .lead::before{transform:scaleX(1)}
 .intro .lead strong{font-weight:700}
 .intro .side p{color:var(--ink-soft);font-size:var(--fs-base);line-height:2}
 .intro .side p+p{margin-top:var(--space-2)}
@@ -214,6 +254,13 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .sec-grid>*{min-width:0}
 .sec-grid{display:grid;grid-template-columns:minmax(0,3.2fr) minmax(0,8.8fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
 .sec-idx{position:sticky;top:calc(var(--bar-h) + var(--space-3))}
+/* a large outlined numeral behind the index: Archivo 300, hairline stroke, no fill — the section's "folio" */
+.sec-idx .big{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(72px,9vw,132px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--hairline-dk);margin:0 0 var(--space-3) -.04em;user-select:none}
+.night .sec-idx .big{-webkit-text-stroke-color:var(--rule-night)}
+.js .sec-idx .big{opacity:0;transform:translateX(-12px);transition:opacity var(--dur-img) var(--ease),transform var(--dur-img) var(--ease)}
+.js .sec-idx .big.in{opacity:1;transform:none}
+/* keyline between the index column and the body on wide screens */
+@media(min-width:881px){.sec-grid{--gutter:clamp(var(--space-4),5vw,var(--space-10));gap:var(--gutter)}.sec-grid>:nth-child(2){border-left:1px solid var(--hairline);padding-left:calc(var(--gutter)/2);margin-left:calc(var(--gutter)/-2)}.night .sec-grid>:nth-child(2){border-left-color:var(--rule-night)}}
 .sec-idx .num{text-transform:uppercase;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent)}
 .sec-idx .num span{color:var(--ink-mute);margin-left:var(--space-1)}
 .sec-idx h2{font-weight:700;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2)}
@@ -240,8 +287,17 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .m-minor path{fill:none;stroke:var(--white);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .m-major path{fill:none;stroke:var(--map-road);stroke-linecap:round;stroke-linejoin:round}
 .m-route{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
-.js .m-route.draw{stroke-dasharray:2600;stroke-dashoffset:2600;animation:draw 3.6s var(--ease) .4s forwards}
+/* the route draws itself once the map is in view (JS adds .go on the svg); the stops pop as the line reaches them,
+   the goal pin last, and the matching step cards light up on the same clock (see .steps li below) */
+.js .routemap .m-route{stroke-dasharray:2600;stroke-dashoffset:2600}
+.js .routemap.go .m-route{animation:draw 3.6s var(--ease) .3s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
+.js .routemap .m-stop,.js .routemap .m-goal{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.4)}
+.js .routemap.go .m-stop{animation:pop .6s var(--ease-in) both;animation-delay:calc(.3s + var(--k,0)*1s)}
+.js .routemap.go .m-goal{animation:pop .7s var(--ease-in) 3.4s both}
+@keyframes pop{to{opacity:1;transform:none}}
+.js .routemap .m-goal-pulse{animation-play-state:paused;opacity:0}
+.js .routemap.go .m-goal-pulse{animation-play-state:running;animation-delay:3.6s}
 .m-route-last{fill:none;stroke:var(--accent);stroke-width:3;stroke-dasharray:1 6;stroke-linecap:round}
 .m-route-bus{fill:none;stroke:var(--ci-amber);stroke-width:4;stroke-dasharray:2 7;stroke-linecap:round}
 .m-stop circle{fill:var(--accent);stroke:var(--paper);stroke-width:3;transition:fill var(--dur-fast),r var(--dur-fast) var(--ease)}
@@ -258,7 +314,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .m-water-l{font-size:var(--fs-map);fill:var(--map-water-l);letter-spacing:.3em}
 .m-north path{fill:var(--ci-brown)}.m-north text,.m-scale text{font:500 var(--fs-xs) var(--mono);fill:var(--map-label)}
 .m-scale path{stroke:var(--map-label);stroke-width:2;fill:none}.m-attr{font-size:var(--fs-micro);fill:var(--map-label-dk)}
-.m-goal-pulse{fill:var(--accent);opacity:.18;transform-origin:center;transform-box:fill-box;animation:pulse 2.8s var(--ease) infinite}
+.m-goal-pulse{fill:var(--accent);opacity:.18;transform-origin:center;transform-box:fill-box;animation:pulse 2.8s var(--ease) 3}
 @keyframes pulse{0%{transform:scale(.6);opacity:.35}100%{transform:scale(2.2);opacity:0}}
 .m-sub circle{fill:var(--paper);stroke:var(--ci-terracotta);stroke-width:3}
 .m-pt-s{font-size:var(--fs-map-s);font-weight:700;fill:var(--map-label-dk);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
@@ -267,6 +323,8 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4);margin-top:clamp(var(--space-5),5vw,var(--space-8))}
 .steps li{border-top:1px solid var(--hairline-dk);padding-top:var(--space-2);transition:border-color .3s var(--ease)}
 .steps li.on{border-top-color:var(--accent)}
+.steps li.on .n{color:var(--accent-dp)}
+.steps .n,.steps .t{transition:color var(--dur-ui) var(--ease)}
 .steps .n{display:flex;align-items:baseline;gap:var(--space-1);font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent);text-transform:uppercase}
 .steps .n span{color:var(--ink-mute)}
 .steps .t{font-size:var(--fs-base);line-height:1.9;margin-top:var(--space-1);word-break:auto-phrase}
@@ -308,9 +366,11 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .gallery figure{position:relative;min-height:0}
 .gallery button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative;overflow:hidden;background:var(--lqip,var(--paper-dp))}
 .gallery button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .8s var(--ease)}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-img) var(--ease),opacity .8s var(--ease),filter var(--dur-img) var(--ease)}
 .js .gallery img[loading="lazy"]:not(.ok){opacity:0}
-.gallery button:hover img{transform:scale(1.04)}
+.gallery button:hover img,.gallery button:focus-visible img{transform:scale(1.04)}
+.gallery figcaption,.album-grid .cap{transition:transform var(--dur-ui) var(--ease)}
+.gallery button:hover figcaption,.album-grid button:hover .cap{transform:translateY(-2px)}
 /* Scrim under captions: the old .72 gradient left white text at 2.2:1 on bright photos (audit 2026-11-07); this reaches >=6.1:1 on every photo */
 .gallery figcaption{position:absolute;left:0;bottom:0;padding:20px var(--space-2) var(--space-1);font-size:var(--fs-cap);color:var(--white);background:var(--scrim);width:100%;letter-spacing:.04em}
 .g1{grid-column:1/8;grid-row:1/4}
@@ -319,9 +379,25 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .g4{grid-column:1/8;grid-row:4/6} /* two rows, so the living room is not a thin strip under the gate */
 .g4 img{object-position:50% 72%} /* keep the sunlit floor of the living room in the wide crop */
 @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:140px}.g1{grid-column:1/3;grid-row:1/3}.g2{grid-column:1/2;grid-row:3/4}.g3{grid-column:2/3;grid-row:3/4}.g4{grid-column:1/3;grid-row:4/5}}
-dialog.lb{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh;margin:auto}
-dialog.lb::backdrop{background:rgba(33,23,18,.88)}
-dialog.lb img{max-width:min(1200px,94vw);max-height:84vh;width:auto;height:auto;margin:0 auto}
+/* Lightbox: open = scale .96 + fade, 300ms emphasized-decelerate; close = 180ms accelerate (MID design_rule 1/2, 61 backdrop in sync).
+   Done with @starting-style + allow-discrete so the close animates while the dialog is already closed for scripts;
+   browsers without it get an instant open/close. */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh;margin:auto;opacity:0;transform:translateY(10px) scale(.96);transition:opacity .18s var(--ease-exit),transform .18s var(--ease-exit),overlay .18s allow-discrete,display .18s allow-discrete}
+dialog.lb[open]{opacity:1;transform:none;transition:opacity .3s var(--ease-in),transform .3s var(--ease-in),overlay .3s allow-discrete,display .3s allow-discrete}
+@starting-style{dialog.lb[open]{opacity:0;transform:translateY(10px) scale(.96)}}
+dialog.lb::backdrop{background:rgba(33,23,18,0);backdrop-filter:blur(0);transition:background .18s var(--ease-exit),backdrop-filter .18s,overlay .18s allow-discrete,display .18s allow-discrete}
+dialog.lb[open]::backdrop{background:rgba(33,23,18,.9);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .3s var(--ease-in),backdrop-filter .3s,overlay .3s allow-discrete,display .3s allow-discrete}
+@starting-style{dialog.lb[open]::backdrop{background:rgba(33,23,18,0);backdrop-filter:blur(0)}}
+dialog.lb .stage{position:relative;display:grid;place-items:center}
+dialog.lb img{max-width:min(1200px,94vw);max-height:84vh;width:auto;height:auto;margin:0 auto;transition:opacity .35s var(--ease)}
+dialog.lb img.swap{opacity:0;transition:none}
+/* the previous photo stays on a ghost layer and fades out while the new one fades in (crossfade) */
+dialog.lb img.ghost{position:absolute;inset:0;margin:auto;pointer-events:none;opacity:0;transition:opacity .35s var(--ease)}
+dialog.lb img.ghost.show{opacity:1;transition:none}
+dialog.lb .x,dialog.lb .nav{transition:background var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease),transform var(--dur-ui) var(--ease)}
+dialog.lb .x:hover,dialog.lb .nav:hover{background:rgba(33,23,18,.85);border-color:var(--star-soft)}
+dialog.lb .nav:active{transform:translateY(-50%) scale(.94)}
+dialog.lb .x:active{transform:scale(.94)}
 dialog.lb p{color:var(--star);font-size:var(--fs-sm);text-align:center;margin-top:var(--space-1)}
 dialog.lb .x{position:fixed;top:var(--space-2);right:var(--space-2);width:44px;height:44px;border-radius:50%;border:1px solid var(--star-line);background:rgba(33,23,18,.6);color:var(--star);font-size:22px;cursor:pointer}
 dialog.lb .nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid var(--star-line);background:rgba(33,23,18,.6);color:var(--star);font-size:28px;line-height:1;cursor:pointer}
@@ -337,7 +413,8 @@ dialog.lb .lb-n{color:var(--star-soft)}
 .album-head h3{font-size:clamp(20px,2vw,26px);font-weight:700;letter-spacing:.04em}
 .album-head h3 span{display:block;font-family:var(--latin);font-size:var(--fs-xs);font-weight:500;letter-spacing:var(--tracking-label);color:var(--ink-mute);text-transform:uppercase;margin-top:6px}
 .filters{display:flex;flex-wrap:wrap;gap:6px}
-.filters button{font:inherit;font-size:var(--fs-sm);padding:7px 14px;border-radius:var(--radius-pill);border:1px solid var(--hairline-ui);background:transparent;color:var(--ink-soft);cursor:pointer;min-height:44px;transition:background var(--dur-fast),color var(--dur-fast)}
+.filters button{font:inherit;font-size:var(--fs-sm);padding:7px 14px;border-radius:var(--radius-pill);border:1px solid var(--hairline-ui);background:transparent;color:var(--ink-soft);cursor:pointer;min-height:44px;transition:background var(--dur-ui) var(--ease),color var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease),transform var(--dur-fast) var(--ease)}
+.filters button:active{transform:scale(.96)}
 .filters button span{font-family:var(--mono);font-size:var(--fs-xs);margin-left:6px;color:var(--ink-mute)}
 .filters button:hover{background:var(--accent-wash)}
 .filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper-lt)}
@@ -347,6 +424,9 @@ dialog.lb .lb-n{color:var(--star-soft)}
 /* overflow stays on the button, not the li, so the focus ring outside the tile is not clipped */
 .album-grid li{aspect-ratio:3/2;background:var(--lqip,var(--paper-dp))}
 .album-grid li[hidden]{display:none}
+/* tiles returning after a filter fade in (display -> allow-discrete + @starting-style; older browsers just show them) */
+.album-grid li{transition:opacity .35s var(--ease),display .35s allow-discrete}
+@starting-style{.album-grid li:not([hidden]){opacity:0}}
 .album-grid button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative;overflow:hidden}
 .album-grid button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .album-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .8s var(--ease)}
@@ -362,10 +442,13 @@ dialog.lb .lb-n{color:var(--star-soft)}
 
 /* ---------- night: about + course ---------- */
 .night{background:var(--night);color:var(--star)}
+/* a faint warm glow in the upper right of the dark ground, so the two night sections read as one evening rather than a flat block */
+.night::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 55% at 85% 0%,rgba(240,166,113,.075),transparent 65%)}
+.night>.wrap{position:relative}
 .night .sec-idx .num{color:var(--ci-orange)}.night .sec-idx .num span{color:var(--star-mute)}
 .night .sec-idx h2{color:var(--paper-lt)}
 .night .sec-idx p{color:var(--star-soft)}
-.about p{font-size:var(--fs-base);line-height:2.1;color:rgba(242,230,212,.88);max-width:var(--measure)}
+.about p{font-size:var(--fs-base);line-height:2.1;color:var(--star-88);max-width:var(--measure)}
 .about p+p{margin-top:var(--space-3)}
 .about .pull{font-size:clamp(19px,1.9vw,26px);font-weight:500;line-height:1.7;color:var(--paper-lt);max-width:22em;margin-bottom:var(--space-4)}
 .about .note{font-size:var(--fs-sm);color:var(--star-soft);margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid var(--rule-night);max-width:var(--measure)}
@@ -383,12 +466,12 @@ section.sec.night+section.sec.night{border-top-color:var(--rule-night)}
 .course .status{display:inline-block;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ci-orange);border:1px solid rgba(240,166,113,.5);padding:3px 10px;border-radius:var(--radius-pill)}
 .course h3{font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.4;margin-top:var(--space-3);color:var(--paper-lt)}
 .course h3 span{display:block;font-size:var(--fs-md);font-weight:500;color:var(--ci-beige);margin-top:6px;letter-spacing:.06em}
-.course .lead{margin-top:var(--space-3);font-size:var(--fs-base);line-height:2.05;color:rgba(242,230,212,.86);max-width:var(--measure)}
+.course .lead{margin-top:var(--space-3);font-size:var(--fs-base);line-height:2.05;color:var(--star-86);max-width:var(--measure)}
 .course .cb-facts{display:grid;gap:var(--space-2)}
 .course .cb-facts div{border-top:1px solid var(--rule-night);padding-top:var(--space-2)}
-.course dt{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.12em;color:rgba(242,230,212,.6);text-transform:uppercase}
+.course dt{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.12em;color:var(--star-60);text-transform:uppercase}
 .course dd{font-size:var(--fs-base);font-weight:700;line-height:1.7;margin-top:4px;color:var(--paper-lt)}
-.course dd small{display:block;font-weight:400;color:rgba(242,230,212,.75);font-size:var(--fs-sm)}
+.course dd small{display:block;font-weight:400;color:var(--star-75);font-size:var(--fs-sm)}
 .course .acts{margin-top:var(--space-4)}
 @media(max-width:880px){.course-grid{grid-template-columns:1fr;gap:var(--space-4)}}
 
@@ -407,27 +490,71 @@ footer ul a:hover{color:var(--accent)}
 .foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2);margin-top:clamp(var(--space-5),5vw,var(--space-8));padding-top:var(--space-3);border-top:1px solid var(--hairline);font-size:var(--fs-cap);color:var(--ink-mute)}
 @media(max-width:880px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}}
 
-/* ---------- reveal ---------- */
-.js .rv{opacity:0;transform:translateY(18px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+/* ---------- reveal (JS adds .in when the element enters the viewport; three vocabularies, so not everything fades the same way) ----------
+   .rv       text and cards rise 18px (900ms, ease-out)
+   .rv.rl    a hairline draws in from the left over the element's top rule (bottom rule with .rl-b); .on turns it to the accent
+   .rv.ri    photographs and the map open like a curtain from the top while the image settles from 1.06 to 1
+   --i       sibling index -> stagger of 90ms (MID design_rule 7: 60-100ms per item)                                                   */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity var(--dur-rv) var(--ease),transform var(--dur-rv) var(--ease);transition-delay:calc(var(--i,0)*var(--stagger))}
 .js .rv.in{opacity:1;transform:none}
+.rl{position:relative}
+.js .rl{border-top-color:transparent}
+.js .rl::before{content:"";position:absolute;left:0;top:-1px;width:100%;height:1px;background:var(--hairline-dk);transform:scaleX(0);transform-origin:left;transition:transform var(--dur-img) var(--ease),background var(--dur-ui) var(--ease);transition-delay:calc(var(--i,0)*var(--stagger))}
+.js .rl.in::before{transform:scaleX(1)}
+.js .rl.on::before{background:var(--accent)}
+.js .rl-b{border-bottom-color:transparent}
+.js .rl-b::before{top:auto;bottom:-1px;background:var(--hairline)}
+.js .ri{transform:none;clip-path:inset(0 0 100% 0);transition:opacity var(--dur-rv) var(--ease),clip-path var(--dur-img) var(--ease);transition-delay:calc(var(--i,0)*var(--stagger))}
+.js .ri.in{clip-path:inset(0)}
+.js .ri img{transform:scale(1.06);transition:transform 1.6s var(--ease)}
+.js .ri.in img{transform:none}
+.js .ri.in button:hover img,.js .ri.in button:focus-visible img{transform:scale(1.04)}
+/* scroll-driven layers: hero parallax (image drifts 12% over the first screen), depth on the mosaic photos, reading line in the bar.
+   CSS only (MID decision_rule 6); off when the user prefers reduced motion (design_rule 64: parallax stops first; vestibular — cognitive 17) */
+@media(prefers-reduced-motion:no-preference){
+  @supports(animation-timeline:scroll()){
+    .hero .hero-img{animation:settle 2.4s var(--ease) forwards,heropx linear both;animation-timeline:auto,scroll(root);animation-range:normal,0 100vh}
+    @keyframes heropx{to{translate:0 12%}}
+    @media(min-width:881px){.hero-inner{animation:herotxt linear both;animation-timeline:scroll(root);animation-range:0 70vh}}
+    @keyframes herotxt{to{translate:0 -6%;opacity:.15}}
+    .bar .prog{display:block;animation:prog linear both;animation-timeline:scroll(root)}
+    @keyframes prog{to{transform:scaleX(1)}}
+    @media(min-width:881px){
+      .gallery button img{scale:1.1;animation:depth linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+      @keyframes depth{from{translate:0 -4%}to{translate:0 4%}}
+    }
+  }
+}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .js .rv{opacity:1;transform:none}
+  .js .rv,.js .sec-idx .big{opacity:1;transform:none}
+  .js .ri{clip-path:none}.js .ri img{transform:none}
+  .js .rl{border-top-color:var(--hairline-dk)}.js .rl-b{border-bottom-color:var(--hairline)}.js .rl::before{display:none}
   .js .gallery img[loading="lazy"]:not(.ok){opacity:1}
   .js .album-grid img:not(.ok){opacity:1}
-  .hero .hero-img{transform:none}
-  .js .m-route.draw{stroke-dashoffset:0;stroke-dasharray:none}
+  .hero .hero-img{transform:none;translate:none}
+  .hero .cue{display:none}
+  .intro .lead::before{transform:none}
+  .js .routemap .m-route{stroke-dashoffset:0;stroke-dasharray:none}
+  .js .routemap .m-stop,.js .routemap .m-goal{opacity:1;transform:none}
   .m-goal-pulse{display:none}
+  dialog.lb,dialog.lb[open]{opacity:1;transform:none}
+  dialog.lb img.swap,dialog.lb img.ghost{opacity:0}dialog.lb img.swap{opacity:1}
+  body::after{display:none}
 }
 @media print{
   .bar,.map-frame,dialog{display:none!important}
   .hero{min-height:auto;color:var(--ink)}.hero::before,.hero .hero-img{display:none}
   .hero .lede,.hero h1 .en,.hero .obs{color:var(--ink)}
   .night{background:#fff;color:var(--ink)}.night .sec-idx h2,.about .pull,.course h3,.course dd{color:var(--ink)}
-  .js .rv{opacity:1;transform:none}
+  .js .rv,.js .sec-idx .big{opacity:1;transform:none}
+  .js .ri{clip-path:none}.js .ri img{transform:none}
+  .js .rl{border-top-color:var(--hairline-dk)}.js .rl-b{border-bottom-color:var(--hairline)}.js .rl::before{display:none}
   .js .gallery img,.js .album-grid img{opacity:1}
   .filters{display:none}.album-grid{grid-template-columns:repeat(4,1fr)}
-  .js .m-route.draw{stroke-dashoffset:0;stroke-dasharray:none}
+  .js .routemap .m-route{stroke-dashoffset:0;stroke-dasharray:none}
+  .js .routemap .m-stop,.js .routemap .m-goal{opacity:1;transform:none}
+  body::after,.hero .cue,.bar .prog{display:none}
   section.sec{padding:var(--space-4) 0}
   .sec-idx{position:static}
 }
@@ -450,6 +577,7 @@ footer ul a:hover{color:var(--accent)}
     <a href="#about">未来庵</a>
     <a href="#course">講座</a>
   </nav>
+  <span class="prog" aria-hidden="true"></span>
 </header>
 
 <main id="top">
@@ -463,10 +591,10 @@ footer ul a:hover{color:var(--accent)}
   <div class="hero-inner">
     <div>
       <p class="obs mono"><span>Access</span><span>N 35.0263°</span><span>E 135.7846°</span><span>Kyoto · Sakyo</span></p>
-      <h1 id="h1">未来庵<span class="en">MIRAI-AN</span></h1>
+      <h1 id="h1"><span class="ja">未来庵</span><span class="en">MIRAI-AN</span></h1>
       <p class="lede">NPO法人ミラツクの<strong class="nw">未来学研究の拠点</strong>へ、<span class="nw">お越しいただくための</span><span class="nw">行き方のご案内です。</span></p>
     </div>
-    <div class="hero-card rv">
+    <div class="hero-card">
       <p class="mono">Address — 所在地</p>
       <p class="zip">〒606-8317</p>
       <p class="addr">京都府京都市左京区<br>吉田本町13</p>
@@ -478,6 +606,7 @@ footer ul a:hover{color:var(--accent)}
       </div>
     </div>
   </div>
+  <p class="cue" aria-hidden="true"><i></i>Scroll</p>
 </section>
 
 <!-- ================= INTRO ================= -->
@@ -491,9 +620,9 @@ footer ul a:hover{color:var(--accent)}
       </div>
     </div>
     <ul class="glance rv" aria-label="所要時間の目安">
-      <li><p class="k">京阪「出町柳」駅から</p><p class="v">徒歩 約18分<small>約1.4km</small></p></li>
-      <li><p class="k">市バス「京大農学部前」から</p><p class="v">徒歩 約5分<small>約300m</small></p></li>
-      <li><p class="k">JR京都駅から</p><p class="v">市バス7系統 約35分<small>目安</small></p></li>
+      <li class="rv rl" style="--i:0"><p class="k">京阪「出町柳」駅から</p><p class="v">徒歩 約18分<small>約1.4km</small></p></li>
+      <li class="rv rl" style="--i:1"><p class="k">市バス「京大農学部前」から</p><p class="v">徒歩 約5分<small>約300m</small></p></li>
+      <li class="rv rl" style="--i:2"><p class="k">JR京都駅から</p><p class="v">市バス7系統 約35分<small>目安</small></p></li>
     </ul>
   </div>
 </section>
@@ -502,12 +631,13 @@ footer ul a:hover{color:var(--accent)}
 <section class="sec" id="route" tabindex="-1" aria-labelledby="h-route">
   <div class="wrap sec-grid">
     <div class="sec-idx">
+      <span class="big" aria-hidden="true">01</span>
       <p class="num rv">01<span>Route</span></p>
       <h2 id="h-route" class="rv"><span class="nw">出町柳駅から、</span><span class="nw">歩いて。</span></h2>
       <p class="rv">京阪「出町柳」駅から今出川通をまっすぐ東へ。百万遍を越え、京都大学の北側を歩きます。約1.4km、徒歩約18分。地図は OpenStreetMap の道路データから作った、縮尺のあるものです。</p>
     </div>
     <div>
-      <figure class="mapfig rv">
+      <figure class="mapfig rv ri">
         <div class="mapscroll" role="region" tabindex="0" aria-label="道順の地図（狭い画面では横にスクロールできます）">
         <svg viewBox="0 0 1000 653" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mp-t mp-d" class="routemap">
 <title id="mp-t">出町柳駅・京大正門前から未来庵までの道順の地図</title>
@@ -562,10 +692,10 @@ footer ul a:hover{color:var(--accent)}
       </figure>
 
       <ol class="steps" aria-label="出町柳駅からの道順">
-        <li class="rv" data-step="1"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong class="nw">出口3</strong>を出て、今出川通を東へ進みます。</p></li>
-        <li class="rv" data-step="2"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
-        <li class="rv" data-step="3"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、<span class="nw">約230m</span>進みます。<span class="m"><span class="nw">停留所から 約300m</span> · <span class="nw">徒歩 約5分</span></span></p></li>
-        <li class="rv" data-step="4"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">約1.4km · 徒歩 約18分</span></p></li>
+        <li class="rv rl" data-step="1" style="--i:0"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong class="nw">出口3</strong>を出て、今出川通を東へ進みます。</p></li>
+        <li class="rv rl" data-step="2" style="--i:4"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
+        <li class="rv rl" data-step="3" style="--i:8"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、<span class="nw">約230m</span>進みます。<span class="m"><span class="nw">停留所から 約300m</span> · <span class="nw">徒歩 約5分</span></span></p></li>
+        <li class="rv rl" data-step="4" style="--i:12"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">約1.4km · 徒歩 約18分</span></p></li>
       </ol>
       <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
 
@@ -596,28 +726,29 @@ footer ul a:hover{color:var(--accent)}
 <section class="sec" id="ways" tabindex="-1" aria-labelledby="h-ways">
   <div class="wrap sec-grid">
     <div class="sec-idx">
+      <span class="big" aria-hidden="true">02</span>
       <p class="num rv">02<span>By bus · By car</span></p>
       <h2 id="h-ways" class="rv"><span class="nw">バスでも、</span><span class="nw">京都駅からも。</span></h2>
       <p class="rv">最寄りの停留所は、今出川通の「京大農学部前」です。7系統と203系統が停まります。</p>
     </div>
     <div>
       <ul class="ways">
-        <li class="rv">
+        <li class="rv rl rl-b" style="--i:0">
           <div><h3>JR京都駅から</h3><div class="tag"><span>7</span></div></div>
           <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。</p>
           <p class="time">約35分<small>目安</small></p>
         </li>
-        <li class="rv">
+        <li class="rv rl rl-b" style="--i:1">
           <div><h3>出町柳駅前から</h3><div class="tag"><span>7</span><span>203</span></div></div>
           <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。</p>
           <p class="time">約8分</p>
         </li>
-        <li class="rv">
+        <li class="rv rl rl-b" style="--i:2">
           <div><h3>「京大正門前」で降りたら</h3><div class="tag"><span>東大路通</span></div></div>
           <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
           <p class="time">徒歩 約11分</p>
         </li>
-        <li class="rv" id="parking">
+        <li class="rv rl rl-b" style="--i:3" id="parking">
           <div><h3>お車でお越しの場合</h3></div>
           <p>未来庵には駐車場がありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください。空き状況や料金は地図でご確認いただけます。</p>
           <p class="time">駐車場なし</p>
@@ -632,15 +763,16 @@ footer ul a:hover{color:var(--accent)}
 <section class="sec" id="photos" tabindex="-1" aria-labelledby="h-photos">
   <div class="wrap sec-grid">
     <div class="sec-idx">
+      <span class="big" aria-hidden="true">03</span>
       <p class="num rv">03<span>Photos</span></p>
       <h2 id="h-photos" class="rv"><span class="nw">庭と建物の</span><span class="nw">いまの姿</span></h2>
       <p class="rv">門をくぐり、石畳の小径を抜けた先が未来庵の玄関です。到着の目印に、そして滞在の様子を思い描く手がかりにご覧ください。</p>
     </div>
     <div class="gallery">
-      <figure class="g1 rv" style="--lqip:#494A49"><button type="button" data-full="assets/photos/gate-1600.webp" aria-label="写真を拡大：門"><img src="assets/photos/gate-640.webp" srcset="assets/photos/gate-640.webp 640w, assets/photos/gate-1600.webp 1600w" sizes="(max-width:760px) 100vw, 44vw" alt="瓦屋根をのせた木の門と板塀。門の脇に表札、上に紅葉した木々" loading="lazy" decoding="async" width="640" height="427"><figcaption>門</figcaption></button></figure>
-      <figure class="g2 rv" style="--lqip:#87866C"><button type="button" data-full="assets/photos/path-to-house-1600.webp" aria-label="写真を拡大：石畳の小径"><img src="assets/photos/path-to-house-640.webp" srcset="assets/photos/path-to-house-640.webp 640w, assets/photos/path-to-house-1600.webp 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="苔の庭を抜けて建物の入口へ続く石畳の小径" loading="lazy" decoding="async" width="640" height="427"><figcaption>石畳の小径</figcaption></button></figure>
-      <figure class="g3 rv" style="--lqip:#6E665E"><button type="button" data-full="assets/photos/entrance-1600.webp" aria-label="写真を拡大：玄関先"><img src="assets/photos/entrance-640.webp" srcset="assets/photos/entrance-640.webp 640w, assets/photos/entrance-1600.webp 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="土壁と柱の玄関先。開いた戸の奥に室内が見え、足元は石のタイル" loading="lazy" decoding="async" width="640" height="427"><figcaption>玄関先</figcaption></button></figure>
-      <figure class="g4 rv" style="--lqip:#4D4035"><button type="button" data-full="assets/photos/living-sun-1600.webp" aria-label="写真を拡大：木漏れ日の居間"><img src="assets/photos/living-sun-640.webp" srcset="assets/photos/living-sun-640.webp 640w, assets/photos/living-sun-1600.webp 1600w" sizes="(max-width:760px) 100vw, 44vw" alt="煉瓦の壁とソファ、木の食卓がある居間。床に木漏れ日の影が落ちる" loading="lazy" decoding="async" width="640" height="427"><figcaption>木漏れ日の居間</figcaption></button></figure>
+      <figure class="g1 rv ri" style="--i:0;--lqip:#494A49"><button type="button" data-full="assets/photos/gate-1600.webp" aria-label="写真を拡大：門"><img src="assets/photos/gate-640.webp" srcset="assets/photos/gate-640.webp 640w, assets/photos/gate-1600.webp 1600w" sizes="(max-width:760px) 100vw, 44vw" alt="瓦屋根をのせた木の門と板塀。門の脇に表札、上に紅葉した木々" loading="lazy" decoding="async" width="640" height="427"><figcaption>門</figcaption></button></figure>
+      <figure class="g2 rv ri" style="--i:1;--lqip:#87866C"><button type="button" data-full="assets/photos/path-to-house-1600.webp" aria-label="写真を拡大：石畳の小径"><img src="assets/photos/path-to-house-640.webp" srcset="assets/photos/path-to-house-640.webp 640w, assets/photos/path-to-house-1600.webp 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="苔の庭を抜けて建物の入口へ続く石畳の小径" loading="lazy" decoding="async" width="640" height="427"><figcaption>石畳の小径</figcaption></button></figure>
+      <figure class="g3 rv ri" style="--i:2;--lqip:#6E665E"><button type="button" data-full="assets/photos/entrance-1600.webp" aria-label="写真を拡大：玄関先"><img src="assets/photos/entrance-640.webp" srcset="assets/photos/entrance-640.webp 640w, assets/photos/entrance-1600.webp 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="土壁と柱の玄関先。開いた戸の奥に室内が見え、足元は石のタイル" loading="lazy" decoding="async" width="640" height="427"><figcaption>玄関先</figcaption></button></figure>
+      <figure class="g4 rv ri" style="--i:3;--lqip:#4D4035"><button type="button" data-full="assets/photos/living-sun-1600.webp" aria-label="写真を拡大：木漏れ日の居間"><img src="assets/photos/living-sun-640.webp" srcset="assets/photos/living-sun-640.webp 640w, assets/photos/living-sun-1600.webp 1600w" sizes="(max-width:760px) 100vw, 44vw" alt="煉瓦の壁とソファ、木の食卓がある居間。床に木漏れ日の影が落ちる" loading="lazy" decoding="async" width="640" height="427"><figcaption>木漏れ日の居間</figcaption></button></figure>
     </div>
   </div>
   <div class="wrap album" id="gallery" aria-labelledby="h-album">
@@ -699,7 +831,7 @@ footer ul a:hover{color:var(--accent)}
     <button class="x" type="button" aria-label="閉じる">×</button>
     <button class="nav prev" type="button" aria-label="前の写真">‹</button>
     <button class="nav next" type="button" aria-label="次の写真">›</button>
-    <img alt=""><p><span class="lb-cap"></span><span class="lb-n mono"></span></p>
+    <div class="stage"><img alt=""><img class="ghost" alt="" aria-hidden="true"></div><p><span class="lb-cap"></span><span class="lb-n mono"></span></p>
   </dialog>
 </section>
 
@@ -707,6 +839,7 @@ footer ul a:hover{color:var(--accent)}
 <section class="sec night about" id="about" tabindex="-1" aria-labelledby="h-about">
   <div class="wrap sec-grid">
     <div class="sec-idx">
+      <span class="big" aria-hidden="true">04</span>
       <p class="num rv">04<span>About Mirai-an</span></p>
       <h2 id="h-about" class="rv"><span class="nw">未来学の拠点、</span><span class="nw">余白と文化の</span><span class="nw">知の場。</span></h2>
     </div>
@@ -727,6 +860,7 @@ footer ul a:hover{color:var(--accent)}
 <section class="sec night course" id="course" tabindex="-1" aria-labelledby="h-course">
   <div class="wrap sec-grid">
     <div class="sec-idx">
+      <span class="big" aria-hidden="true">05</span>
       <p class="num rv">05<span>Futures Studies Course</span></p>
       <h2 id="h-course" class="rv"><span class="nw">ここで、</span><span class="nw">未来学を学ぶ。</span></h2>
       <p class="rv">未来庵は未来学入門講座のワークショップ回の会場でもあります。</p>
@@ -796,14 +930,16 @@ footer ul a:hover{color:var(--accent)}
   function onScroll(){bar.classList.toggle('solid', window.scrollY > hero.offsetHeight-96);}
   onScroll(); addEventListener('scroll',onScroll,{passive:true});
 
-  var rv=document.querySelectorAll('.rv');
+  // reveal on entry; the map svg gets .go so the route draws when it is actually seen (not on page load).
+  // Safety net: everything is revealed 4s after load regardless, so no content depends on the observer.
+  var rv=document.querySelectorAll('.rv, .sec-idx .big, .routemap');
+  function reveal(el){el.classList.add('in'); if(el.classList.contains('routemap')) el.classList.add('go');}
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
     rv.forEach(function(el){io.observe(el)});
-  } else rv.forEach(function(el){el.classList.add('in')});
-  function revealAll(){rv.forEach(function(el){el.classList.add('in')});}
-  addEventListener('load',function(){setTimeout(revealAll,1800)});
-  setTimeout(revealAll,4000);
+  } else rv.forEach(reveal);
+  // no timed reveal-all: it was firing before the user scrolled, so the map drew off-screen (audit 2026-11-07). Print still gets everything.
+  addEventListener('beforeprint',function(){rv.forEach(reveal)});
 
   document.querySelectorAll('.gallery img').forEach(function(im){
     function ok(){im.classList.add('ok')}
@@ -820,9 +956,8 @@ footer ul a:hover{color:var(--accent)}
   var rm=document.querySelector('.routemap'), stops=[];
   (function(){var sc=document.querySelector('.mapscroll');if(sc&&sc.scrollWidth>sc.clientWidth+4){sc.scrollLeft=sc.scrollWidth-sc.clientWidth;}})();
   if(rm){
-    rm.querySelectorAll('.m-stop').forEach(function(g,i){g.dataset.step=String(i+1);stops.push(g)});
+    rm.querySelectorAll('.m-stop').forEach(function(g,i){g.dataset.step=String(i+1);g.style.setProperty('--k',String(i));stops.push(g)});
     var goal=rm.querySelector('.m-goal'); if(goal){goal.dataset.step='4';stops.push(goal)}
-    var rt=rm.querySelector('.m-route'); if(rt) rt.classList.add('draw');
   }
   var steps=document.querySelectorAll('.steps li');
   function mark(n){stops.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)}); steps.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)});}
@@ -869,12 +1004,17 @@ footer ul a:hover{color:var(--accent)}
 
   // lightbox: one dialog for the mosaic and the album. prev/next walk the
   // buttons of the group that was clicked, skipping tiles hidden by a filter.
-  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-cap'), lbN=lb.querySelector('.lb-n');
+  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), ghost=lb.querySelector('img.ghost'), lbCap=lb.querySelector('.lb-cap'), lbN=lb.querySelector('.lb-n');
   var group=[], cur=0, opener=null;
   function capOf(b){var c=b.querySelector('figcaption,.cap'); return c?c.textContent:'';}
+  // crossfade: the outgoing photo is copied to the ghost layer and fades out while the incoming one fades in once loaded
   function show(i){
-    cur=(i+group.length)%group.length; var b=group[cur], im=b.querySelector('img');
+    cur=(i+group.length)%group.length; var b=group[cur], im=b.querySelector('img'), fade=lb.open&&lbImg.src&&lbImg.src!==b.dataset.full;
+    if(fade){ghost.src=lbImg.src; ghost.classList.add('show'); requestAnimationFrame(function(){requestAnimationFrame(function(){ghost.classList.remove('show')})});}
+    lbImg.classList.add('swap');
     lbImg.src=b.dataset.full; lbImg.alt=im.alt; lbCap.textContent=capOf(b); lbN.textContent=(cur+1)+' / '+group.length;
+    function arrive(){requestAnimationFrame(function(){requestAnimationFrame(function(){lbImg.classList.remove('swap')})})}
+    if(lbImg.complete&&lbImg.naturalWidth) arrive(); else{lbImg.onload=arrive; lbImg.onerror=arrive;}
   }
   function open(b,sel){
     group=[].slice.call(document.querySelectorAll(sel)).filter(function(x){return !x.closest('[hidden]')});
