@@ -69,6 +69,7 @@
   --ink-mute:#6E675D;          /* 5.0:1 on paper (AA) */
   --hairline:#E5DDD0;
   --hairline-dk:#D6CBB9;
+  --hairline-ui:#958977; /* control outlines: 3.2:1 on --paper (WCAG 1.4.11 needs 3:1; --hairline-dk is 1.5:1) */
   --night:#211712;
   --night-2:#2A1D15;
   --star:#F2E6D4;
@@ -326,7 +327,7 @@ dialog.lb .lb-n{color:rgba(242,230,212,.7)}
 .album-head h3{font-size:clamp(20px,2vw,26px);font-weight:700;letter-spacing:.04em}
 .album-head h3 span{display:block;font-family:var(--latin);font-size:var(--fs-xs);font-weight:500;letter-spacing:var(--tracking-label);color:var(--ink-mute);text-transform:uppercase;margin-top:6px}
 .filters{display:flex;flex-wrap:wrap;gap:6px}
-.filters button{font:inherit;font-size:var(--fs-sm);padding:7px 14px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);background:transparent;color:var(--ink-soft);cursor:pointer;min-height:36px;transition:background var(--dur-fast),color var(--dur-fast)}
+.filters button{font:inherit;font-size:var(--fs-sm);padding:7px 14px;border-radius:var(--radius-pill);border:1px solid var(--hairline-ui);background:transparent;color:var(--ink-soft);cursor:pointer;min-height:36px;transition:background var(--dur-fast),color var(--dur-fast)}
 .filters button span{font-family:var(--mono);font-size:var(--fs-xs);margin-left:6px;color:var(--ink-mute)}
 .filters button:hover{background:var(--accent-wash)}
 .filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper-lt)}
