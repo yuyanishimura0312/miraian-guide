@@ -1,0 +1,670 @@
+{
+ "zashiki-garden": {
+  "w": 2400,
+  "h": 1544,
+  "color": "#6B6858",
+  "files": [
+   [
+    "assets/photos/zashiki-garden-900.webp",
+    900,
+    579
+   ],
+   [
+    "assets/photos/zashiki-garden-1600.webp",
+    1600,
+    1029
+   ],
+   [
+    "assets/photos/zashiki-garden-2400.webp",
+    2400,
+    1544
+   ]
+  ]
+ },
+ "kitchen": {
+  "w": 2400,
+  "h": 1561,
+  "color": "#5A4B35",
+  "files": [
+   [
+    "assets/photos/kitchen-640.webp",
+    640,
+    416
+   ],
+   [
+    "assets/photos/kitchen-1600.webp",
+    1600,
+    1041
+   ]
+  ]
+ },
+ "counter-window": {
+  "w": 2400,
+  "h": 1602,
+  "color": "#4B4027",
+  "files": [
+   [
+    "assets/photos/counter-window-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/counter-window-1600.webp",
+    1600,
+    1068
+   ]
+  ]
+ },
+ "library-garden": {
+  "w": 2400,
+  "h": 1596,
+  "color": "#555442",
+  "files": [
+   [
+    "assets/photos/library-garden-640.webp",
+    640,
+    426
+   ],
+   [
+    "assets/photos/library-garden-1600.webp",
+    1600,
+    1064
+   ]
+  ]
+ },
+ "work-table": {
+  "w": 2400,
+  "h": 1575,
+  "color": "#4D4D3B",
+  "files": [
+   [
+    "assets/photos/work-table-640.webp",
+    640,
+    420
+   ],
+   [
+    "assets/photos/work-table-1600.webp",
+    1600,
+    1050
+   ]
+  ]
+ },
+ "bedroom-sun": {
+  "w": 2400,
+  "h": 1602,
+  "color": "#655443",
+  "files": [
+   [
+    "assets/photos/bedroom-sun-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/bedroom-sun-1600.webp",
+    1600,
+    1068
+   ]
+  ]
+ },
+ "library": {
+  "w": 2400,
+  "h": 1551,
+  "color": "#483F30",
+  "files": [
+   [
+    "assets/photos/library-640.webp",
+    640,
+    414
+   ],
+   [
+    "assets/photos/library-1600.webp",
+    1600,
+    1034
+   ]
+  ]
+ },
+ "brick-dining": {
+  "w": 2400,
+  "h": 1602,
+  "color": "#5E4F3E",
+  "files": [
+   [
+    "assets/photos/brick-dining-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/brick-dining-1600.webp",
+    1600,
+    1068
+   ]
+  ]
+ },
+ "long-table": {
+  "w": 2400,
+  "h": 1767,
+  "color": "#706D65",
+  "files": [
+   [
+    "assets/photos/long-table-640.webp",
+    640,
+    471
+   ],
+   [
+    "assets/photos/long-table-1600.webp",
+    1600,
+    1178
+   ]
+  ]
+ },
+ "terrace-view": {
+  "w": 2400,
+  "h": 1543,
+  "color": "#454340",
+  "files": [
+   [
+    "assets/photos/terrace-view-640.webp",
+    640,
+    411
+   ],
+   [
+    "assets/photos/terrace-view-1600.webp",
+    1600,
+    1029
+   ]
+  ]
+ },
+ "desk-garden": {
+  "w": 2400,
+  "h": 1602,
+  "color": "#686351",
+  "files": [
+   [
+    "assets/photos/desk-garden-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/desk-garden-1600.webp",
+    1600,
+    1068
+   ]
+  ]
+ },
+ "gate": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#494A49",
+  "files": [
+   [
+    "assets/photos/gate-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/gate-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "path-to-house": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#87866C",
+  "files": [
+   [
+    "assets/photos/path-to-house-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/path-to-house-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "entrance": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#6E665E",
+  "files": [
+   [
+    "assets/photos/entrance-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/entrance-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "path-framed": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#505248",
+  "files": [
+   [
+    "assets/photos/path-framed-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/path-framed-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "deck": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#59594E",
+  "files": [
+   [
+    "assets/photos/deck-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/deck-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "path-winter": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#474431",
+  "files": [
+   [
+    "assets/photos/path-winter-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/path-winter-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "annex": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#5E5D42",
+  "files": [
+   [
+    "assets/photos/annex-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/annex-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "maple-hill": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#7D6F62",
+  "files": [
+   [
+    "assets/photos/maple-hill-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/maple-hill-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "maple-roof": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#52332D",
+  "files": [
+   [
+    "assets/photos/maple-roof-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/maple-roof-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "lantern-leaves": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#2C2C24",
+  "files": [
+   [
+    "assets/photos/lantern-leaves-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/lantern-leaves-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "autumn-garden": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#564C35",
+  "files": [
+   [
+    "assets/photos/autumn-garden-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/autumn-garden-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "nandina": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#252216",
+  "files": [
+   [
+    "assets/photos/nandina-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/nandina-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "shrubs-moss": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#434733",
+  "files": [
+   [
+    "assets/photos/shrubs-moss-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/shrubs-moss-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "genkan": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#514A41",
+  "files": [
+   [
+    "assets/photos/genkan-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/genkan-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "agarikamachi": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#3E3933",
+  "files": [
+   [
+    "assets/photos/agarikamachi-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/agarikamachi-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "kitchen-counter": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#51433B",
+  "files": [
+   [
+    "assets/photos/kitchen-counter-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/kitchen-counter-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "counter-brick": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#594C43",
+  "files": [
+   [
+    "assets/photos/counter-brick-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/counter-brick-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "courtyard": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#2E2D25",
+  "files": [
+   [
+    "assets/photos/courtyard-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/courtyard-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "tokonoma": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#413527",
+  "files": [
+   [
+    "assets/photos/tokonoma-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/tokonoma-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "washitsu-scroll": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#837360",
+  "files": [
+   [
+    "assets/photos/washitsu-scroll-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/washitsu-scroll-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "engawa-chairs": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#463D36",
+  "files": [
+   [
+    "assets/photos/engawa-chairs-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/engawa-chairs-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "living-sun": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#4D4035",
+  "files": [
+   [
+    "assets/photos/living-sun-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/living-sun-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "upstairs-corner": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#594735",
+  "files": [
+   [
+    "assets/photos/upstairs-corner-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/upstairs-corner-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "upstairs-bed": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#604B3C",
+  "files": [
+   [
+    "assets/photos/upstairs-bed-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/upstairs-bed-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "rooftops": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#666B6E",
+  "files": [
+   [
+    "assets/photos/rooftops-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/rooftops-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "upstairs-west": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#5A4738",
+  "files": [
+   [
+    "assets/photos/upstairs-west-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/upstairs-west-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "upstairs-shoji": {
+  "w": 2400,
+  "h": 1600,
+  "color": "#615044",
+  "files": [
+   [
+    "assets/photos/upstairs-shoji-640.webp",
+    640,
+    427
+   ],
+   [
+    "assets/photos/upstairs-shoji-1600.webp",
+    1600,
+    1067
+   ]
+  ]
+ },
+ "shoji-shadow": {
+  "w": 1600,
+  "h": 2400,
+  "color": "#68625F",
+  "files": [
+   [
+    "assets/photos/shoji-shadow-640.webp",
+    427,
+    640
+   ],
+   [
+    "assets/photos/shoji-shadow-1600.webp",
+    1067,
+    1600
+   ]
+  ]
+ }
+}

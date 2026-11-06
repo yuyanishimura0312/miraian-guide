@@ -1,0 +1,330 @@
+{
+ "_note": "Photos picked from the Drive folder 1eSAIicK6Yal-XAItXnDmEc8I2E-lPJzb. drive_id is the source file. Excluded on purpose: photos with people (#166 #255 #259 #277 in the 2026-11-07 inventory) and the completion-era scans (pages of a published book/magazine; copyright unclear). cat = gallery filter. Captions describe only what is visible.",
+ "hero": "zashiki-garden",
+ "mosaic": [
+  "gate",
+  "path-to-house",
+  "entrance",
+  "living-sun"
+ ],
+ "cats": {
+  "recent": "近影",
+  "garden": "庭",
+  "first": "1階",
+  "second": "2階"
+ },
+ "photos": [
+  {
+   "key": "zashiki-garden",
+   "drive_id": "1NY4oGhzs-MzgbcqZ4ETUqBseJwdSzfg5",
+   "cat": "recent",
+   "caption": "庭に開く和室",
+   "alt": "障子を開け放った和室。座卓と座布団の向こうに、ガラス戸越しの緑の庭が見える",
+   "source": "近影/_N8A0754.png"
+  },
+  {
+   "key": "kitchen",
+   "drive_id": "1kCE1yOnWLzI-32D6aY2UzFNNebB29n_M",
+   "cat": "recent",
+   "caption": "台所",
+   "alt": "木の食器棚と板張りの天井のある台所。手前に一枚板のカウンターがのぞく",
+   "source": "近影/_N8A0747.png"
+  },
+  {
+   "key": "counter-window",
+   "drive_id": "1Cw0EOA2wXyI6vqHow5XCkBNY9odnBYvC",
+   "cat": "recent",
+   "caption": "一枚板のカウンター",
+   "alt": "曲線を描く一枚板のカウンターと木の椅子。奥の窓に庭の緑が映る",
+   "source": "近影/_N8A0746.png"
+  },
+  {
+   "key": "library-garden",
+   "drive_id": "1hUiM6RkW_Z0vXgXp2bAzDn56AVXPiu27",
+   "cat": "recent",
+   "caption": "本棚と庭に面した机",
+   "alt": "本棚の脇に置かれた木の机と椅子。大きなガラス戸の外に木々が広がる",
+   "source": "近影/_N8A0271.png"
+  },
+  {
+   "key": "work-table",
+   "drive_id": "1Xmh4wQZmB0RvfIP66U1iSgyEweeNjaO3",
+   "cat": "recent",
+   "caption": "庭に面した作業机",
+   "alt": "大きなガラス戸の前に置かれた木の長机。外のテラスと庭の木々に光が差す",
+   "source": "近影/_N8A0265.png"
+  },
+  {
+   "key": "bedroom-sun",
+   "drive_id": "1pOEkYT9OMwmhfcY2I08lS05Jeg7YK8CF",
+   "cat": "recent",
+   "caption": "光の入る寝室",
+   "alt": "角に窓のある寝室。木のベッドに布団がたたまれ、床に陽だまりができている",
+   "source": "近影/_N8A0688.png"
+  },
+  {
+   "key": "library",
+   "drive_id": "14uxi90wVzrC3AEqUqNnQ64x6TXRB-FBr",
+   "cat": "recent",
+   "caption": "本棚のある部屋",
+   "alt": "壁一面の本棚の前に木の長机と椅子が並ぶ部屋。緑の敷物が敷かれている",
+   "source": "近影/_N8A0677.png"
+  },
+  {
+   "key": "brick-dining",
+   "drive_id": "1kiCDNc_aUpa2--JnT98NFtoBqHN0W_ZK",
+   "cat": "recent",
+   "caption": "煉瓦の壁と食卓",
+   "alt": "煉瓦積みの壁の脇、ガラス戸の向こうに食卓と食器棚が見える",
+   "source": "近影/_N8A0666.png"
+  },
+  {
+   "key": "long-table",
+   "drive_id": "1z2VAuy1veXZGjpBYutVlvsWrd4oted3D",
+   "cat": "recent",
+   "caption": "本棚と長机の部屋",
+   "alt": "本棚に囲まれた部屋の長机。奥のガラス戸の外に庭の木々",
+   "source": "近影/20261106_114602832.png"
+  },
+  {
+   "key": "terrace-view",
+   "drive_id": "1ovD3inqmRDrMBQzhM1S8TiT0z5NPKlET",
+   "cat": "recent",
+   "caption": "テラスから室内を見る",
+   "alt": "木のテラスに丸テーブルと椅子。ガラス戸の奥に室内の食卓が見える",
+   "source": "近影/_N8A0645.png"
+  },
+  {
+   "key": "desk-garden",
+   "drive_id": "18v508qibM2Tzv_VsbyFHb2Sj5vb_Zjgu",
+   "cat": "recent",
+   "caption": "庭を望む机",
+   "alt": "窓辺の木の机と椅子。ガラス戸の外いっぱいに庭の木々が広がる",
+   "source": "近影/_N8A0595.png"
+  },
+  {
+   "key": "gate",
+   "drive_id": "18fVwdCWCuRg73UNW72rNkxwEY7vzdX5X",
+   "cat": "garden",
+   "caption": "門",
+   "alt": "瓦屋根をのせた木の門と板塀。門の脇に表札、上に紅葉した木々",
+   "source": "01_お庭/SDIM5782.JPG"
+  },
+  {
+   "key": "path-to-house",
+   "drive_id": "11UZepUgA-uVIJtUNNAwTZHb1Pfqb_nAi",
+   "cat": "garden",
+   "caption": "石畳の小径",
+   "alt": "苔の庭を抜けて建物の入口へ続く石畳の小径",
+   "source": "01_お庭/SDIM6579.JPG"
+  },
+  {
+   "key": "entrance",
+   "drive_id": "1xlkHYfkzs6F-e1LhgNDv-1sqQ2qKYA2b",
+   "cat": "garden",
+   "caption": "玄関先",
+   "alt": "土壁と柱の玄関先。開いた戸の奥に室内が見え、足元は石のタイル",
+   "source": "01_お庭/SDIM6729.JPG"
+  },
+  {
+   "key": "path-framed",
+   "drive_id": "16ku1UsfSF3gGcOLjCZHXZmisFZIu69LZ",
+   "cat": "garden",
+   "caption": "戸口から庭を見る",
+   "alt": "戸口の枠越しに見る庭。石畳の小径と石灯籠、奥に門の屋根",
+   "source": "01_お庭/SDIM6585.JPG"
+  },
+  {
+   "key": "deck",
+   "drive_id": "1H-rVCTPkfn01RAd0HMjg83jMqtRjM6kL",
+   "cat": "garden",
+   "caption": "庭のデッキ",
+   "alt": "木のデッキに丸テーブルと折りたたみ椅子。その先に苔の庭と木々",
+   "source": "03_本館/1階/リビング/SDIM6628.JPG"
+  },
+  {
+   "key": "path-winter",
+   "drive_id": "1ffU4PSbLQWPbATlZfvc4dNc79ml_5hmv",
+   "cat": "garden",
+   "caption": "木立を抜ける小径",
+   "alt": "窓枠越しに見る、木立のあいだを奥の建物へ続く石畳の小径",
+   "source": "01_お庭/SDIM6751.JPG"
+  },
+  {
+   "key": "annex",
+   "drive_id": "158daksziyxlCi7pPGs6Oct3hzN6EpyXf",
+   "cat": "garden",
+   "caption": "庭の離れ",
+   "alt": "苔の庭と若い木々のあいだに建つ小さな離れ",
+   "source": "01_お庭/SDIM6748.JPG"
+  },
+  {
+   "key": "maple-hill",
+   "drive_id": "1ODXmaQKpTbP-8fSwyX8VBodXkRgnKycy",
+   "cat": "garden",
+   "caption": "紅葉と山",
+   "alt": "赤く色づいた紅葉の向こうに、こんもりとした山の緑",
+   "source": "01_お庭/SDIM5851.JPG"
+  },
+  {
+   "key": "maple-roof",
+   "drive_id": "1CoJMKD-4gbCCwW_-IoCLp1sR_Kgl-E6K",
+   "cat": "garden",
+   "caption": "屋根にかかる紅葉",
+   "alt": "建物の屋根の上に覆いかぶさる真っ赤な紅葉",
+   "source": "01_お庭/SDIM5849.JPG"
+  },
+  {
+   "key": "lantern-leaves",
+   "drive_id": "10KjkNfZPfcmMAWW9f-pkz9ylTvIb6wZL",
+   "cat": "garden",
+   "caption": "石灯籠と落ち葉",
+   "alt": "苔むした石灯籠と、落ち葉の散る石畳の小径",
+   "source": "01_お庭/SDIM5846.JPG"
+  },
+  {
+   "key": "autumn-garden",
+   "drive_id": "1XVxfgtnUc5LStqYAZ-_bO1G5ZKfq4Gpq",
+   "cat": "garden",
+   "caption": "秋の庭",
+   "alt": "紅葉と常緑の木々が重なる秋の庭",
+   "source": "01_お庭/SDIM5833.JPG"
+  },
+  {
+   "key": "nandina",
+   "drive_id": "1MJo8tr_6OYNNjTAZj52qlp6IEg1h_uLd",
+   "cat": "garden",
+   "caption": "色づく低木",
+   "alt": "薄暗い庭の中で、桃色と黄色に色づいた低木",
+   "source": "01_お庭/SDIM5790.JPG"
+  },
+  {
+   "key": "shrubs-moss",
+   "drive_id": "1B2m3b1sEFWKyFmTAGrinKC9zhNRkyD1B",
+   "cat": "garden",
+   "caption": "苔と下草",
+   "alt": "苔の地面に、色づいた低木と八手の葉が並ぶ",
+   "source": "01_お庭/SDIM5789.JPG"
+  },
+  {
+   "key": "genkan",
+   "drive_id": "1ay48AjdxZcWSCafNQaD1gYFluYHiJ5K0",
+   "cat": "first",
+   "caption": "玄関の土間",
+   "alt": "木の下駄箱が並ぶ玄関の土間。開いた戸口から外の光が差し込む",
+   "source": "03_本館/1階/その他/SDIM6592.JPG"
+  },
+  {
+   "key": "agarikamachi",
+   "drive_id": "1rCbIHHWDeVotRn8qylJoIwMi8hzReLGH",
+   "cat": "first",
+   "caption": "上がり口",
+   "alt": "スリッパが並ぶ上がり口の畳の間。奥の障子とガラス戸の先に中庭の緑",
+   "source": "03_本館/1階/その他/SDIM6589.JPG"
+  },
+  {
+   "key": "kitchen-counter",
+   "drive_id": "1RDgx7hjBQMjd_e_7M3oH0RLUnZ1E6IkB",
+   "cat": "first",
+   "caption": "台所とカウンター",
+   "alt": "一枚板のカウンターに木の椅子。奥に食器棚と台所",
+   "source": "03_本館/1階/キッチン/SDIM6647.JPG"
+  },
+  {
+   "key": "counter-brick",
+   "drive_id": "1qVk_uOpB1i1JOJZfUH2O5iUDfrejL0Ba",
+   "cat": "first",
+   "caption": "カウンターと煉瓦の壁",
+   "alt": "大きな一枚板のカウンターの奥に、煉瓦の壁と板張りの天井",
+   "source": "03_本館/1階/キッチン/SDIM6643.JPG"
+  },
+  {
+   "key": "courtyard",
+   "drive_id": "1siu3bDDMzDf-w3owUBLAqDsThSqEiKpF",
+   "cat": "first",
+   "caption": "中庭",
+   "alt": "開いた障子の間から見える、棕櫚竹の植わった中庭",
+   "source": "03_本館/1階/和室/SDIM6615.JPG"
+  },
+  {
+   "key": "tokonoma",
+   "drive_id": "1OU3GTr98BOnzB6XCpW0OBlby-5VKy4y3",
+   "cat": "first",
+   "caption": "床の間",
+   "alt": "掛け軸の掛かった床の間と、障子の小窓のある和室",
+   "source": "03_本館/1階/和室/SDIM6610.JPG"
+  },
+  {
+   "key": "washitsu-scroll",
+   "drive_id": "1zGtgfQAx4EYxWMr-IlLZjhccdhUXCiOi",
+   "cat": "first",
+   "caption": "和室",
+   "alt": "障子越しの和室。畳に座卓が置かれ、奥に掛け軸と籐の椅子",
+   "source": "03_本館/1階/和室/SDIM6606.JPG"
+  },
+  {
+   "key": "engawa-chairs",
+   "drive_id": "1ciC3pizYYUkJrg2L4jtVMVdJUwQD4FBD",
+   "cat": "first",
+   "caption": "庭に向いた椅子",
+   "alt": "障子を開けた和室の奥、ガラス戸の前に庭を向いた椅子が二脚",
+   "source": "03_本館/1階/和室/SDIM6604.JPG"
+  },
+  {
+   "key": "living-sun",
+   "drive_id": "1_sqij4IJibTfldaNrCiRK-WzANvvGEHi",
+   "cat": "first",
+   "caption": "木漏れ日の居間",
+   "alt": "煉瓦の壁とソファ、木の食卓がある居間。床に木漏れ日の影が落ちる",
+   "source": "03_本館/1階/リビング/SDIM6623.JPG"
+  },
+  {
+   "key": "upstairs-corner",
+   "drive_id": "1_DdTcFTVTuIHIh2ab79DeffZfh_dAt3K",
+   "cat": "second",
+   "caption": "角窓の部屋",
+   "alt": "二方向に窓のある二階の部屋。窓の外に緑と瓦屋根が見える",
+   "source": "03_本館/2階/SDIM6706.JPG"
+  },
+  {
+   "key": "upstairs-bed",
+   "drive_id": "1DzZR75p9BjJYLfn8oO8J10sSOrk72i0E",
+   "cat": "second",
+   "caption": "二階の寝室",
+   "alt": "二つの窓から光が入る二階の寝室と木のベッド",
+   "source": "03_本館/2階/SDIM6700.JPG"
+  },
+  {
+   "key": "rooftops",
+   "drive_id": "1BPAalPkiDCjetNMGCQiGS0lDQPqTeS3c",
+   "cat": "second",
+   "caption": "二階からの眺め",
+   "alt": "二階から見た瓦屋根の連なりと、その先の山並み",
+   "source": "03_本館/2階/SDIM6693.JPG"
+  },
+  {
+   "key": "upstairs-west",
+   "drive_id": "1ut1sCNk4JonVev8J2hAOrME2NoPSyqcA",
+   "cat": "second",
+   "caption": "床に落ちる光",
+   "alt": "窓から差し込む光がベッドと床に縞の影をつくる二階の部屋",
+   "source": "03_本館/2階/SDIM6685.JPG"
+  },
+  {
+   "key": "upstairs-shoji",
+   "drive_id": "1ILUUmEEB6JqCrdPRfhtfkxO9nldLXk-k",
+   "cat": "second",
+   "caption": "障子の角部屋",
+   "alt": "二方向に障子窓のある二階の角部屋と、木のベッド",
+   "source": "03_本館/2階/SDIM6679.JPG"
+  },
+  {
+   "key": "shoji-shadow",
+   "drive_id": "1FbmZcPJvEplVtefk2IZm5LRxwpIvps3d",
+   "cat": "second",
+   "caption": "障子に映る影",
+   "alt": "白い障子に映る植物の影",
+   "source": "03_本館/2階/SDIM6682.JPG"
+  }
+ ]
+}
