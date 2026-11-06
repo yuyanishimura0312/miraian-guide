@@ -52,8 +52,9 @@ with sync_playwright() as p:
 
     pg.click('.filters button[data-f="all"]')
     check("all restores", pg.locator(".album-grid li:not([hidden])").count() == total)
+    # arrival landmarks (gate -> stone path -> entrance) share the lightbox; 3 photos since v5 (2026-11-07)
     pg.locator(".gallery button").first.click()
-    check("mosaic opens lightbox (4 photos)", pg.text_content("#lb .lb-n") == "1 / 4")
+    check("landmarks open lightbox (3 photos)", pg.text_content("#lb .lb-n") == "1 / 3")
     pg.click("#lb .x")
     broken = pg.evaluate("[...document.images].filter(i=>i.complete&&i.naturalWidth===0&&i.getAttribute('loading')!=='lazy').map(i=>i.src)")
     check("no broken eager images", not broken)

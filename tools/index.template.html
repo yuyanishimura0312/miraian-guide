@@ -44,7 +44,7 @@
 {"@context":"https://schema.org","@graph":[
 {"@type":"NGO","@id":"https://emerging-future.org/#org","name":"NPO法人ミラツク","alternateName":"Miratuku","url":"https://emerging-future.org/","email":"info@emerging-future.org","logo":"https://miraian.emerging-future.org/assets/miratuku-logo.png"},
 {"@type":"Place","@id":"https://miraian.emerging-future.org/#place","name":"未来庵","alternateName":["MIRAI-AN","ミラツク未来庵"],"description":"NPO法人ミラツクの京都拠点。京都大学（本部構内）の東側、吉田山の西のふもとにある、未来学（Futures Studies）研究の拠点であり、余白と文化のなかで未来を創造する知の場。京阪「出町柳」駅から徒歩約18分、市バス「京大農学部前」から徒歩約5分。","url":"https://journal.emerging-future.org/miraian/","address":{"@type":"PostalAddress","postalCode":"606-8317","addressCountry":"JP","addressRegion":"京都府","addressLocality":"京都市左京区","streetAddress":"吉田本町13"},"geo":{"@type":"GeoCoordinates","latitude":35.0263201,"longitude":135.7846307},"hasMap":"https://www.google.com/maps/place/%E3%83%9F%E3%83%A9%E3%83%84%E3%82%AF%E6%9C%AA%E6%9D%A5%E5%BA%B5+-MIRAI-AN-/@35.0263201,135.7846307,17z","photo":[{"@type":"ImageObject","contentUrl":"https://miraian.emerging-future.org/assets/photos/zashiki-garden-1600.webp","caption":"庭に開く和室"},{"@type":"ImageObject","contentUrl":"https://miraian.emerging-future.org/assets/photos/gate-1600.webp","caption":"門"},{"@type":"ImageObject","contentUrl":"https://miraian.emerging-future.org/assets/photos/path-to-house-1600.webp","caption":"石畳の小径"}],"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"駐車場","value":false}],"parentOrganization":{"@id":"https://emerging-future.org/#org"}},
-{"@type":"WebPage","@id":"https://miraian.emerging-future.org/#page","url":"https://miraian.emerging-future.org/","name":"未来庵（MIRAI-AN）へのアクセス","inLanguage":"ja","about":{"@id":"https://miraian.emerging-future.org/#place"},"publisher":{"@id":"https://emerging-future.org/#org"},"dateModified":"2026-11-04","primaryImageOfPage":{"@type":"ImageObject","url":"https://miraian.emerging-future.org/assets/og-access.png"},"breadcrumb":{"@id":"https://miraian.emerging-future.org/#crumbs"}},
+{"@type":"WebPage","@id":"https://miraian.emerging-future.org/#page","url":"https://miraian.emerging-future.org/","name":"未来庵（MIRAI-AN）へのアクセス","inLanguage":"ja","about":{"@id":"https://miraian.emerging-future.org/#place"},"publisher":{"@id":"https://emerging-future.org/#org"},"dateModified":"2026-11-07","primaryImageOfPage":{"@type":"ImageObject","url":"https://miraian.emerging-future.org/assets/og-access.png"},"breadcrumb":{"@id":"https://miraian.emerging-future.org/#crumbs"}},
 {"@type":"BreadcrumbList","@id":"https://miraian.emerging-future.org/#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"NPO法人ミラツク","item":"https://emerging-future.org/"},{"@type":"ListItem","position":2,"name":"未来庵","item":"https://journal.emerging-future.org/miraian/"},{"@type":"ListItem","position":3,"name":"アクセス","item":"https://miraian.emerging-future.org/"}]}
 ]}
 </script>
@@ -166,7 +166,6 @@ a{color:inherit}
   .brand .bt{display:none}
   .bar nav{gap:0}
   .bar nav a{padding:6px 6px;font-size:11.5px;letter-spacing:0}
-  .bar nav a[href="#map"]{display:none}
   .brand img{height:20px}
 }
 
@@ -228,24 +227,41 @@ a{color:inherit}
 .tlink{transition:color var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease)}
 .btn.done{background:var(--accent-dp);border-color:var(--accent-dp);color:var(--white)}
 
-/* ---------- intro (positioning) ---------- */
-.intro{padding:var(--section) 0 clamp(var(--space-6),6vw,var(--space-10));border-bottom:1px solid var(--hairline)}
-.intro-grid>*{min-width:0}
-.intro-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-5),6vw,var(--space-12));align-items:start}
-.intro .lead{font-size:clamp(20px,2.1vw,30px);font-weight:500;line-height:1.75;letter-spacing:.01em;max-width:22em;word-break:auto-phrase;position:relative;padding-top:var(--space-3)}
-.intro .lead::before{content:"";position:absolute;top:0;left:0;width:48px;height:2px;background:var(--accent);transform-origin:left;transform:scaleX(0);transition:transform var(--dur-rv) var(--ease) .2s}
-.intro .lead.in::before,html:not(.js) .intro .lead::before{transform:scaleX(1)}
-.intro .lead strong{font-weight:700}
-.intro .side p{color:var(--ink-soft);font-size:var(--fs-base);line-height:2}
-.intro .side p+p{margin-top:var(--space-2)}
-.glance{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(var(--space-6),6vw,var(--space-10));border-top:1px solid var(--hairline)}
-.glance li{padding:var(--space-3) var(--space-3) 0 0;border-left:1px solid var(--hairline);padding-left:var(--space-3)}
-.glance li:first-child{border-left:0;padding-left:0}
-.glance .k{font-size:var(--fs-sm);color:var(--ink-mute)}
-.glance .v{font-size:var(--fs-lg);font-weight:700;line-height:1.4;margin-top:2px}
-.glance .v small{font-size:var(--fs-sm);font-weight:400;color:var(--ink-soft);margin-left:6px}
-@media(max-width:880px){.intro-grid{grid-template-columns:1fr;gap:var(--space-4)}
-  .glance{grid-template-columns:1fr}.glance li{border-left:0;padding-left:0;border-top:1px solid var(--hairline)}.glance li:first-child{border-top:0}}
+/* ---------- from: choose your origin (v5) ----------
+   The first thing after the address: four origins as large, tappable rows, each jumping to its own instructions.
+   Weight carries the hierarchy (the time is the headline), hairlines carry the structure. */
+.origins{padding:clamp(var(--space-8),8vw,var(--space-12)) 0 clamp(var(--space-6),6vw,var(--space-10));border-bottom:1px solid var(--hairline)}
+.from-head .num{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent);text-transform:uppercase}
+.from-head .num span{color:var(--ink-mute);margin-left:var(--space-1);text-transform:none;letter-spacing:.08em;font-family:var(--ja)}
+.from-head h2{font-weight:700;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2);word-break:auto-phrase}
+.from{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(var(--space-4),4vw,var(--space-6));border-top:1px solid var(--hairline-dk)}
+.from li{border-left:1px solid var(--hairline)}
+.from li:first-child{border-left:0}
+.from a{display:grid;grid-template-rows:auto auto auto 1fr;height:100%;padding:var(--space-3) var(--space-3) var(--space-3);text-decoration:none;color:inherit;transition:background var(--dur-ui) var(--ease)}
+.from li:first-child a{padding-left:0}
+.from a:hover{background:var(--accent-wash)}
+.from li:first-child a:hover{background:linear-gradient(90deg,transparent,var(--accent-wash) 30%)}
+.from .k{font-size:var(--fs-sm);color:var(--ink-mute)}
+.from .v{font-size:clamp(20px,2vw,28px);font-weight:700;line-height:1.35;letter-spacing:.01em;margin-top:var(--space-1);word-break:auto-phrase}
+.from .s{font-size:var(--fs-sm);color:var(--ink-soft);margin-top:2px}
+.from .go{align-self:end;display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-3);font-size:var(--fs-sm);font-weight:500;color:var(--accent)}
+.from .go svg{width:15px;height:15px;transition:transform var(--dur-ui) var(--ease)}
+.from a:hover .go svg{transform:translateY(3px)}
+.hub{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--space-1) var(--space-3);align-items:baseline;margin-top:clamp(var(--space-4),4vw,var(--space-6));padding:var(--space-3) 0 0;border-top:2px solid var(--accent);max-width:none}
+.hub .mono{color:var(--accent)}
+.hub-t{font-size:var(--fs-md);line-height:1.85;word-break:auto-phrase}
+.hub strong{font-weight:700;color:var(--accent-dp)}
+.hub .tlink{font-size:var(--fs-sm);white-space:nowrap}
+@media(max-width:1000px){.from{grid-template-columns:repeat(2,minmax(0,1fr))}.from li:nth-child(3){border-left:0}.from li:nth-child(3) a{padding-left:0}.from li:nth-child(n+3){border-top:1px solid var(--hairline)}}
+@media(max-width:600px){
+  .from{grid-template-columns:1fr}
+  .from li{border-left:0;border-top:1px solid var(--hairline)}.from li:first-child{border-top:0}
+  .from a,.from li:first-child a,.from li:nth-child(3) a{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:var(--space-2);padding:var(--space-2) 0;min-height:44px}
+  .from .k,.from .v,.from .s{grid-column:1}
+  .from .go{grid-column:2;grid-row:1/4;align-self:center;margin-top:0;font-size:var(--fs-cap)}
+  .from .v{margin-top:2px}
+  .hub{grid-template-columns:1fr}
+}
 
 /* ---------- sections: running index column ---------- */
 section.sec{padding:var(--section) 0;position:relative;scroll-margin-top:calc(var(--bar-h) + var(--space-1))}
@@ -263,11 +279,18 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 @media(min-width:881px){.sec-grid{--gutter:clamp(var(--space-4),5vw,var(--space-10));gap:var(--gutter)}.sec-grid>:nth-child(2){border-left:1px solid var(--hairline);padding-left:calc(var(--gutter)/2);margin-left:calc(var(--gutter)/-2)}.night .sec-grid>:nth-child(2){border-left-color:var(--rule-night)}}
 .sec-idx .num{text-transform:uppercase;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--accent)}
 .sec-idx .num span{color:var(--ink-mute);margin-left:var(--space-1)}
-.sec-idx h2{font-weight:700;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2)}
+.sec-idx h2{word-break:auto-phrase;font-weight:700;font-size:var(--fs-h2);line-height:var(--lh-tight);letter-spacing:var(--tracking-head);margin-top:var(--space-2)}
 .sec-idx p{color:var(--ink-soft);font-size:var(--fs-sm);line-height:1.9;margin-top:var(--space-3);max-width:20em}
 .sec-idx p a{color:var(--accent)}
 @media(max-width:880px){.sec-grid{grid-template-columns:1fr;gap:var(--space-4)}.sec-idx{position:static}.sec-idx p{max-width:var(--measure)}}
 
+/* ---------- route: two legs (on foot / bus · car) under one index ---------- */
+.leg{scroll-margin-top:calc(var(--bar-h) + var(--space-2))}
+.leg:focus{outline:none}
+.leg+.leg{margin-top:clamp(var(--space-8),7vw,var(--space-12))}
+.leg-h{font-size:var(--fs-lg);font-weight:700;line-height:1.4;margin-bottom:var(--space-3)}
+.leg-h .mono{display:block;color:var(--accent);margin-bottom:var(--space-1)}
+.leg-h small{display:block;font-size:var(--fs-sm);font-weight:400;color:var(--ink-soft);margin-top:4px;letter-spacing:.02em}
 /* ---------- route ---------- */
 .mapfig{background:var(--paper-lt);border:1px solid var(--hairline);padding:clamp(var(--space-2),2vw,var(--space-3))}
 .mapfig figcaption{display:flex;justify-content:space-between;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-2);color:var(--ink-mute);font-size:var(--fs-cap)}
@@ -320,7 +343,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .m-pt-s{font-size:var(--fs-map-s);font-weight:700;fill:var(--map-label-dk);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
 
 /* steps: four quiet columns, number and text share one baseline */
-.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4);margin-top:clamp(var(--space-5),5vw,var(--space-8))}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);margin-top:clamp(var(--space-5),5vw,var(--space-8))}
 .steps li{border-top:1px solid var(--hairline-dk);padding-top:var(--space-2);transition:border-color .3s var(--ease)}
 .steps li.on{border-top-color:var(--accent)}
 .steps li.on .n{color:var(--accent-dp)}
@@ -330,7 +353,9 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .steps .t{font-size:var(--fs-base);line-height:1.9;margin-top:var(--space-1);word-break:auto-phrase}
 .steps .t .m{display:block;font-family:var(--mono);font-size:var(--fs-xs);color:var(--ink-mute);margin-top:var(--space-1);letter-spacing:.06em}
 .steps strong{color:var(--accent);font-weight:700}
-@media(max-width:880px){.steps{grid-template-columns:1fr 1fr;gap:var(--space-3)}}
+.steps .t .m a{color:var(--accent);font-family:var(--ja);letter-spacing:.02em}
+.steps-2{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:0}
+.steps-2 .t{font-size:var(--fs-md);line-height:1.85}
 @media(max-width:520px){.steps{grid-template-columns:1fr}}
 .route-note{margin-top:var(--space-4);font-size:var(--fs-sm);color:var(--ink-mute);line-height:1.9;max-width:var(--measure)}
 
@@ -349,8 +374,8 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 
 /* ---------- ways (bus / car): a quiet list ---------- */
 .ways{list-style:none;border-top:1px solid var(--hairline-dk)}
-.ways li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);align-items:baseline}
-.ways h3{font-size:var(--fs-md);font-weight:700;line-height:1.5;word-break:auto-phrase}
+.ways li{scroll-margin-top:calc(var(--bar-h) + var(--space-2));display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);align-items:baseline}
+.ways h4{font-size:var(--fs-md);font-weight:700;line-height:1.5;word-break:auto-phrase}
 .ways .tag{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .ways .tag span{font-family:var(--latin);font-size:11px;font-weight:600;padding:2px 9px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);color:var(--accent-dp)}
 .ways p{font-size:var(--fs-base);color:var(--ink-soft);line-height:1.9}
@@ -373,12 +398,17 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .gallery button:hover figcaption,.album-grid button:hover .cap{transform:translateY(-2px)}
 /* Scrim under captions: the old .72 gradient left white text at 2.2:1 on bright photos (audit 2026-11-07); this reaches >=6.1:1 on every photo */
 .gallery figcaption{position:absolute;left:0;bottom:0;padding:20px var(--space-2) var(--space-1);font-size:var(--fs-cap);color:var(--white);background:var(--scrim);width:100%;letter-spacing:.04em}
+/* arrival landmarks: three photographs in the order you meet them (gate -> stone path -> entrance), numbered */
+.landmarks{list-style:none;margin-top:clamp(var(--space-5),5vw,var(--space-8))}
+.landmarks li{min-height:0;background:var(--lqip,var(--paper-dp))}
+.landmarks figure{height:100%}
 .g1{grid-column:1/8;grid-row:1/4}
 .g2{grid-column:8/13;grid-row:1/3}
 .g3{grid-column:8/13;grid-row:3/6}
-.g4{grid-column:1/8;grid-row:4/6} /* two rows, so the living room is not a thin strip under the gate */
-.g4 img{object-position:50% 72%} /* keep the sunlit floor of the living room in the wide crop */
-@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:140px}.g1{grid-column:1/3;grid-row:1/3}.g2{grid-column:1/2;grid-row:3/4}.g3{grid-column:2/3;grid-row:3/4}.g4{grid-column:1/3;grid-row:4/5}}
+.landmarks .g1{grid-row:1/5}.landmarks .g3{grid-row:3/5}
+.gallery .lm-n{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:var(--accent);color:var(--white);font:600 var(--fs-xs)/1 var(--latin);vertical-align:1px}
+.arrive-note{margin-top:var(--space-3);font-size:var(--fs-sm);color:var(--ink-soft);line-height:1.9;padding-left:var(--space-2);border-left:2px solid var(--accent)}
+@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:140px}.landmarks .g1{grid-column:1/3;grid-row:1/3}.g2{grid-column:1/2;grid-row:3/4}.g3{grid-column:2/3;grid-row:3/4}}
 /* Lightbox: open = scale .96 + fade, 300ms emphasized-decelerate; close = 180ms accelerate (MID design_rule 1/2, 61 backdrop in sync).
    Done with @starting-style + allow-discrete so the close animates while the dialog is already closed for scripts;
    browsers without it get an instant open/close. */
@@ -440,27 +470,29 @@ dialog.lb .lb-n{color:var(--star-soft)}
 .album-more{display:none;margin-top:var(--space-3);text-align:center}
 .album-more[data-on]{display:block}
 
-/* ---------- night: about + course ---------- */
+/* ---------- about (paper) ---------- */
+.about p{font-size:var(--fs-base);line-height:2.1;color:var(--ink-soft);max-width:var(--measure)}
+.about p+p{margin-top:var(--space-3)}
+.about .pull{font-size:clamp(19px,1.9vw,26px);font-weight:500;line-height:1.7;color:var(--ink);max-width:22em;margin-bottom:var(--space-4);padding-left:var(--space-3);border-left:2px solid var(--accent)}
+.about .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-4)}
+.about .album{scroll-margin-top:calc(var(--bar-h) + var(--space-2))}
+.about .album:focus{outline:none}
+
+/* ---------- night: the course, the one dark section (the evening at the end of the page) ---------- */
 .night{background:var(--night);color:var(--star)}
-/* a faint warm glow in the upper right of the dark ground, so the two night sections read as one evening rather than a flat block */
+/* a faint warm glow in the upper right of the dark ground */
 .night::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 55% at 85% 0%,rgba(240,166,113,.075),transparent 65%)}
 .night>.wrap{position:relative}
 .night .sec-idx .num{color:var(--ci-orange)}.night .sec-idx .num span{color:var(--star-mute)}
 .night .sec-idx h2{color:var(--paper-lt)}
 .night .sec-idx p{color:var(--star-soft)}
-.about p{font-size:var(--fs-base);line-height:2.1;color:var(--star-88);max-width:var(--measure)}
-.about p+p{margin-top:var(--space-3)}
-.about .pull{font-size:clamp(19px,1.9vw,26px);font-weight:500;line-height:1.7;color:var(--paper-lt);max-width:22em;margin-bottom:var(--space-4)}
-.about .note{font-size:var(--fs-sm);color:var(--star-soft);margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid var(--rule-night);max-width:var(--measure)}
 .night .btn{background:var(--ci-beige);border-color:var(--ci-beige);color:var(--night)}
 .night .btn:hover{background:var(--paper-lt)}
 .night .btn.ghost{background:transparent;color:var(--ci-beige)}
 .night .btn.ghost:hover{background:rgba(242,199,146,.12)}
-.about .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-4)}
 
-.course{border-top:1px solid var(--rule-night)}
-/* the generic sec+sec hairline is paper-coloured and glows on the dark ground; the two night sections share the softer rule */
-section.sec.night+section.sec.night{border-top-color:var(--rule-night)}
+/* the generic sec+sec hairline is paper-coloured and would glow on the dark ground */
+section.sec+section.sec.night{border-top-color:transparent}
 .course-grid>*{min-width:0}
 .course-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
 .course .status{display:inline-block;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ci-orange);border:1px solid rgba(240,166,113,.5);padding:3px 10px;border-radius:var(--radius-pill)}
@@ -474,6 +506,18 @@ section.sec.night+section.sec.night{border-top-color:var(--rule-night)}
 .course dd small{display:block;font-weight:400;color:var(--star-75);font-size:var(--fs-sm)}
 .course .acts{margin-top:var(--space-4)}
 @media(max-width:880px){.course-grid{grid-template-columns:1fr;gap:var(--space-4)}}
+
+/* ---------- dock: address + route actions pinned to the bottom of phones after the hero ----------
+   56px + safe area (ACD nav rows: Material bottom navigation 56dp, iOS tab bar 49pt with the safe area absorbed separately).
+   Hidden (visibility) until the hero card is gone, so it is never tabbable twice; no JS -> never shown (the hero card has the same actions). */
+.dock{display:none}
+@media(max-width:760px){
+  .js .dock{position:fixed;left:0;right:0;bottom:0;z-index:45;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-1);padding:var(--space-1) var(--side) calc(var(--space-1) + env(safe-area-inset-bottom));background:rgba(250,248,245,.96);-webkit-backdrop-filter:saturate(1.2) blur(10px);backdrop-filter:saturate(1.2) blur(10px);border-top:1px solid var(--hairline);transform:translateY(110%);visibility:hidden;transition:transform var(--dur-ui) var(--ease-exit),visibility 0s linear var(--dur-ui)}
+  .js .dock.show{transform:none;visibility:visible;transition:transform .3s var(--ease-in),visibility 0s}
+  .dock .btn{justify-content:center;min-height:44px;padding:8px 10px;background:var(--accent);color:var(--white)}
+  .dock .btn.ghost{background:var(--paper-lt);color:var(--accent)}
+  .js body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--hairline);padding:clamp(var(--space-6),6vw,var(--space-10)) 0 var(--space-6);font-size:var(--fs-sm);color:var(--ink-soft)}
@@ -534,34 +578,35 @@ footer ul a:hover{color:var(--accent)}
   .js .album-grid img:not(.ok){opacity:1}
   .hero .hero-img{transform:none;translate:none}
   .hero .cue{display:none}
-  .intro .lead::before{transform:none}
   .js .routemap .m-route{stroke-dashoffset:0;stroke-dasharray:none}
   .js .routemap .m-stop,.js .routemap .m-goal{opacity:1;transform:none}
   .m-goal-pulse{display:none}
   dialog.lb,dialog.lb[open]{opacity:1;transform:none}
   dialog.lb img.swap,dialog.lb img.ghost{opacity:0}dialog.lb img.swap{opacity:1}
   body::after{display:none}
+  .js .dock{transform:none}
 }
 @media print{
   .bar,.map-frame,dialog{display:none!important}
   .hero{min-height:auto;color:var(--ink)}.hero::before,.hero .hero-img{display:none}
   .hero .lede,.hero h1 .en,.hero .obs{color:var(--ink)}
-  .night{background:#fff;color:var(--ink)}.night .sec-idx h2,.about .pull,.course h3,.course dd{color:var(--ink)}
+  .night{background:#fff;color:var(--ink)}.night .sec-idx h2,.course h3,.course dd{color:var(--ink)}
   .js .rv,.js .sec-idx .big{opacity:1;transform:none}
   .js .ri{clip-path:none}.js .ri img{transform:none}
   .js .rl{border-top-color:var(--hairline-dk)}.js .rl-b{border-bottom-color:var(--hairline)}.js .rl::before{display:none}
   .js .gallery img,.js .album-grid img{opacity:1}
-  .filters{display:none}.album-grid{grid-template-columns:repeat(4,1fr)}
+  .filters{display:none}.album-grid{grid-template-columns:repeat(4,1fr)}.album-grid li[hidden]{display:block}
   .js .routemap .m-route{stroke-dashoffset:0;stroke-dasharray:none}
   .js .routemap .m-stop,.js .routemap .m-goal{opacity:1;transform:none}
-  body::after,.hero .cue,.bar .prog{display:none}
+  body::after,.hero .cue,.bar .prog,.dock{display:none!important}
+  .js body{padding-bottom:0}
   section.sec{padding:var(--space-4) 0}
   .sec-idx{position:static}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#route">本文へ移動</a>
+<a class="skip" href="#from">本文へ移動</a>
 
 <header class="bar" id="bar">
   <a class="brand" href="#top" aria-label="NPO法人ミラツク 未来庵 アクセスガイド ページの先頭へ">
@@ -570,11 +615,10 @@ footer ul a:hover{color:var(--accent)}
     <span class="bt"><b>未来庵</b><span>MIRAI-AN</span></span>
   </a>
   <nav aria-label="ページ内">
-    <a href="#route">道順</a>
-    <a href="#ways">バス・車</a>
-    <a href="#map">地図</a>
-    <a href="#photos">写真</a>
+    <a href="#route">行き方</a>
+    <a href="#arrive">到着</a>
     <a href="#about">未来庵</a>
+    <a href="#photos">写真</a>
     <a href="#course">講座</a>
   </nav>
   <span class="prog" aria-hidden="true"></span>
@@ -609,53 +653,107 @@ footer ul a:hover{color:var(--accent)}
   <p class="cue" aria-hidden="true"><i></i>Scroll</p>
 </section>
 
-<!-- ================= INTRO ================= -->
-<section class="intro" aria-labelledby="h-intro">
+<!-- ================= FROM (where are you coming from) =================
+     v5 (2026-11-07): the page is organised around the one place every public-transport route passes —
+     the 京大農学部前 stop on Imadegawa-dori. First choose your origin, then 01 gets you to the stop,
+     02 is the last ~300m with the landmarks you will actually see. -->
+<section class="origins" id="from" aria-labelledby="h-from">
   <div class="wrap">
-    <div class="intro-grid">
-      <p class="lead rv" id="h-intro">未来庵は、未来学（Futures Studies）<span class="nw">研究の拠点</span>であり、<strong>余白と文化のなかで未来を創造する</strong>知の場です。</p>
-      <div class="side rv">
-        <p>京都大学の東側、吉田山の西のふもと。クライアント、パートナー、ワークショップの参加者、研究者の方をお迎えしています。</p>
-        <p>見学・プログラムへの参加・場所のご利用は、事前のご相談制です。</p>
-      </div>
+    <div class="from-head">
+      <p class="num rv">Access<span>どこからお越しですか</span></p>
+      <h2 id="h-from" class="rv">出発する場所を選んでください。</h2>
     </div>
-    <ul class="glance rv" aria-label="所要時間の目安">
-      <li class="rv rl" style="--i:0"><p class="k">京阪「出町柳」駅から</p><p class="v">徒歩 約18分<small>約1.4km</small></p></li>
-      <li class="rv rl" style="--i:1"><p class="k">市バス「京大農学部前」から</p><p class="v">徒歩 約5分<small>約300m</small></p></li>
-      <li class="rv rl" style="--i:2"><p class="k">JR京都駅から</p><p class="v">市バス7系統 約35分<small>目安</small></p></li>
+    <ul class="from" aria-label="出発地ごとの所要時間">
+      <li class="rv rl" style="--i:0"><a href="#walk"><span class="k">京阪「出町柳」駅から</span><span class="v">徒歩 約18分</span><span class="s">約1.4km</span><span class="go">歩く道順<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></li>
+      <li class="rv rl" style="--i:1"><a href="#bus-kyoto"><span class="k">JR京都駅から</span><span class="v">市バス7系統 <span class="nw">約35分</span></span><span class="s">目安</span><span class="go">市バスで<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></li>
+      <li class="rv rl" style="--i:2"><a href="#bus-demachi"><span class="k">出町柳駅前から市バスで</span><span class="v">7・203系統 <span class="nw">約8分</span></span><span class="s">「京大農学部前」まで</span><span class="go">市バスで<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></li>
+      <li class="rv rl" style="--i:3"><a href="#car"><span class="k">お車で</span><span class="v">駐車場なし</span><span class="s">周辺のコインパーキングへ</span><span class="go">お車で<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a></li>
     </ul>
+    <p class="hub rv"><span class="mono">Junction</span><span class="hub-t">出町柳駅から歩く道も、市バス7・203系統も、今出川通の<strong class="nw">「京大農学部前」</strong>を通ります。そこから南へ<strong class="nw">約300m・徒歩約5分</strong>で未来庵です。</span><a class="tlink" href="#arrive">最後の約300mへ</a></p>
   </div>
 </section>
 
-<!-- ================= ROUTE ================= -->
+<!-- ================= 01 TO THE STOP ================= -->
 <section class="sec" id="route" tabindex="-1" aria-labelledby="h-route">
   <div class="wrap sec-grid">
     <div class="sec-idx">
       <span class="big" aria-hidden="true">01</span>
-      <p class="num rv">01<span>Route</span></p>
-      <h2 id="h-route" class="rv"><span class="nw">出町柳駅から、</span><span class="nw">歩いて。</span></h2>
-      <p class="rv">京阪「出町柳」駅から今出川通をまっすぐ東へ。百万遍を越え、京都大学の北側を歩きます。約1.4km、徒歩約18分。地図は OpenStreetMap の道路データから作った、縮尺のあるものです。</p>
+      <p class="num rv">01<span>To the stop</span></p>
+      <h2 id="h-route" class="rv"><span class="nw">まず、</span><span class="nw">停留所まで。</span></h2>
+      <p class="rv">出町柳駅から歩いても、市バスに乗っても、目指すのは今出川通の停留所「京大農学部前」です。地図は OpenStreetMap の道路データから作った、縮尺のあるものです。</p>
     </div>
     <div>
-      <figure class="mapfig rv ri">
-        <div class="mapscroll" role="region" tabindex="0" aria-label="道順の地図（狭い画面では横にスクロールできます）">
-        {{MAP_SVG}}
-        </div>
-        <ul class="legend" aria-label="凡例">
-          <li><span class="ln" aria-hidden="true"></span>出町柳駅からの徒歩経路</li>
-          <li><span class="ln sub" aria-hidden="true"></span>市バス「京大正門前」からの経路</li>
-          <li><span class="ln last" aria-hidden="true"></span>道路から建物まで（道路データ外）</li>
-        </ul>
-        <figcaption><span>地図データ © OpenStreetMap contributors（ODbL）</span><a href="#map">Google マップで見る</a></figcaption>
-      </figure>
+      <div class="leg" id="walk" tabindex="-1">
+        <h3 class="leg-h rv"><span class="mono">On foot</span>出町柳駅から歩く<small>約1.4km・徒歩約18分（未来庵まで）</small></h3>
+        <figure class="mapfig rv ri">
+          <div class="mapscroll" role="region" tabindex="0" aria-label="道順の地図（狭い画面では横にスクロールできます）">
+          {{MAP_SVG}}
+          </div>
+          <ul class="legend" aria-label="凡例">
+            <li><span class="ln" aria-hidden="true"></span>出町柳駅からの徒歩経路</li>
+            <li><span class="ln sub" aria-hidden="true"></span>市バス「京大正門前」からの経路</li>
+            <li><span class="ln last" aria-hidden="true"></span>道路から建物まで（道路データ外）</li>
+          </ul>
+          <figcaption><span>地図データ © OpenStreetMap contributors（ODbL）</span><a href="#map">Google マップで見る</a></figcaption>
+        </figure>
+        <ol class="steps" aria-label="出町柳駅から「京大農学部前」までの道順">
+          <li class="rv rl" data-step="1" style="--i:0"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong class="nw">出口3</strong>を出て、今出川通を東へ進みます。</p></li>
+          <li class="rv rl" data-step="2" style="--i:4"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。<span class="m">この先の停留所「京大農学部前」から先は、<a href="#arrive">02 最後の約300m</a>へ</span></p></li>
+        </ol>
+        <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。</p>
+      </div>
 
-      <ol class="steps" aria-label="出町柳駅からの道順">
-        <li class="rv rl" data-step="1" style="--i:0"><p class="n">1<span>Start</span></p><p class="t">京阪「出町柳」駅の<strong class="nw">出口3</strong>を出て、今出川通を東へ進みます。</p></li>
-        <li class="rv rl" data-step="2" style="--i:4"><p class="n">2<span>Straight</span></p><p class="t"><strong>百万遍交差点</strong>を渡り、そのまま今出川通を東へ。右手に京都大学の構内が続きます。</p></li>
-        <li class="rv rl" data-step="3" style="--i:8"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、<span class="nw">約230m</span>進みます。<span class="m"><span class="nw">停留所から 約300m</span> · <span class="nw">徒歩 約5分</span></span></p></li>
-        <li class="rv rl" data-step="4" style="--i:12"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">約1.4km · 徒歩 約18分</span></p></li>
+      <div class="leg" id="ways" tabindex="-1">
+        <h3 class="leg-h rv"><span class="mono">By bus · By car</span>市バスで、お車で<small>最寄りの停留所は「京大農学部前」。7系統と203系統が停まります</small></h3>
+        <ul class="ways">
+          <li class="rv rl rl-b" style="--i:0" id="bus-kyoto">
+            <div><h4>JR京都駅から</h4><div class="tag"><span>7</span></div></div>
+            <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。</p>
+            <p class="time">約35分<small>目安</small></p>
+          </li>
+          <li class="rv rl rl-b" style="--i:1" id="bus-demachi">
+            <div><h4>出町柳駅前から</h4><div class="tag"><span>7</span><span>203</span></div></div>
+            <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。</p>
+            <p class="time">約8分</p>
+          </li>
+          <li class="rv rl rl-b" style="--i:2">
+            <div><h4>「京大正門前」で降りたら</h4><div class="tag"><span>東大路通</span></div></div>
+            <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
+            <p class="time">徒歩 約11分</p>
+          </li>
+          <li class="rv rl rl-b" style="--i:3" id="car">
+            <div><h4>お車でお越しの場合</h4></div>
+            <p>未来庵には駐車場がありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください。空き状況や料金は地図でご確認いただけます。</p>
+            <p class="time">駐車場なし</p>
+          </li>
+        </ul>
+        <p class="ways-note">バスの乗車時間は京都大学の案内資料にもとづく目安、徒歩の時間は地図データでの計測と実際に歩いた目安です。ダイヤ・のりばは変わることがあります。最新の運行は<a href="https://www.city.kyoto.lg.jp/kotsu/" target="_blank" rel="noopener">京都市交通局</a>でご確認ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 THE LAST 300m ================= -->
+<section class="sec arrive" id="arrive" tabindex="-1" aria-labelledby="h-arrive">
+  <div class="wrap sec-grid">
+    <div class="sec-idx">
+      <span class="big" aria-hidden="true">02</span>
+      <p class="num rv">02<span>The last 300m</span></p>
+      <h2 id="h-arrive" class="rv"><span class="nw">停留所から、</span><span class="nw">門まで。</span></h2>
+      <p class="rv">今出川通の「京大農学部前」から南へ約300m、徒歩約5分。門をくぐり、石畳の小径を抜けた先が未来庵の玄関です。</p>
+    </div>
+    <div>
+      <ol class="steps steps-2" aria-label="「京大農学部前」から未来庵までの道順">
+        <li class="rv rl" data-step="3" style="--i:0"><p class="n">3<span>Turn</span></p><p class="t">市バス「<strong class="nw">京大農学部前</strong>」の停留所を過ぎたところで右（南）へ曲がり、<span class="nw">約230m</span>進みます。<span class="m"><span class="nw">停留所から 約300m</span> · <span class="nw">徒歩 約5分</span></span></p></li>
+        <li class="rv rl" data-step="4" style="--i:2"><p class="n">4<span>Arrive</span></p><p class="t">吉田本町13が<strong>未来庵</strong>です。<span class="m">出町柳駅から 約1.4km · 徒歩 約18分</span></p></li>
       </ol>
-      <p class="route-note">距離は OpenStreetMap の道路データで測った道のりで、徒歩は分速80mで計算しています（バス停「京大農学部前」からの約5分は、実際に歩いた目安です）。市バス「京大正門前」（東大路通）で降りた場合は、東一条通を経て約850m・徒歩約11分です。</p>
+
+      <ol class="gallery landmarks" aria-label="到着の目印（門から玄関まで）">
+        <li class="g1 rv ri" style="--i:0;--lqip:{{C:gate}}"><figure><button type="button" data-full="assets/photos/gate-1600.webp" aria-label="写真を拡大：門"><img src="assets/photos/gate-640.webp" srcset="assets/photos/gate-640.webp 640w, assets/photos/gate-1600.webp 1600w" sizes="(max-width:760px) 100vw, 50vw" alt="瓦屋根をのせた木の門と板塀。門の脇に表札、上に紅葉した木々" loading="lazy" decoding="async" width="640" height="427"><figcaption><span class="lm-n" aria-hidden="true">1</span>門</figcaption></button></figure></li>
+        <li class="g2 rv ri" style="--i:1;--lqip:{{C:path-to-house}}"><figure><button type="button" data-full="assets/photos/path-to-house-1600.webp" aria-label="写真を拡大：石畳の小径"><img src="assets/photos/path-to-house-640.webp" srcset="assets/photos/path-to-house-640.webp 640w, assets/photos/path-to-house-1600.webp 1600w" sizes="(max-width:760px) 50vw, 25vw" alt="苔の庭を抜けて建物の入口へ続く石畳の小径" loading="lazy" decoding="async" width="640" height="427"><figcaption><span class="lm-n" aria-hidden="true">2</span>石畳の小径</figcaption></button></figure></li>
+        <li class="g3 rv ri" style="--i:2;--lqip:{{C:entrance}}"><figure><button type="button" data-full="assets/photos/entrance-1600.webp" aria-label="写真を拡大：玄関先"><img src="assets/photos/entrance-640.webp" srcset="assets/photos/entrance-640.webp 640w, assets/photos/entrance-1600.webp 1600w" sizes="(max-width:760px) 50vw, 25vw" alt="土壁と柱の玄関先。開いた戸の奥に室内が見え、足元は石のタイル" loading="lazy" decoding="async" width="640" height="427"><figcaption><span class="lm-n" aria-hidden="true">3</span>玄関先</figcaption></button></figure></li>
+      </ol>
+      <p class="arrive-note rv">見学・プログラムへの参加・場所のご利用は、事前のご相談制です。</p>
 
       <div class="gmap rv" id="map" tabindex="-1">
         <div>
@@ -680,62 +778,27 @@ footer ul a:hover{color:var(--accent)}
   </div>
 </section>
 
-<!-- ================= WAYS ================= -->
-<section class="sec" id="ways" tabindex="-1" aria-labelledby="h-ways">
-  <div class="wrap sec-grid">
-    <div class="sec-idx">
-      <span class="big" aria-hidden="true">02</span>
-      <p class="num rv">02<span>By bus · By car</span></p>
-      <h2 id="h-ways" class="rv"><span class="nw">バスでも、</span><span class="nw">京都駅からも。</span></h2>
-      <p class="rv">最寄りの停留所は、今出川通の「京大農学部前」です。7系統と203系統が停まります。</p>
-    </div>
-    <div>
-      <ul class="ways">
-        <li class="rv rl rl-b" style="--i:0">
-          <div><h3>JR京都駅から</h3><div class="tag"><span>7</span></div></div>
-          <p>京都駅前 A2のりばから市バス7系統に乗り、「京大農学部前」で下車。停留所から徒歩約5分です。</p>
-          <p class="time">約35分<small>目安</small></p>
-        </li>
-        <li class="rv rl rl-b" style="--i:1">
-          <div><h3>出町柳駅前から</h3><div class="tag"><span>7</span><span>203</span></div></div>
-          <p>歩かずに来られる場合は、出町柳駅前から市バス7系統・203系統で「京大農学部前」まで約8分です。</p>
-          <p class="time">約8分</p>
-        </li>
-        <li class="rv rl rl-b" style="--i:2">
-          <div><h3>「京大正門前」で降りたら</h3><div class="tag"><span>東大路通</span></div></div>
-          <p>東大路通の「京大正門前」で降りた場合は、東一条通を東へ。約850m・徒歩約11分です（地図の点線）。</p>
-          <p class="time">徒歩 約11分</p>
-        </li>
-        <li class="rv rl rl-b" style="--i:3" id="parking">
-          <div><h3>お車でお越しの場合</h3></div>
-          <p>未来庵には駐車場がありません。<a href="https://www.google.com/maps/search/%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0/@35.0263201,135.7846307,17z" target="_blank" rel="noopener">周辺のコインパーキング</a>をご利用ください。空き状況や料金は地図でご確認いただけます。</p>
-          <p class="time">駐車場なし</p>
-        </li>
-      </ul>
-      <p class="ways-note">バスの乗車時間は京都大学の案内資料にもとづく目安、徒歩の時間は地図データでの計測と実際に歩いた目安です。ダイヤ・のりばは変わることがあります。最新の運行は<a href="https://www.city.kyoto.lg.jp/kotsu/" target="_blank" rel="noopener">京都市交通局</a>でご確認ください。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PHOTOS ================= -->
-<section class="sec" id="photos" tabindex="-1" aria-labelledby="h-photos">
+<!-- ================= 03 ABOUT (light) + photos ================= -->
+<section class="sec about" id="about" tabindex="-1" aria-labelledby="h-about">
   <div class="wrap sec-grid">
     <div class="sec-idx">
       <span class="big" aria-hidden="true">03</span>
-      <p class="num rv">03<span>Photos</span></p>
-      <h2 id="h-photos" class="rv"><span class="nw">庭と建物の</span><span class="nw">いまの姿</span></h2>
-      <p class="rv">門をくぐり、石畳の小径を抜けた先が未来庵の玄関です。到着の目印に、そして滞在の様子を思い描く手がかりにご覧ください。</p>
+      <p class="num rv">03<span>About Mirai-an</span></p>
+      <h2 id="h-about" class="rv"><span class="nw">未来学の拠点、</span><span class="nw">余白と文化の</span><span class="nw">知の場。</span></h2>
     </div>
-    <div class="gallery">
-      <figure class="g1 rv ri" style="--i:0;--lqip:{{C:gate}}"><button type="button" data-full="assets/photos/gate-1600.webp" aria-label="写真を拡大：門"><img src="assets/photos/gate-640.webp" srcset="assets/photos/gate-640.webp 640w, assets/photos/gate-1600.webp 1600w" sizes="(max-width:760px) 100vw, 44vw" alt="瓦屋根をのせた木の門と板塀。門の脇に表札、上に紅葉した木々" loading="lazy" decoding="async" width="640" height="427"><figcaption>門</figcaption></button></figure>
-      <figure class="g2 rv ri" style="--i:1;--lqip:{{C:path-to-house}}"><button type="button" data-full="assets/photos/path-to-house-1600.webp" aria-label="写真を拡大：石畳の小径"><img src="assets/photos/path-to-house-640.webp" srcset="assets/photos/path-to-house-640.webp 640w, assets/photos/path-to-house-1600.webp 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="苔の庭を抜けて建物の入口へ続く石畳の小径" loading="lazy" decoding="async" width="640" height="427"><figcaption>石畳の小径</figcaption></button></figure>
-      <figure class="g3 rv ri" style="--i:2;--lqip:{{C:entrance}}"><button type="button" data-full="assets/photos/entrance-1600.webp" aria-label="写真を拡大：玄関先"><img src="assets/photos/entrance-640.webp" srcset="assets/photos/entrance-640.webp 640w, assets/photos/entrance-1600.webp 1600w" sizes="(max-width:760px) 50vw, 32vw" alt="土壁と柱の玄関先。開いた戸の奥に室内が見え、足元は石のタイル" loading="lazy" decoding="async" width="640" height="427"><figcaption>玄関先</figcaption></button></figure>
-      <figure class="g4 rv ri" style="--i:3;--lqip:{{C:living-sun}}"><button type="button" data-full="assets/photos/living-sun-1600.webp" aria-label="写真を拡大：木漏れ日の居間"><img src="assets/photos/living-sun-640.webp" srcset="assets/photos/living-sun-640.webp 640w, assets/photos/living-sun-1600.webp 1600w" sizes="(max-width:760px) 100vw, 44vw" alt="煉瓦の壁とソファ、木の食卓がある居間。床に木漏れ日の影が落ちる" loading="lazy" decoding="async" width="640" height="427"><figcaption>木漏れ日の居間</figcaption></button></figure>
+    <div>
+      <p class="pull rv">すでに現れている未来の兆しを観測し、対話を通じて意味を与え、選び取るべき<span class="nw">未来の像を結ぶ。</span></p>
+      <p class="rv">京都大学の東側、吉田山の西のふもと。未来庵は、NPO法人ミラツクが2024年11月に開いた、未来学（Futures Studies）研究の拠点です。世界の研究機関で磨かれてきた未来学の方法論を、ここでの対話に実装しています。</p>
+      <p class="rv">縁側や障子で外とやわらかくつながる建物と、時間をかけて積み上げられてきた庭。会議室にはない余白と、千年の都に重なる文化の層のなかで、肩書きを離れて問いを深め、まだかたちのない未来を想像し、創造する。クライアントやパートナー、ワークショップの参加者、研究者が集う知的空間です。</p>
+      <div class="acts rv">
+        <a class="btn ghost" href="https://journal.emerging-future.org/miraian/">未来庵について詳しく
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
     </div>
   </div>
-  <div class="wrap album" id="gallery" aria-labelledby="h-album">
-    <div class="album-head">
-      <h3 id="h-album" class="rv">ギャラリー<span>Gallery — {{N_ALL}}枚</span></h3>
+  <div class="wrap album" id="photos" tabindex="-1" aria-labelledby="h-album">
+    <div class="album-head" id="gallery">
+      <h3 id="h-album" class="rv">積み上げられてきた庭と共に、<span>Photos — {{N_ALL}}枚</span></h3>
       <div class="filters rv" role="group" aria-label="写真の絞り込み">
         <button type="button" aria-pressed="true" data-f="all">すべて<span>{{N_ALL}}</span></button>
         <button type="button" aria-pressed="false" data-f="recent">近影<span>{{N_recent}}</span></button>
@@ -757,33 +820,12 @@ footer ul a:hover{color:var(--accent)}
   </dialog>
 </section>
 
-<!-- ================= ABOUT (night) ================= -->
-<section class="sec night about" id="about" tabindex="-1" aria-labelledby="h-about">
-  <div class="wrap sec-grid">
-    <div class="sec-idx">
-      <span class="big" aria-hidden="true">04</span>
-      <p class="num rv">04<span>About Mirai-an</span></p>
-      <h2 id="h-about" class="rv"><span class="nw">未来学の拠点、</span><span class="nw">余白と文化の</span><span class="nw">知の場。</span></h2>
-    </div>
-    <div>
-      <p class="pull rv">すでに現れている未来の兆しを観測し、対話を通じて意味を与え、選び取るべき<span class="nw">未来の像を結ぶ。</span></p>
-      <p class="rv">未来庵は、NPO法人ミラツクが2024年11月に京都・吉田に開いた、未来学（Futures Studies）研究の拠点です。世界の研究機関で磨かれてきた未来学の方法論を、ここでの対話に実装しています。</p>
-      <p class="rv">縁側や障子で外とやわらかくつながる建物と、時間をかけて積み上げられてきた庭。会議室にはない余白と、千年の都に重なる文化の層のなかで、肩書きを離れて問いを深め、まだかたちのない未来を想像し、創造する。クライアントやパートナー、ワークショップの参加者、研究者が集う知的空間です。</p>
-      <p class="note rv">見学・プログラムへの参加・場所のご利用は、事前のご相談制です。</p>
-      <div class="acts rv">
-        <a class="btn" href="https://journal.emerging-future.org/miraian/">未来庵について詳しく
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= COURSE (night) ================= -->
+<!-- ================= 04 COURSE (the one night section, the finale) ================= -->
 <section class="sec night course" id="course" tabindex="-1" aria-labelledby="h-course">
   <div class="wrap sec-grid">
     <div class="sec-idx">
-      <span class="big" aria-hidden="true">05</span>
-      <p class="num rv">05<span>Futures Studies Course</span></p>
+      <span class="big" aria-hidden="true">04</span>
+      <p class="num rv">04<span>Futures Studies Course</span></p>
       <h2 id="h-course" class="rv"><span class="nw">ここで、</span><span class="nw">未来学を学ぶ。</span></h2>
       <p class="rv">未来庵は未来学入門講座のワークショップ回の会場でもあります。</p>
     </div>
@@ -807,6 +849,15 @@ footer ul a:hover{color:var(--accent)}
 </section>
 </main>
 
+<!-- phones only: once the hero (with its address card) has scrolled away, the two things people need on the street stay at hand.
+     Bar height 56 + safe area (ACD nav: Material bottom navigation 56dp / iOS tab bar 49pt, safe area absorbed separately) -->
+<div class="dock" id="dock" role="region" aria-label="住所と経路">
+  <button class="btn" type="button" data-copy="〒606-8317 京都府京都市左京区吉田本町13" data-done="住所をコピーしました">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 011-1h10"/></svg>住所をコピー</button>
+  <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=35.0263201,135.7846307&travelmode=transit" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>経路を調べる</a>
+</div>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -825,8 +876,9 @@ footer ul a:hover{color:var(--accent)}
       <div>
         <h4>Access</h4>
         <ul>
-          <li><a href="#route">道順</a></li>
-          <li><a href="#ways">バス・お車</a></li>
+          <li><a href="#walk">出町柳駅から歩く</a></li>
+          <li><a href="#ways">市バス・お車</a></li>
+          <li><a href="#arrive">最後の約300m</a></li>
           <li><a href="#map">Google マップ</a></li>
         </ul>
       </div>
@@ -848,9 +900,23 @@ footer ul a:hover{color:var(--accent)}
 
 <script>
 (function(){
-  var bar=document.getElementById('bar'), hero=document.querySelector('.hero');
-  function onScroll(){bar.classList.toggle('solid', window.scrollY > hero.offsetHeight-96);}
-  onScroll(); addEventListener('scroll',onScroll,{passive:true});
+  var bar=document.getElementById('bar'), hero=document.querySelector('.hero'), dock=document.getElementById('dock');
+  // the bottom dock (phones) appears once the hero card - which holds the same two actions - has left the screen
+  var card=document.querySelector('.hero-card');
+  var links=[].slice.call(document.querySelectorAll('.bar nav a'));
+  var marks=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1))});
+  var ticking=false;
+  function onScroll(){
+    bar.classList.toggle('solid', window.scrollY > hero.offsetHeight-96);
+    if(dock) dock.classList.toggle('show', card.getBoundingClientRect().bottom < 0);
+    // current section in the bar: the last target whose top has passed 45% of the viewport
+    // (computed, not observed, because #photos sits inside #about and observers cannot order nested targets)
+    var line=innerHeight*.45, cur=-1;
+    marks.forEach(function(m,i){if(m&&m.getBoundingClientRect().top<=line) cur=i});
+    links.forEach(function(a,i){a.setAttribute('aria-current',i===cur?'true':'false')});
+    ticking=false;
+  }
+  onScroll(); addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
 
   // reveal on entry; the map svg gets .go so the route draws when it is actually seen (not on page load).
   // Safety net: everything is revealed 4s after load regardless, so no content depends on the observer.
@@ -868,12 +934,6 @@ footer ul a:hover{color:var(--accent)}
     if(im.complete&&im.naturalWidth) ok(); else{im.addEventListener('load',ok);im.addEventListener('error',ok);}
   });
 
-  var links=[].slice.call(document.querySelectorAll('.bar nav a'));
-  if('IntersectionObserver' in window){
-    var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id?'true':'false')});}})},{rootMargin:'-45% 0px -50% 0px'});
-    ['route','ways','map','photos','about','course'].forEach(function(id){var s=document.getElementById(id); if(s) so.observe(s);});
-  }
-
   // step <-> map link (stops 1..3 are emitted in route order by build_map.py; goal pin = 4)
   var rm=document.querySelector('.routemap'), stops=[];
   (function(){var sc=document.querySelector('.mapscroll');if(sc&&sc.scrollWidth>sc.clientWidth+4){sc.scrollLeft=sc.scrollWidth-sc.clientWidth;}})();
@@ -881,7 +941,8 @@ footer ul a:hover{color:var(--accent)}
     rm.querySelectorAll('.m-stop').forEach(function(g,i){g.dataset.step=String(i+1);g.style.setProperty('--k',String(i));stops.push(g)});
     var goal=rm.querySelector('.m-goal'); if(goal){goal.dataset.step='4';stops.push(goal)}
   }
-  var steps=document.querySelectorAll('.steps li');
+  // only the steps next to the map light it up; steps 3-4 (02) sit far below it, so linking them would point off-screen (fable review 2026-11-07)
+  var steps=document.querySelectorAll('#walk .steps li');
   function mark(n){stops.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)}); steps.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)});}
   steps.forEach(function(li){li.addEventListener('mouseenter',function(){mark(li.dataset.step)}); li.addEventListener('mouseleave',function(){mark('')}); li.tabIndex=0; li.addEventListener('focusin',function(){mark(li.dataset.step)}); li.addEventListener('focusout',function(){mark('')});});
 

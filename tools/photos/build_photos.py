@@ -12,6 +12,8 @@ do not control. Why the average colour: it fills each tile before the image
 loads (dominant-colour placeholder), so the grid never flashes white.
 
 Usage: build_photos.py <rendition_dir>
+       build_photos.py --markup-only   (rebuild gallery.html / counts.json from the existing
+                                        manifest.json, e.g. after editing "mosaic"; no images touched)
 """
 import html, json, os, sys
 from PIL import Image, ImageOps
@@ -32,6 +34,13 @@ def avg_hex(im):
 def main():
     src = sys.argv[1]
     sel = json.load(open(os.path.join(HERE, "selection.json")))
+    if src == "--markup-only":
+        manifest = json.load(open(os.path.join(OUT, "manifest.json")))
+        missing = [p["key"] for p in sel["photos"] if p["key"] not in manifest]
+        if missing:
+            sys.exit(f"not in manifest.json (run with a rendition dir first): {missing}")
+        write_markup(sel, manifest)
+        return
     os.makedirs(OUT_IMG, exist_ok=True)
     os.makedirs(OUT, exist_ok=True)
     manifest = {}
@@ -55,8 +64,12 @@ def main():
             os.remove(os.path.join(OUT_IMG, f))
             print("removed stale", f)
 
+    write_markup(sel, manifest)
+
+
+def write_markup(sel, manifest):
     # Gallery tiles: thumbnails are the 640 file, the lightbox loads the 1600 file.
-    # The 4 mosaic photos already sit just above the album, so they are not repeated in it.
+    # The "mosaic" photos (the arrival landmarks) are shown in the arrival section, so they are not repeated in the album.
     album = [p for p in sel["photos"] if p["key"] not in sel["mosaic"]]
     tiles = []
     for n, p in enumerate(album):

@@ -32,7 +32,7 @@ miraian-guide/
 │       ├── contact_sheet.py   全写真の一覧シート（選定用）
 │       ├── selection.json     掲載する写真の正本（区分・キャプション・代替テキスト・Drive の出所）
 │       ├── build_photos.py    selection.json → assets/photos/*.webp ＋ ギャラリーの HTML 断片
-│       ├── test_gallery.py    絞り込み・拡大表示の動作確認（Playwright）
+│       ├── test_gallery.py    絞り込み・拡大表示・到着の目印の動作確認（Playwright）
 │       └── out/               生成物（manifest.json / gallery.html / counts.json）
 ├── assets/
 │   ├── photos/                    掲載写真（WebP。build_photos.py の生成物。直接編集しない）
@@ -50,6 +50,7 @@ miraian-guide/
 ```bash
 python3 tools/map/build_map.py     # 地図を作り直す（OSM データから）
 python3 tools/photos/build_photos.py <縮小版の置き場>   # 写真を作り直す（selection.json を変えたとき）
+python3 tools/photos/build_photos.py --markup-only     # 画像はそのままで、ギャラリーの断片と枚数だけ作り直す（"mosaic" を変えたときなど）
 python3 tools/build_index.py       # index.html を組み直す
 python3 tools/photos/test_gallery.py http://127.0.0.1:<port>/   # 動作確認（リポジトリ直下を http.server で配信してから）
 ```
@@ -69,10 +70,12 @@ python3 tools/photos/test_gallery.py http://127.0.0.1:<port>/   # 動作確認�
 - ミラツク正式CI（NOSIGNER 2011）。Web アクセント #783C28、地 #FAF8F5、文字 #1A1A1A。地図の配色は CI 12色。赤白CI（#CC1400）は使わない
 - ロゴは正規ファイルから書き出した PNG をそのまま使う。生成・描き直し・色替え・種や渦の図柄の自作はしない
 - 書体は姉妹ページ `miraian-lp`（journal.emerging-future.org/miraian/）と同じ Zen Kaku Gothic New / Archivo / IBM Plex Mono
-- 構成（v4・2026-11-04）: ヒーロー（庭に開く和室の写真＋所在地カード）→ 導入（未来学研究の拠点としての位置づけ＋所要時間3項目）→ 01 道順（OSM 地図・手順・Google マップ補助）→ 02 バス・お車 → 03 写真（到着の目印になる4枚＋絞り込みと拡大表示のできるギャラリー。2026-11-07 追加）→ 04 未来庵について（暗面）→ 05 未来学入門講座（暗面の続き）→ フッター。左に索引列・右に本文の2列の編集的な版面
+- 構成（v5・2026-11-07 組み替え）: ヒーロー（庭の写真＋所在地カード。据え置き）→ 出発地の選択（出町柳駅から徒歩／京都駅から市バス／出町柳駅前から市バス／お車 の4つ。各カードが該当箇所へ飛ぶ。下に「どの電車・バスの道も今出川通の京大農学部前を通る」合流点の1文）→ 01 京大農学部前まで（出町柳駅から歩く: OSM 地図＋手順1-2 ／ 市バスで、お車で）→ 02 最後の約300m（手順3-4＋到着の目印 門・石畳の小径・玄関先の3枚を順に＋Google マップ）→ 03 未来庵について（明るい地。旧導入の位置づけ文を統合）＋写真ギャラリー38枚（見出し「積み上げられてきた庭と共に、」は FACTS の指定）→ 04 未来学入門講座（暗面はここだけ）→ フッター。スマートフォンではヒーローを過ぎると画面下に「住所をコピー」「経路を調べる」の操作バーが出る
+- 旧 id（#route #ways #map #photos #about #course）は外部からの直リンクのために残している。新しい id は #from #walk #bus-kyoto #bus-demachi #car #arrive。到着の目印は selection.json の "mosaic"（3枚）で、ギャラリーには重ねない
+- v4 までの構成（2026-11-04）: ヒーロー → 導入（位置づけ＋所要時間3項目）→ 01 道順 → 02 バス・お車 → 03 写真 → 04 未来庵について（暗面）→ 05 講座（暗面）。到着の目印が手順4から離れていたことと、バスの人が最後の区間を読めない構造だったことを理由に組み替えた（build-record 2026-11-07）
 - 余白・寸法・色は `:root` のトークン（`--space-*` `--fs-*` ほか）から引く。純黒・イタリックは使わない。文字のコントラストは WCAG AA 以上。写真の上の文字には暗い下地を敷く。prefers-reduced-motion で動きを止める
 - 390px 幅でもページ内ナビ（横スクロール）を残す。CDN 画像は 2x の srcset を持つ
-- ギャラリーは 1100px 以上で5列、760px 以下では最初の12枚だけを出し「残りN枚を表示する」で開く（絞り込みで折りたたみに戻る。折りたたんだ写真は拡大表示の前後送りにも入らない）。到着の目印4枚のモザイクは5行で組む（2026-11-07 全体見直し）
+- ギャラリーは 1100px 以上で5列、760px 以下では最初の12枚だけを出し「残りN枚を表示する」で開く（絞り込みで折りたたみに戻る。折りたたんだ写真は拡大表示の前後送りにも入らない）。到着の目印3枚は番号つきで、門を大きく、小径と玄関先を右に積む
 
 ### 動きと質感（2026-11-07・MID-DB に接地）
 
