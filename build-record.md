@@ -39,3 +39,6 @@
 - 自前の確認: test_gallery.py 14/14（修正前後とも）。1440/390 × reduced-motion on/off × JS 有/無 の8条件で見出し・カード・手順・写真・節番号がすべて opacity 1・横はみ出し0・JS エラー0（scratchpad の shots.py）。修正後: 1.8s でカード opacity 1、スクロール前は `.rv` 0/43 が未表示（地図も未描画）→ 該当節へスクロールで描画、紙地の実測 rgb(250,248,245)
 - 確認していないこと: 実機の iOS Safari（`animation-timeline`・`allow-discrete` は非対応なら静的に落ちる設計だが未実測）
 - 公開: 西村さんの承認待ち（push で即時公開）
+
+## 2026-11-07 公開
+- 西村さんの指示（「その後公開してください」）で 137d3ad までを push。GitHub Pages のビルド完了を確認し、公開ページの index.html が手元と md5 一致（abd9e979…）、写真の配信 200、公開ページで test_gallery.py 14/14 PASS
