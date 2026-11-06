@@ -69,6 +69,7 @@
   --ink-mute:#6E675D;          /* 5.0:1 on paper (AA) */
   --hairline:#E5DDD0;
   --hairline-dk:#D6CBB9;
+  --scrim:linear-gradient(rgba(33,23,18,0),rgba(33,23,18,.6) 40%,rgba(33,23,18,.85)); /* dark base under text on photos */
   --hairline-ui:#958977; /* control outlines: 3.2:1 on --paper (WCAG 1.4.11 needs 3:1; --hairline-dk is 1.5:1) */
   --night:#211712;
   --night-2:#2A1D15;
@@ -302,7 +303,8 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .8s var(--ease)}
 .js .gallery img[loading="lazy"]:not(.ok){opacity:0}
 .gallery button:hover img{transform:scale(1.04)}
-.gallery figcaption{position:absolute;left:0;bottom:0;padding:var(--space-1) var(--space-2);font-size:12px;color:#fff;background:linear-gradient(transparent,rgba(33,23,18,.72));width:100%;letter-spacing:.06em}
+/* Scrim under captions: the old .72 gradient left white text at 2.2:1 on bright photos (audit 2026-11-07); this reaches >=6.1:1 on every photo */
+.gallery figcaption{position:absolute;left:0;bottom:0;padding:20px var(--space-2) var(--space-1);font-size:12px;color:#fff;background:var(--scrim);width:100%;letter-spacing:.04em}
 .g1{grid-column:1/8;grid-row:1/4}
 .g2{grid-column:8/13;grid-row:1/3}
 .g3{grid-column:8/13;grid-row:3/5}
@@ -334,16 +336,17 @@ dialog.lb .lb-n{color:rgba(242,230,212,.7)}
 .filters button[aria-pressed="true"] span{color:rgba(253,252,250,.8)}
 .filters button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .album-grid{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(var(--space-1),1vw,14px);margin-top:var(--space-4)}
-.album-grid li{aspect-ratio:3/2;background:var(--lqip,var(--paper-dp));overflow:hidden}
+/* overflow stays on the button, not the li, so the focus ring outside the tile is not clipped */
+.album-grid li{aspect-ratio:3/2;background:var(--lqip,var(--paper-dp))}
 .album-grid li[hidden]{display:none}
-.album-grid button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.album-grid button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative;overflow:hidden}
 .album-grid button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .album-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .8s var(--ease)}
 .js .album-grid img:not(.ok){opacity:0}
 .album-grid button:hover img{transform:scale(1.04)}
-.album-grid .cap{position:absolute;left:0;bottom:0;width:100%;padding:var(--space-1) var(--space-2);font-size:12px;letter-spacing:.06em;color:#fff;background:linear-gradient(transparent,rgba(33,23,18,.72))}
+.album-grid .cap{position:absolute;left:0;bottom:0;width:100%;padding:20px var(--space-2) var(--space-1);font-size:12px;letter-spacing:.04em;color:#fff;background:var(--scrim)}
 @media(max-width:1000px){.album-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:760px){.album-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.album-grid .cap{font-size:11px;padding:6px 8px}}
+@media(max-width:760px){.album-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.album-grid .cap{padding:16px 8px 6px;letter-spacing:.03em}}
 
 /* ---------- night: about + course ---------- */
 .night{background:var(--night);color:var(--star)}

@@ -56,8 +56,10 @@ def main():
             print("removed stale", f)
 
     # Gallery tiles: thumbnails are the 640 file, the lightbox loads the 1600 file.
+    # The 4 mosaic photos already sit just above the album, so they are not repeated in it.
+    album = [p for p in sel["photos"] if p["key"] not in sel["mosaic"]]
     tiles = []
-    for n, p in enumerate(sel["photos"]):
+    for n, p in enumerate(album):
         m = manifest[p["key"]]
         small, large = m["files"][0], m["files"][-1] if p["key"] != sel["hero"] else m["files"][1]
         cap, alt = html.escape(p["caption"]), html.escape(p["alt"])
@@ -68,7 +70,7 @@ def main():
             f'<span class="cap">{cap}</span></button></li>')
     open(os.path.join(OUT, "gallery.html"), "w", encoding="utf-8").write("\n".join(tiles))
     counts = {}
-    for p in sel["photos"]:
+    for p in album:
         counts[p["cat"]] = counts.get(p["cat"], 0) + 1
     json.dump(counts, open(os.path.join(OUT, "counts.json"), "w"))
     total = sum(os.path.getsize(os.path.join(OUT_IMG, f)) for f in os.listdir(OUT_IMG))

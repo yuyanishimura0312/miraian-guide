@@ -69,6 +69,7 @@
   --ink-mute:#6E675D;          /* 5.0:1 on paper (AA) */
   --hairline:#E5DDD0;
   --hairline-dk:#D6CBB9;
+  --scrim:linear-gradient(rgba(33,23,18,0),rgba(33,23,18,.6) 40%,rgba(33,23,18,.85)); /* dark base under text on photos */
   --hairline-ui:#958977; /* control outlines: 3.2:1 on --paper (WCAG 1.4.11 needs 3:1; --hairline-dk is 1.5:1) */
   --night:#211712;
   --night-2:#2A1D15;
@@ -302,7 +303,8 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .8s var(--ease)}
 .js .gallery img[loading="lazy"]:not(.ok){opacity:0}
 .gallery button:hover img{transform:scale(1.04)}
-.gallery figcaption{position:absolute;left:0;bottom:0;padding:var(--space-1) var(--space-2);font-size:12px;color:#fff;background:linear-gradient(transparent,rgba(33,23,18,.72));width:100%;letter-spacing:.06em}
+/* Scrim under captions: the old .72 gradient left white text at 2.2:1 on bright photos (audit 2026-11-07); this reaches >=6.1:1 on every photo */
+.gallery figcaption{position:absolute;left:0;bottom:0;padding:20px var(--space-2) var(--space-1);font-size:12px;color:#fff;background:var(--scrim);width:100%;letter-spacing:.04em}
 .g1{grid-column:1/8;grid-row:1/4}
 .g2{grid-column:8/13;grid-row:1/3}
 .g3{grid-column:8/13;grid-row:3/5}
@@ -334,16 +336,17 @@ dialog.lb .lb-n{color:rgba(242,230,212,.7)}
 .filters button[aria-pressed="true"] span{color:rgba(253,252,250,.8)}
 .filters button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .album-grid{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(var(--space-1),1vw,14px);margin-top:var(--space-4)}
-.album-grid li{aspect-ratio:3/2;background:var(--lqip,var(--paper-dp));overflow:hidden}
+/* overflow stays on the button, not the li, so the focus ring outside the tile is not clipped */
+.album-grid li{aspect-ratio:3/2;background:var(--lqip,var(--paper-dp))}
 .album-grid li[hidden]{display:none}
-.album-grid button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative}
+.album-grid button{all:unset;display:block;width:100%;height:100%;cursor:zoom-in;position:relative;overflow:hidden}
 .album-grid button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .album-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),opacity .8s var(--ease)}
 .js .album-grid img:not(.ok){opacity:0}
 .album-grid button:hover img{transform:scale(1.04)}
-.album-grid .cap{position:absolute;left:0;bottom:0;width:100%;padding:var(--space-1) var(--space-2);font-size:12px;letter-spacing:.06em;color:#fff;background:linear-gradient(transparent,rgba(33,23,18,.72))}
+.album-grid .cap{position:absolute;left:0;bottom:0;width:100%;padding:20px var(--space-2) var(--space-1);font-size:12px;letter-spacing:.04em;color:#fff;background:var(--scrim)}
 @media(max-width:1000px){.album-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:760px){.album-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.album-grid .cap{font-size:11px;padding:6px 8px}}
+@media(max-width:760px){.album-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.album-grid .cap{padding:16px 8px 6px;letter-spacing:.03em}}
 
 /* ---------- night: about + course ---------- */
 .night{background:var(--night);color:var(--star)}
@@ -625,12 +628,12 @@ footer ul a:hover{color:var(--accent)}
   </div>
   <div class="wrap album" id="gallery" aria-labelledby="h-album">
     <div class="album-head">
-      <h3 id="h-album" class="rv">ギャラリー<span>Gallery — 39枚</span></h3>
+      <h3 id="h-album" class="rv">ギャラリー<span>Gallery — 35枚</span></h3>
       <div class="filters rv" role="group" aria-label="写真の絞り込み">
-        <button type="button" aria-pressed="true" data-f="all">すべて<span>39</span></button>
+        <button type="button" aria-pressed="true" data-f="all">すべて<span>35</span></button>
         <button type="button" aria-pressed="false" data-f="recent">近影<span>11</span></button>
-        <button type="button" aria-pressed="false" data-f="garden">庭<span>13</span></button>
-        <button type="button" aria-pressed="false" data-f="first">1階<span>9</span></button>
+        <button type="button" aria-pressed="false" data-f="garden">庭<span>10</span></button>
+        <button type="button" aria-pressed="false" data-f="first">1階<span>8</span></button>
         <button type="button" aria-pressed="false" data-f="second">2階<span>6</span></button>
       </div>
     </div>
@@ -646,34 +649,30 @@ footer ul a:hover{color:var(--accent)}
 <li data-cat="recent" style="--lqip:#706D65"><button type="button" data-full="assets/photos/long-table-1600.webp" data-i="8" aria-label="写真を拡大：本棚と長机の部屋"><img src="assets/photos/long-table-640.webp" alt="本棚に囲まれた部屋の長机。奥のガラス戸の外に庭の木々" width="640" height="471" loading="lazy" decoding="async"><span class="cap">本棚と長机の部屋</span></button></li>
 <li data-cat="recent" style="--lqip:#454340"><button type="button" data-full="assets/photos/terrace-view-1600.webp" data-i="9" aria-label="写真を拡大：テラスから室内を見る"><img src="assets/photos/terrace-view-640.webp" alt="木のテラスに丸テーブルと椅子。ガラス戸の奥に室内の食卓が見える" width="640" height="411" loading="lazy" decoding="async"><span class="cap">テラスから室内を見る</span></button></li>
 <li data-cat="recent" style="--lqip:#686351"><button type="button" data-full="assets/photos/desk-garden-1600.webp" data-i="10" aria-label="写真を拡大：庭を望む机"><img src="assets/photos/desk-garden-640.webp" alt="窓辺の木の机と椅子。ガラス戸の外いっぱいに庭の木々が広がる" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭を望む机</span></button></li>
-<li data-cat="garden" style="--lqip:#494A49"><button type="button" data-full="assets/photos/gate-1600.webp" data-i="11" aria-label="写真を拡大：門"><img src="assets/photos/gate-640.webp" alt="瓦屋根をのせた木の門と板塀。門の脇に表札、上に紅葉した木々" width="640" height="427" loading="lazy" decoding="async"><span class="cap">門</span></button></li>
-<li data-cat="garden" style="--lqip:#87866C"><button type="button" data-full="assets/photos/path-to-house-1600.webp" data-i="12" aria-label="写真を拡大：石畳の小径"><img src="assets/photos/path-to-house-640.webp" alt="苔の庭を抜けて建物の入口へ続く石畳の小径" width="640" height="427" loading="lazy" decoding="async"><span class="cap">石畳の小径</span></button></li>
-<li data-cat="garden" style="--lqip:#6E665E"><button type="button" data-full="assets/photos/entrance-1600.webp" data-i="13" aria-label="写真を拡大：玄関先"><img src="assets/photos/entrance-640.webp" alt="土壁と柱の玄関先。開いた戸の奥に室内が見え、足元は石のタイル" width="640" height="427" loading="lazy" decoding="async"><span class="cap">玄関先</span></button></li>
-<li data-cat="garden" style="--lqip:#505248"><button type="button" data-full="assets/photos/path-framed-1600.webp" data-i="14" aria-label="写真を拡大：戸口から庭を見る"><img src="assets/photos/path-framed-640.webp" alt="戸口の枠越しに見る庭。石畳の小径と石灯籠、奥に門の屋根" width="640" height="427" loading="lazy" decoding="async"><span class="cap">戸口から庭を見る</span></button></li>
-<li data-cat="garden" style="--lqip:#59594E"><button type="button" data-full="assets/photos/deck-1600.webp" data-i="15" aria-label="写真を拡大：庭のデッキ"><img src="assets/photos/deck-640.webp" alt="木のデッキに丸テーブルと折りたたみ椅子。その先に苔の庭と木々" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭のデッキ</span></button></li>
-<li data-cat="garden" style="--lqip:#474431"><button type="button" data-full="assets/photos/path-winter-1600.webp" data-i="16" aria-label="写真を拡大：木立を抜ける小径"><img src="assets/photos/path-winter-640.webp" alt="窓枠越しに見る、木立のあいだを奥の建物へ続く石畳の小径" width="640" height="427" loading="lazy" decoding="async"><span class="cap">木立を抜ける小径</span></button></li>
-<li data-cat="garden" style="--lqip:#5E5D42"><button type="button" data-full="assets/photos/annex-1600.webp" data-i="17" aria-label="写真を拡大：庭の離れ"><img src="assets/photos/annex-640.webp" alt="苔の庭と若い木々のあいだに建つ小さな離れ" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭の離れ</span></button></li>
-<li data-cat="garden" style="--lqip:#7D6F62"><button type="button" data-full="assets/photos/maple-hill-1600.webp" data-i="18" aria-label="写真を拡大：紅葉と山"><img src="assets/photos/maple-hill-640.webp" alt="赤く色づいた紅葉の向こうに、こんもりとした山の緑" width="640" height="427" loading="lazy" decoding="async"><span class="cap">紅葉と山</span></button></li>
-<li data-cat="garden" style="--lqip:#52332D"><button type="button" data-full="assets/photos/maple-roof-1600.webp" data-i="19" aria-label="写真を拡大：屋根にかかる紅葉"><img src="assets/photos/maple-roof-640.webp" alt="建物の屋根の上に覆いかぶさる真っ赤な紅葉" width="640" height="427" loading="lazy" decoding="async"><span class="cap">屋根にかかる紅葉</span></button></li>
-<li data-cat="garden" style="--lqip:#2C2C24"><button type="button" data-full="assets/photos/lantern-leaves-1600.webp" data-i="20" aria-label="写真を拡大：石灯籠と落ち葉"><img src="assets/photos/lantern-leaves-640.webp" alt="苔むした石灯籠と、落ち葉の散る石畳の小径" width="640" height="427" loading="lazy" decoding="async"><span class="cap">石灯籠と落ち葉</span></button></li>
-<li data-cat="garden" style="--lqip:#564C35"><button type="button" data-full="assets/photos/autumn-garden-1600.webp" data-i="21" aria-label="写真を拡大：秋の庭"><img src="assets/photos/autumn-garden-640.webp" alt="紅葉と常緑の木々が重なる秋の庭" width="640" height="427" loading="lazy" decoding="async"><span class="cap">秋の庭</span></button></li>
-<li data-cat="garden" style="--lqip:#252216"><button type="button" data-full="assets/photos/nandina-1600.webp" data-i="22" aria-label="写真を拡大：色づく低木"><img src="assets/photos/nandina-640.webp" alt="薄暗い庭の中で、桃色と黄色に色づいた低木" width="640" height="427" loading="lazy" decoding="async"><span class="cap">色づく低木</span></button></li>
-<li data-cat="garden" style="--lqip:#434733"><button type="button" data-full="assets/photos/shrubs-moss-1600.webp" data-i="23" aria-label="写真を拡大：苔と下草"><img src="assets/photos/shrubs-moss-640.webp" alt="苔の地面に、色づいた低木と八手の葉が並ぶ" width="640" height="427" loading="lazy" decoding="async"><span class="cap">苔と下草</span></button></li>
-<li data-cat="first" style="--lqip:#514A41"><button type="button" data-full="assets/photos/genkan-1600.webp" data-i="24" aria-label="写真を拡大：玄関の土間"><img src="assets/photos/genkan-640.webp" alt="木の下駄箱が並ぶ玄関の土間。開いた戸口から外の光が差し込む" width="640" height="427" loading="lazy" decoding="async"><span class="cap">玄関の土間</span></button></li>
-<li data-cat="first" style="--lqip:#3E3933"><button type="button" data-full="assets/photos/agarikamachi-1600.webp" data-i="25" aria-label="写真を拡大：上がり口"><img src="assets/photos/agarikamachi-640.webp" alt="スリッパが並ぶ上がり口の畳の間。奥の障子とガラス戸の先に中庭の緑" width="640" height="427" loading="lazy" decoding="async"><span class="cap">上がり口</span></button></li>
-<li data-cat="first" style="--lqip:#51433B"><button type="button" data-full="assets/photos/kitchen-counter-1600.webp" data-i="26" aria-label="写真を拡大：台所とカウンター"><img src="assets/photos/kitchen-counter-640.webp" alt="一枚板のカウンターに木の椅子。奥に食器棚と台所" width="640" height="427" loading="lazy" decoding="async"><span class="cap">台所とカウンター</span></button></li>
-<li data-cat="first" style="--lqip:#594C43"><button type="button" data-full="assets/photos/counter-brick-1600.webp" data-i="27" aria-label="写真を拡大：カウンターと煉瓦の壁"><img src="assets/photos/counter-brick-640.webp" alt="大きな一枚板のカウンターの奥に、煉瓦の壁と板張りの天井" width="640" height="427" loading="lazy" decoding="async"><span class="cap">カウンターと煉瓦の壁</span></button></li>
-<li data-cat="first" style="--lqip:#2E2D25"><button type="button" data-full="assets/photos/courtyard-1600.webp" data-i="28" aria-label="写真を拡大：中庭"><img src="assets/photos/courtyard-640.webp" alt="開いた障子の間から見える、棕櫚竹の植わった中庭" width="640" height="427" loading="lazy" decoding="async"><span class="cap">中庭</span></button></li>
-<li data-cat="first" style="--lqip:#413527"><button type="button" data-full="assets/photos/tokonoma-1600.webp" data-i="29" aria-label="写真を拡大：床の間"><img src="assets/photos/tokonoma-640.webp" alt="掛け軸の掛かった床の間と、障子の小窓のある和室" width="640" height="427" loading="lazy" decoding="async"><span class="cap">床の間</span></button></li>
-<li data-cat="first" style="--lqip:#837360"><button type="button" data-full="assets/photos/washitsu-scroll-1600.webp" data-i="30" aria-label="写真を拡大：和室"><img src="assets/photos/washitsu-scroll-640.webp" alt="障子越しの和室。畳に座卓が置かれ、奥に掛け軸と籐の椅子" width="640" height="427" loading="lazy" decoding="async"><span class="cap">和室</span></button></li>
-<li data-cat="first" style="--lqip:#463D36"><button type="button" data-full="assets/photos/engawa-chairs-1600.webp" data-i="31" aria-label="写真を拡大：庭に向いた椅子"><img src="assets/photos/engawa-chairs-640.webp" alt="障子を開けた和室の奥、ガラス戸の前に庭を向いた椅子が二脚" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭に向いた椅子</span></button></li>
-<li data-cat="first" style="--lqip:#4D4035"><button type="button" data-full="assets/photos/living-sun-1600.webp" data-i="32" aria-label="写真を拡大：木漏れ日の居間"><img src="assets/photos/living-sun-640.webp" alt="煉瓦の壁とソファ、木の食卓がある居間。床に木漏れ日の影が落ちる" width="640" height="427" loading="lazy" decoding="async"><span class="cap">木漏れ日の居間</span></button></li>
-<li data-cat="second" style="--lqip:#594735"><button type="button" data-full="assets/photos/upstairs-corner-1600.webp" data-i="33" aria-label="写真を拡大：角窓の部屋"><img src="assets/photos/upstairs-corner-640.webp" alt="二方向に窓のある二階の部屋。窓の外に緑と瓦屋根が見える" width="640" height="427" loading="lazy" decoding="async"><span class="cap">角窓の部屋</span></button></li>
-<li data-cat="second" style="--lqip:#604B3C"><button type="button" data-full="assets/photos/upstairs-bed-1600.webp" data-i="34" aria-label="写真を拡大：二階の寝室"><img src="assets/photos/upstairs-bed-640.webp" alt="二つの窓から光が入る二階の寝室と木のベッド" width="640" height="427" loading="lazy" decoding="async"><span class="cap">二階の寝室</span></button></li>
-<li data-cat="second" style="--lqip:#666B6E"><button type="button" data-full="assets/photos/rooftops-1600.webp" data-i="35" aria-label="写真を拡大：二階からの眺め"><img src="assets/photos/rooftops-640.webp" alt="二階から見た瓦屋根の連なりと、その先の山並み" width="640" height="427" loading="lazy" decoding="async"><span class="cap">二階からの眺め</span></button></li>
-<li data-cat="second" style="--lqip:#5A4738"><button type="button" data-full="assets/photos/upstairs-west-1600.webp" data-i="36" aria-label="写真を拡大：床に落ちる光"><img src="assets/photos/upstairs-west-640.webp" alt="窓から差し込む光がベッドと床に縞の影をつくる二階の部屋" width="640" height="427" loading="lazy" decoding="async"><span class="cap">床に落ちる光</span></button></li>
-<li data-cat="second" style="--lqip:#615044"><button type="button" data-full="assets/photos/upstairs-shoji-1600.webp" data-i="37" aria-label="写真を拡大：障子の角部屋"><img src="assets/photos/upstairs-shoji-640.webp" alt="二方向に障子窓のある二階の角部屋と、木のベッド" width="640" height="427" loading="lazy" decoding="async"><span class="cap">障子の角部屋</span></button></li>
-<li data-cat="second" style="--lqip:#68625F"><button type="button" data-full="assets/photos/shoji-shadow-1600.webp" data-i="38" aria-label="写真を拡大：障子に映る影"><img src="assets/photos/shoji-shadow-640.webp" alt="白い障子に映る植物の影" width="427" height="640" loading="lazy" decoding="async"><span class="cap">障子に映る影</span></button></li>
+<li data-cat="garden" style="--lqip:#505248"><button type="button" data-full="assets/photos/path-framed-1600.webp" data-i="11" aria-label="写真を拡大：戸口から庭を見る"><img src="assets/photos/path-framed-640.webp" alt="戸口の枠越しに見る庭。石畳の小径と石灯籠、奥に門の屋根" width="640" height="427" loading="lazy" decoding="async"><span class="cap">戸口から庭を見る</span></button></li>
+<li data-cat="garden" style="--lqip:#59594E"><button type="button" data-full="assets/photos/deck-1600.webp" data-i="12" aria-label="写真を拡大：庭のデッキ"><img src="assets/photos/deck-640.webp" alt="木のデッキに丸テーブルと折りたたみ椅子。その先に苔の庭と木々" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭のデッキ</span></button></li>
+<li data-cat="garden" style="--lqip:#474431"><button type="button" data-full="assets/photos/path-winter-1600.webp" data-i="13" aria-label="写真を拡大：木立を抜ける小径"><img src="assets/photos/path-winter-640.webp" alt="窓枠越しに見る、木立のあいだを奥の建物へ続く石畳の小径" width="640" height="427" loading="lazy" decoding="async"><span class="cap">木立を抜ける小径</span></button></li>
+<li data-cat="garden" style="--lqip:#5E5D42"><button type="button" data-full="assets/photos/annex-1600.webp" data-i="14" aria-label="写真を拡大：庭の離れ"><img src="assets/photos/annex-640.webp" alt="苔の庭と若い木々のあいだに建つ小さな離れ" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭の離れ</span></button></li>
+<li data-cat="garden" style="--lqip:#7D6F62"><button type="button" data-full="assets/photos/maple-hill-1600.webp" data-i="15" aria-label="写真を拡大：紅葉と山"><img src="assets/photos/maple-hill-640.webp" alt="赤く色づいた紅葉の向こうに、こんもりとした山の緑" width="640" height="427" loading="lazy" decoding="async"><span class="cap">紅葉と山</span></button></li>
+<li data-cat="garden" style="--lqip:#52332D"><button type="button" data-full="assets/photos/maple-roof-1600.webp" data-i="16" aria-label="写真を拡大：屋根にかかる紅葉"><img src="assets/photos/maple-roof-640.webp" alt="建物の屋根の上に覆いかぶさる真っ赤な紅葉" width="640" height="427" loading="lazy" decoding="async"><span class="cap">屋根にかかる紅葉</span></button></li>
+<li data-cat="garden" style="--lqip:#2C2C24"><button type="button" data-full="assets/photos/lantern-leaves-1600.webp" data-i="17" aria-label="写真を拡大：石灯籠と落ち葉"><img src="assets/photos/lantern-leaves-640.webp" alt="苔むした石灯籠と、落ち葉の散る石畳の小径" width="640" height="427" loading="lazy" decoding="async"><span class="cap">石灯籠と落ち葉</span></button></li>
+<li data-cat="garden" style="--lqip:#564C35"><button type="button" data-full="assets/photos/autumn-garden-1600.webp" data-i="18" aria-label="写真を拡大：秋の庭"><img src="assets/photos/autumn-garden-640.webp" alt="紅葉と常緑の木々が重なる秋の庭" width="640" height="427" loading="lazy" decoding="async"><span class="cap">秋の庭</span></button></li>
+<li data-cat="garden" style="--lqip:#252216"><button type="button" data-full="assets/photos/nandina-1600.webp" data-i="19" aria-label="写真を拡大：色づく低木"><img src="assets/photos/nandina-640.webp" alt="薄暗い庭の中で、桃色と黄色に色づいた低木" width="640" height="427" loading="lazy" decoding="async"><span class="cap">色づく低木</span></button></li>
+<li data-cat="garden" style="--lqip:#434733"><button type="button" data-full="assets/photos/shrubs-moss-1600.webp" data-i="20" aria-label="写真を拡大：苔と下草"><img src="assets/photos/shrubs-moss-640.webp" alt="苔の地面に、色づいた低木と八手の葉が並ぶ" width="640" height="427" loading="lazy" decoding="async"><span class="cap">苔と下草</span></button></li>
+<li data-cat="first" style="--lqip:#514A41"><button type="button" data-full="assets/photos/genkan-1600.webp" data-i="21" aria-label="写真を拡大：玄関の土間"><img src="assets/photos/genkan-640.webp" alt="木の下駄箱が並ぶ玄関の土間。開いた戸口から外の光が差し込む" width="640" height="427" loading="lazy" decoding="async"><span class="cap">玄関の土間</span></button></li>
+<li data-cat="first" style="--lqip:#3E3933"><button type="button" data-full="assets/photos/agarikamachi-1600.webp" data-i="22" aria-label="写真を拡大：上がり口"><img src="assets/photos/agarikamachi-640.webp" alt="スリッパが並ぶ上がり口の畳の間。奥の障子とガラス戸の先に中庭の緑" width="640" height="427" loading="lazy" decoding="async"><span class="cap">上がり口</span></button></li>
+<li data-cat="first" style="--lqip:#51433B"><button type="button" data-full="assets/photos/kitchen-counter-1600.webp" data-i="23" aria-label="写真を拡大：台所とカウンター"><img src="assets/photos/kitchen-counter-640.webp" alt="一枚板のカウンターに木の椅子。奥に食器棚と台所" width="640" height="427" loading="lazy" decoding="async"><span class="cap">台所とカウンター</span></button></li>
+<li data-cat="first" style="--lqip:#594C43"><button type="button" data-full="assets/photos/counter-brick-1600.webp" data-i="24" aria-label="写真を拡大：カウンターと煉瓦の壁"><img src="assets/photos/counter-brick-640.webp" alt="大きな一枚板のカウンターの奥に、煉瓦の壁と板張りの天井" width="640" height="427" loading="lazy" decoding="async"><span class="cap">カウンターと煉瓦の壁</span></button></li>
+<li data-cat="first" style="--lqip:#2E2D25"><button type="button" data-full="assets/photos/courtyard-1600.webp" data-i="25" aria-label="写真を拡大：中庭"><img src="assets/photos/courtyard-640.webp" alt="開いた障子の間から見える、棕櫚竹の植わった中庭" width="640" height="427" loading="lazy" decoding="async"><span class="cap">中庭</span></button></li>
+<li data-cat="first" style="--lqip:#413527"><button type="button" data-full="assets/photos/tokonoma-1600.webp" data-i="26" aria-label="写真を拡大：床の間"><img src="assets/photos/tokonoma-640.webp" alt="掛け軸の掛かった床の間と、障子の小窓のある和室" width="640" height="427" loading="lazy" decoding="async"><span class="cap">床の間</span></button></li>
+<li data-cat="first" style="--lqip:#837360"><button type="button" data-full="assets/photos/washitsu-scroll-1600.webp" data-i="27" aria-label="写真を拡大：和室"><img src="assets/photos/washitsu-scroll-640.webp" alt="障子越しの和室。畳に座卓が置かれ、奥に掛け軸と籐の椅子" width="640" height="427" loading="lazy" decoding="async"><span class="cap">和室</span></button></li>
+<li data-cat="first" style="--lqip:#463D36"><button type="button" data-full="assets/photos/engawa-chairs-1600.webp" data-i="28" aria-label="写真を拡大：庭に向いた椅子"><img src="assets/photos/engawa-chairs-640.webp" alt="障子を開けた和室の奥、ガラス戸の前に庭を向いた椅子が二脚" width="640" height="427" loading="lazy" decoding="async"><span class="cap">庭に向いた椅子</span></button></li>
+<li data-cat="second" style="--lqip:#594735"><button type="button" data-full="assets/photos/upstairs-corner-1600.webp" data-i="29" aria-label="写真を拡大：角窓の部屋"><img src="assets/photos/upstairs-corner-640.webp" alt="二方向に窓のある二階の部屋。窓の外に緑と瓦屋根が見える" width="640" height="427" loading="lazy" decoding="async"><span class="cap">角窓の部屋</span></button></li>
+<li data-cat="second" style="--lqip:#604B3C"><button type="button" data-full="assets/photos/upstairs-bed-1600.webp" data-i="30" aria-label="写真を拡大：二階の寝室"><img src="assets/photos/upstairs-bed-640.webp" alt="二つの窓から光が入る二階の寝室と木のベッド" width="640" height="427" loading="lazy" decoding="async"><span class="cap">二階の寝室</span></button></li>
+<li data-cat="second" style="--lqip:#666B6E"><button type="button" data-full="assets/photos/rooftops-1600.webp" data-i="31" aria-label="写真を拡大：二階からの眺め"><img src="assets/photos/rooftops-640.webp" alt="二階から見た瓦屋根の連なりと、その先の山並み" width="640" height="427" loading="lazy" decoding="async"><span class="cap">二階からの眺め</span></button></li>
+<li data-cat="second" style="--lqip:#5A4738"><button type="button" data-full="assets/photos/upstairs-west-1600.webp" data-i="32" aria-label="写真を拡大：床に落ちる光"><img src="assets/photos/upstairs-west-640.webp" alt="窓から差し込む光がベッドと床に縞の影をつくる二階の部屋" width="640" height="427" loading="lazy" decoding="async"><span class="cap">床に落ちる光</span></button></li>
+<li data-cat="second" style="--lqip:#615044"><button type="button" data-full="assets/photos/upstairs-shoji-1600.webp" data-i="33" aria-label="写真を拡大：障子の角部屋"><img src="assets/photos/upstairs-shoji-640.webp" alt="二方向に障子窓のある二階の角部屋と、木のベッド" width="640" height="427" loading="lazy" decoding="async"><span class="cap">障子の角部屋</span></button></li>
+<li data-cat="second" style="--lqip:#68625F"><button type="button" data-full="assets/photos/shoji-shadow-1600.webp" data-i="34" aria-label="写真を拡大：障子に映る影"><img src="assets/photos/shoji-shadow-640.webp" alt="白い障子に映る植物の影" width="427" height="640" loading="lazy" decoding="async"><span class="cap">障子に映る影</span></button></li>
     </ul>
   </div>
   <dialog class="lb" id="lb" aria-label="写真の拡大表示">
