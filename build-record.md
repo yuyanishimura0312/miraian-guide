@@ -123,3 +123,4 @@
 - 新しく出た「あるとよい」（未対応）: スマートフォンで地図の初期表示に目的地が入らない（1000px 幅のうち左端 313px だけ見える）／理由の無い局所色 6つ（--paper-dp ほか）／--ease-in は正本で --ease-decelerate／rgba(33,23,18,…) 24件のトークン化／--scrim が answer-warm-dark の同名と衝突／薄い罫2色の役割／Google マップ埋め込みの失敗表示／コメントの「37 tiles」（実数38）
 - 確認事項（西村さん）: 文字色は tokens.css miratuku-earth の #2A211C と ci-check.md の #1a1a1a のどちらを正とするか
 - 公開: しない（ローカルにコミットまで）
+- 文字色: ci-check.md（#1A1A1A）と tokens.css miratuku-earth（#2A211C）の食い違いを西村さんに確認。無回答10分のため推奨 A（CI の #1A1A1A）で進めた（2026-11-07）。同名異値を避け局所名 `--ink-ci` に改名。公開は承認待ち

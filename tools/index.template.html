@@ -76,7 +76,7 @@
   --paper:#FAF8F5;
   --paper-lt:#FDFCFA;
   --paper-dp:#F3EBDE;
-  --ink:#2A211C;               /* = miratuku-earth --ink */
+  --ink-ci:#1A1A1A;            /* local: ci-check.md (NOSIGNER 2011) text color; tokens.css miratuku-earth --ink is #2A211C. Kept CI value per 推奨 A (2026-11-07) */
   --ink-soft:#4A3C34;          /* = miratuku-earth --ink-soft */
   --ink-mute-aa:#6E675D;       /* LOCAL (b). earth --ink-mute #8A7868 is 3.99:1 on --paper (AA needs 4.5) and this page sets 11-13px labels in it; this value is 5.27:1. Not named --ink-mute so the canon name keeps its canon value */
   --ink-cite:#5B4A3F;          /* = miratuku-earth --ink-cite (7.94:1) */
@@ -143,7 +143,7 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--bar-h) + var(--space-2))} /* the ONE place the anchor/focus stop offset is set: fixed bar height + 8px. No scroll-margin-top anywhere else (it added to this and stops drifted to 72/144/152px, audit 2026-11-07). Focused elements never sit under the bar (WCAG 2.4.11) */
-body{font-family:var(--ja);background:var(--paper);color:var(--ink);line-height:var(--lh-body);letter-spacing:.02em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:var(--fs-base)}
+body{font-family:var(--ja);background:var(--paper);color:var(--ink-ci);line-height:var(--lh-body);letter-spacing:.02em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:var(--fs-base)}
 img{display:block;max-width:100%}
 /* paper grain: a fixed SVG-noise veil, multiplied at low opacity. Not on phones (fixed blend layers cost scroll performance) */
 body::after{content:"";position:fixed;inset:0;z-index:40;pointer-events:none;background:var(--grain);background-size:180px 180px;opacity:.07;mix-blend-mode:multiply}
@@ -151,7 +151,7 @@ body::after{content:"";position:fixed;inset:0;z-index:40;pointer-events:none;bac
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--radius-sm)}
 .night :focus-visible,.bar:not(.solid) :focus-visible{outline-color:var(--ci-beige)}
-.skip{position:absolute;left:-9999px;top:var(--space-2);background:var(--ink);color:var(--paper);padding:var(--space-2) var(--space-3);z-index:100}
+.skip{position:absolute;left:-9999px;top:var(--space-2);background:var(--ink-ci);color:var(--paper);padding:var(--space-2) var(--space-3);z-index:100}
 .skip:focus{left:var(--space-2)}
 .wrap{max-width:var(--inner);margin:0 auto;padding:0 var(--side-guide)}
 .mono{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);text-transform:uppercase}
@@ -163,7 +163,7 @@ a{color:inherit}
 /* ---------- top bar ---------- */
 .bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding:0 var(--side-guide);height:var(--bar-h);transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease);color:var(--paper-lt);border-bottom:1px solid transparent}
 .bar:not(.solid){background:linear-gradient(180deg,rgba(33,23,18,.78),rgba(33,23,18,.58) 70%,rgba(33,23,18,0))}
-.bar.solid{background:rgba(250,248,245,.94);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);color:var(--ink)} /* no bottom hairline: every section rule scrolls up against the bar, and a fixed hairline doubled each of them; the blur alone marks the edge */
+.bar.solid{background:rgba(250,248,245,.94);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);color:var(--ink-ci)} /* no bottom hairline: every section rule scrolls up against the bar, and a fixed hairline doubled each of them; the blur alone marks the edge */
 .brand{display:flex;align-items:center;gap:var(--space-3);text-decoration:none;flex:none;min-width:0}
 .brand img{height:24px;width:auto}
 .brand .lg-light{display:block}.brand .lg-dark{display:none}
@@ -211,7 +211,7 @@ a{color:inherit}
 .hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:var(--fs-hero-en);letter-spacing:.42em;margin-top:var(--space-3);color:var(--star);animation:track 1.6s var(--ease) .5s both}
 .hero .lede{margin-top:var(--space-5);max-width:var(--measure);font-size:var(--fs-md);font-weight:400;color:rgba(253,252,250,.9);line-height:1.95;animation:fadeup 1s var(--ease) .6s both}
 .hero .lede strong{font-weight:700;color:var(--white)}
-.hero-card{background:rgba(250,248,245,.96);color:var(--ink);padding:clamp(var(--space-4),2.4vw,var(--space-5));min-width:300px;border-top:1px solid var(--accent);animation:land .9s var(--ease) .8s both}
+.hero-card{background:rgba(250,248,245,.96);color:var(--ink-ci);padding:clamp(var(--space-4),2.4vw,var(--space-5));min-width:300px;border-top:1px solid var(--accent);animation:land .9s var(--ease) .8s both}
 @keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes rise{from{opacity:0;transform:translateY(.35em);clip-path:inset(0 0 100% 0)}60%{opacity:1}to{opacity:1;transform:none;clip-path:inset(-10% 0 -10% 0)}}
 @keyframes track{from{opacity:0;letter-spacing:.6em}to{opacity:1;letter-spacing:.42em}}
@@ -357,7 +357,7 @@ section.sec+section.sec{border-top:1px solid var(--rule)}
 .m-stop.on circle{fill:var(--accent-deep);r:16}
 .m-goal path{fill:var(--accent);stroke:var(--paper);stroke-width:2;transition:fill var(--dur-fast)}.m-goal circle{fill:var(--paper)}
 .m-goal.on path{fill:var(--accent-deep)}
-.m-pt{font-size:var(--fs-map-pt);font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
+.m-pt{font-size:var(--fs-map-pt);font-weight:700;fill:var(--ink-ci);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
 .m-pt-en{font:500 var(--fs-xs) var(--mono);letter-spacing:.12em;fill:var(--map-label);paint-order:stroke;stroke:var(--map-bg);stroke-width:4}
 .m-goal-l{font-size:var(--fs-map-goal);font-weight:900;fill:var(--accent-deep);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
 .m-area{font-size:var(--fs-map-area);font-weight:700;fill:var(--map-label);letter-spacing:.3em}.m-area-en{font:500 var(--fs-xs) var(--mono);letter-spacing:.2em;fill:var(--map-label)}
@@ -506,7 +506,7 @@ dialog.lb .lb-n{color:var(--star-soft)}
 .about p,.course .lead,.sec-idx p{text-wrap:pretty}
 .about p{font-size:var(--fs-base);line-height:2.1;color:var(--ink-soft);max-width:var(--measure)}
 .about p+p{margin-top:var(--space-4)}
-.about .pull{font-size:var(--fs-xl);font-weight:500;line-height:1.7;color:var(--ink);max-width:22em;margin-bottom:var(--space-5);padding-left:var(--space-4);border-left:2px solid var(--accent)}
+.about .pull{font-size:var(--fs-xl);font-weight:500;line-height:1.7;color:var(--ink-ci);max-width:22em;margin-bottom:var(--space-5);padding-left:var(--space-4);border-left:2px solid var(--accent)}
 .about .acts{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-5)}
 
 .about .album:focus{outline:none}
@@ -559,7 +559,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(var(--space-6),6vw,var(--s
 footer .lock{display:inline-block;text-decoration:none}
 footer .lock img{height:28px;width:auto}
 footer .org{margin-top:var(--space-4);line-height:1.9}
-footer .org b{font-weight:700;color:var(--ink)}
+footer .org b{font-weight:700;color:var(--ink-ci)}
 footer h4{font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ink-mute-aa);text-transform:uppercase;font-weight:500;margin-bottom:var(--space-3)}
 footer ul{list-style:none;display:grid;gap:6px}
 footer ul a{text-decoration:none;display:inline-block;padding:2px 0}
@@ -622,9 +622,9 @@ footer ul a:hover{color:var(--accent)}
 }
 @media print{
   .bar,.map-frame,dialog{display:none!important}
-  .hero{min-height:auto;color:var(--ink)}.hero::before,.hero .hero-img{display:none}
-  .hero .lede,.hero h1 .en,.hero .obs{color:var(--ink)}
-  .night{background:#fff;color:var(--ink)}.night .sec-idx h2,.course h3,.course dd{color:var(--ink)}
+  .hero{min-height:auto;color:var(--ink-ci)}.hero::before,.hero .hero-img{display:none}
+  .hero .lede,.hero h1 .en,.hero .obs{color:var(--ink-ci)}
+  .night{background:#fff;color:var(--ink-ci)}.night .sec-idx h2,.course h3,.course dd{color:var(--ink-ci)}
   .js .rv,.js .sec-idx .big{opacity:1;transform:none}
   .js .ri{clip-path:none}.js .ri img{transform:none}
   .js .rl{border-top-color:var(--hairline-dk)}.js .rl-b{border-bottom-color:var(--rule)}.js .rl::before{display:none}
