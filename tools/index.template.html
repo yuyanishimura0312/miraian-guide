@@ -127,7 +127,7 @@
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--bar-h) + var(--space-1))} /* focused elements never sit under the fixed bar (WCAG 2.4.11) */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--bar-h) + var(--space-1))} /* the ONE place the anchor/focus stop offset is set: fixed bar height + 8px. No scroll-margin-top anywhere else (it added to this and stops drifted to 72/144/152px, audit 2026-11-07). Focused elements never sit under the bar (WCAG 2.4.11) */
 body{font-family:var(--ja);background:var(--paper);color:var(--ink);line-height:var(--lh-body);letter-spacing:.02em;font-feature-settings:"palt";-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:var(--fs-base)}
 img{display:block;max-width:100%}
 /* paper grain: a fixed SVG-noise veil, multiplied at low opacity. Not on phones (fixed blend layers cost scroll performance) */
@@ -269,7 +269,7 @@ a{color:inherit}
 }
 
 /* ---------- sections: running index column ---------- */
-section.sec{padding:var(--section) 0;position:relative;scroll-margin-top:calc(var(--bar-h) + var(--space-1))}
+section.sec{padding:var(--section) 0;position:relative}
 section.sec:focus{outline:none}
 section.sec+section.sec{border-top:1px solid var(--hairline)}
 .sec-grid>*{min-width:0}
@@ -290,7 +290,6 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 @media(max-width:880px){.sec-grid{grid-template-columns:1fr;gap:var(--space-4)}.sec-idx{position:static}.sec-idx p{max-width:var(--measure)}}
 
 /* ---------- route: two legs (on foot / bus · car) under one index ---------- */
-.leg{scroll-margin-top:calc(var(--bar-h) + var(--space-2))}
 .leg:focus{outline:none}
 .leg+.leg{margin-top:clamp(var(--space-8),7vw,var(--space-12))}
 .leg-h{font-size:var(--fs-lg);font-weight:700;line-height:1.4;margin-bottom:var(--space-3)}
@@ -308,7 +307,17 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 @media(max-width:600px){.legend{flex-direction:column}.mapfig{max-width:100%;min-width:0}}
 /* OSM route map — geometry from tools/map/build_map.py; only presentation lives here */
 .mapscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
-.routemap{width:100%;height:auto;display:block;font-family:var(--ja)}
+.routemap{width:100%;height:auto;display:block;font-family:var(--ja);--map-k:1}
+/* --map-k: labels and markers (.m-k groups from build_map.py) scale about their anchor point so the smallest
+   map text (--fs-xs 11 user units) renders at >= 11 CSS px. k = 1 / (rendered map width / 1000) at the narrowest
+   width of each band, measured 2026-11-07 (the map column narrows to ~515px when the two-column layout starts at 881px).
+   Street geometry and the 200 m bar are not scaled. Phones (<=600px) draw the map 1:1 (min-width:1000px), so k = 1. */
+@media(min-width:601px) and (max-width:759px){.routemap{--map-k:2}}
+@media(min-width:760px) and (max-width:880px){.routemap{--map-k:1.57}}
+@media(min-width:881px) and (max-width:1039px){.routemap{--map-k:2}}
+@media(min-width:1040px) and (max-width:1199px){.routemap{--map-k:1.68}}
+@media(min-width:1200px){.routemap{--map-k:1.51}}
+.m-k{transform:scale(var(--map-k))}
 @media(max-width:600px){.routemap{min-width:1000px}.mapscroll::after{content:"横にスクロールすると、未来庵まで見られます →";display:block;position:sticky;left:0;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
 .m-bg{fill:var(--map-bg)}.m-wood path{fill:var(--map-wood)}.m-campus path{fill:var(--map-campus);stroke:var(--map-campus-edge);stroke-width:1}.m-shrine path{fill:var(--map-shrine)}
 .m-water path{fill:var(--map-water)}.m-river path{fill:none;stroke:var(--map-river);stroke-width:3;stroke-linecap:round}.m-river path.river{stroke-width:5}
@@ -341,7 +350,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .m-road{font-size:var(--fs-map);fill:var(--map-label-dk);letter-spacing:.2em;paint-order:stroke;stroke:var(--map-road);stroke-width:4}
 .m-water-l{font-size:var(--fs-map);fill:var(--map-water-l);letter-spacing:.3em}
 .m-north path{fill:var(--ci-brown)}.m-north text,.m-scale text{font:500 var(--fs-xs) var(--mono);fill:var(--map-label)}
-.m-scale path{stroke:var(--map-label);stroke-width:2;fill:none}.m-attr{font-size:var(--fs-xs);fill:var(--map-label-dk)}
+.m-scale path{stroke:var(--map-label);stroke-width:2;fill:none}
 .m-goal-pulse{fill:var(--accent);opacity:.18;transform-origin:center;transform-box:fill-box;animation:pulse 2.8s var(--ease) 3}
 @keyframes pulse{0%{transform:scale(.6);opacity:.35}100%{transform:scale(2.2);opacity:0}}
 .m-sub circle{fill:var(--paper);stroke:var(--ci-terracotta);stroke-width:3}
@@ -379,7 +388,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 
 /* ---------- ways (bus / car): a quiet list ---------- */
 .ways{list-style:none;border-top:1px solid var(--hairline-dk)}
-.ways li{scroll-margin-top:calc(var(--bar-h) + var(--space-2));display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);align-items:baseline}
+.ways li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);align-items:baseline}
 .ways h4{font-size:var(--fs-md);font-weight:700;line-height:1.5;word-break:auto-phrase}
 .ways .tag{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .ways .tag span{font-family:var(--latin);font-size:var(--fs-xs);font-weight:600;padding:2px 9px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);color:var(--accent-dp)}
@@ -484,7 +493,7 @@ dialog.lb .lb-n{color:var(--star-soft)}
 .about p+p{margin-top:var(--space-3)}
 .about .pull{font-size:var(--fs-xl);font-weight:500;line-height:1.7;color:var(--ink);max-width:22em;margin-bottom:var(--space-4);padding-left:var(--space-3);border-left:2px solid var(--accent)}
 .about .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-4)}
-.about .album{scroll-margin-top:calc(var(--bar-h) + var(--space-2))}
+
 .about .album:focus{outline:none}
 
 /* ---------- night: the course, the one dark section (the evening at the end of the page) ---------- */

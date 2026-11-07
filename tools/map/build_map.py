@@ -104,9 +104,16 @@ json.dump({"station_m": round(len_station), "bus_m": round(len_bus), "seimon_m":
           open(os.path.join(OUT, "route.json"), "w"), ensure_ascii=False, indent=1)
 
 def lbl(lat, lon, text, cls="lbl", dx=0, dy=0, anchor="middle", rot=0):
-    x, y = P(lat, lon); x += dx; y += dy
-    tr = f' transform="rotate({rot} {x:.1f} {y:.1f})"' if rot else ""
-    return f'<text x="{x:.1f}" y="{y:.1f}" class="{cls}" text-anchor="{anchor}"{tr}>{text}</text>'
+    """A label pinned to a point. The offset is applied around the pin and the whole group is
+    scaled by CSS (--map-k) so text keeps a readable size when the map is shrunk on wide screens;
+    the street geometry is not scaled (audit 2026-11-07: 6.5-8.4px text at 1024-1440px)."""
+    x, y = P(lat, lon)
+    return k_group(x, y, f'<text x="{dx}" y="{dy}" class="{cls}" text-anchor="{anchor}">{text}</text>', rot)
+
+def k_group(x, y, inner, rot=0):
+    """translate to the anchor, then an inner <g class="m-k"> that CSS scales by --map-k about that anchor."""
+    r = f" rotate({rot})" if rot else ""
+    return f'<g transform="translate({x:.1f} {y:.1f}){r}"><g class="m-k">{inner}</g></g>'
 
 vx, vy = P(*VENUE); sx, sy = P(*STATION_EXIT); bx, by = P(*BUS_STOP); mx, my = P(*MILLION); gx, gy = P(*SEIMON_STOP)
 bar = 200 * SCALE  # 200 m
@@ -127,35 +134,40 @@ svg = [f'<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" role="img
        # last few tens of metres from the street to the pin: not on the OSM street graph, drawn dotted, not counted in the distances
        f'<path class="m-route-last" d="M{P(*r_station[-1])[0]:.1f} {P(*r_station[-1])[1]:.1f} L{vx:.1f} {vy:.1f}"/>',
        f'<path class="m-route-last" d="M{P(*r_seimon[-1])[0]:.1f} {P(*r_seimon[-1])[1]:.1f} L{vx:.1f} {vy:.1f}"/>',
-       # labels
+       # labels. Offsets are in the label's own (rotated) frame; the rotated river/road labels were
+       # previously offset in screen space, converted here by rotating the old offset by -rot.
        lbl(35.0272, 135.7812, "京都大学", "m-area"),
        lbl(35.0272, 135.7812, "KYOTO UNIVERSITY", "m-area-en", dy=22),
        lbl(35.0247, 135.7872, "吉田山", "m-area"),
        lbl(35.02435, 135.78464, "吉田神社", "m-area-s"),
-       lbl(35.0300, 135.7712, "鴨川", "m-water-l", dx=-14, rot=-78),
-       lbl(35.0318, 135.7738, "高野川", "m-water-l", dx=18, rot=-62),
-       lbl(35.02885, 135.7755, "今出川通", "m-road", dy=-13),
-       lbl(35.0238, 135.7791, "東大路通", "m-road", dx=-13, rot=-90),
+       lbl(35.0300, 135.7712, "鴨川", "m-water-l", dx=-2.9, dy=-13.7, rot=-78),
+       lbl(35.03135, 135.77342, "高野川", "m-water-l", dx=8.4, dy=15.9, rot=-62),  # moved south 2026-11-07: the old anchor clipped at the top edge,
+       lbl(35.02885, 135.7755, "今出川通", "m-road", dy=24),
+       lbl(35.0238, 135.7791, "東大路通", "m-road", dy=-13, rot=-90),
        lbl(35.02525, 135.7812, "東一条通", "m-road", dy=19),
-       f'<g class="m-stop"><circle cx="{sx:.1f}" cy="{sy:.1f}" r="13"/><text x="{sx:.1f}" y="{sy:.1f}">1</text></g>',
-       f'<text x="{sx:.1f}" y="{sy+36:.1f}" class="m-pt" text-anchor="middle">出町柳駅</text>',
-       f'<text x="{sx:.1f}" y="{sy+54:.1f}" class="m-pt-en" text-anchor="middle">DEMACHIYANAGI · 出口3</text>',
-       f'<g class="m-stop"><circle cx="{mx:.1f}" cy="{my:.1f}" r="13"/><text x="{mx:.1f}" y="{my:.1f}">2</text></g>',
-       f'<text x="{mx-18:.1f}" y="{my-20:.1f}" class="m-pt" text-anchor="end">百万遍</text>',
-       f'<g class="m-stop"><circle cx="{bx:.1f}" cy="{by:.1f}" r="13"/><text x="{bx:.1f}" y="{by:.1f}">3</text></g>',
-       f'<text x="{bx:.1f}" y="{by-24:.1f}" class="m-pt" text-anchor="middle">京大農学部前</text>',
-       f'<text x="{bx:.1f}" y="{by-42:.1f}" class="m-pt-en" text-anchor="middle">BUS STOP</text>',
-       f'<g class="m-sub"><circle cx="{gx:.1f}" cy="{gy:.1f}" r="8"/></g>',
-       f'<text x="{gx-16:.1f}" y="{gy+5:.1f}" class="m-pt-s" text-anchor="end">京大正門前</text>',
-       f'<text x="{gx-16:.1f}" y="{gy+21:.1f}" class="m-pt-en" text-anchor="end">BUS STOP</text>',
-       f'<circle class="m-goal-pulse" cx="{vx:.1f}" cy="{vy:.1f}" r="16"/>',
-       f'<g class="m-goal"><path d="M{vx:.1f} {vy:.1f} c-11 -15 -17 -24 -17 -33 a17 17 0 0 1 34 0 c0 9 -6 18 -17 33z"/><circle cx="{vx:.1f}" cy="{vy-33:.1f}" r="6.5"/></g>',
-       f'<text x="{vx+24:.1f}" y="{vy+2:.1f}" class="m-goal-l">未来庵</text>',
-       f'<text x="{vx+24:.1f}" y="{vy+20:.1f}" class="m-pt-en">MIRAI-AN</text>',
-       # north + scale
-       f'<g transform="translate({W-44} 46)" class="m-north"><path d="M0 -18 L8 9 L0 3 L-8 9Z"/><text y="28" text-anchor="middle">N</text></g>',
-       f'<g transform="translate(28 {H-30})" class="m-scale"><path d="M0 0 H{bar:.1f}"/><path d="M0 -5 V5 M{bar:.1f} -5 V5"/><text x="{bar/2:.1f}" y="-10" text-anchor="middle">200 m</text></g>',
-       f'<text x="{W-14}" y="{H-12}" class="m-attr" text-anchor="end">地図データ © OpenStreetMap contributors</text>',
+       # markers: the symbol and its labels scale together about the marker point (--map-k).
+       # Placement is checked at the largest k (2, ~500px-wide map) for overlap and canvas fit.
+       k_group(sx, sy, '<g class="m-stop"><circle r="13"/><text>1</text></g>'
+               '<text x="18" y="6" class="m-pt">出町柳駅</text>'
+               '<text x="18" y="26" class="m-pt-en">DEMACHIYANAGI · 出口3</text>'),
+       k_group(mx, my, '<g class="m-stop"><circle r="13"/><text>2</text></g>'
+               '<text x="-18" y="34" class="m-pt" text-anchor="end">百万遍</text>'),
+       k_group(bx, by, '<g class="m-stop"><circle r="13"/><text>3</text></g>'
+               '<text y="-24" class="m-pt" text-anchor="middle">京大農学部前</text>'
+               '<text y="-46" class="m-pt-en" text-anchor="middle">BUS STOP</text>'),
+       k_group(gx, gy, '<g class="m-sub"><circle r="8"/></g>'
+               '<text x="-16" y="5" class="m-pt-s" text-anchor="end">京大正門前</text>'
+               '<text x="-16" y="21" class="m-pt-en" text-anchor="end">BUS STOP</text>'),
+       k_group(vx, vy, '<circle class="m-goal-pulse" r="16"/>'
+               '<g class="m-goal"><path d="M0 0 c-11 -15 -17 -24 -17 -33 a17 17 0 0 1 34 0 c0 9 -6 18 -17 33z"/><circle cy="-33" r="6.5"/></g>'
+               '<text x="24" y="2" class="m-goal-l">未来庵</text>'
+               '<text x="24" y="20" class="m-pt-en">MIRAI-AN</text>'),
+       # north + scale. The scale bar length is geometry (200 m) and is not scaled; only its label is.
+       f'<g transform="translate({W-44} 46)" class="m-north"><g class="m-k"><path d="M0 -18 L8 9 L0 3 L-8 9Z"/><text y="28" text-anchor="middle">N</text></g></g>',
+       f'<g transform="translate(28 {H-30})" class="m-scale"><path d="M0 0 H{bar:.1f}"/><path d="M0 -5 V5 M{bar:.1f} -5 V5"/>'
+       + k_group(bar / 2, 0, '<text y="-10" text-anchor="middle">200 m</text>') + '</g>',
+       # OSM attribution (ODbL) is not drawn inside the map: it would shrink with the map to ~6.5px on wide
+       # screens. It is HTML text in the figure caption and the page footer (index.template.html).
        '</svg>']
 open(os.path.join(OUT, "route-map.svg"), "w").write("\n".join(svg))
 print(json.load(open(os.path.join(OUT, "route.json"))), "size", W, H)
