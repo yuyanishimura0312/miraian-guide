@@ -88,7 +88,8 @@
   /* route map (OSM) — presentation colours; geometry comes from tools/map/build_map.py */
   --map-bg:#F6F1EA; --map-wood:#E9E3D3; --map-campus:#EFE6D8; --map-campus-edge:#E2D6C4; --map-shrine:#E6DCC9;
   --map-water:#D9E2E0; --map-river:#CFDCDA; --map-road:#FFFDF9; --map-label:#6B5A50; --map-label-dk:#5A4A40; --map-water-l:#4A5F5C;
-  --fs-cap:12px; --fs-micro:10px; --fs-map:12.5px; --fs-map-s:13.5px; --fs-map-pt:16px; --fs-map-goal:19px; --fs-map-area:15px; --fs-map-area-s:13px; --fs-map-en:10.5px;
+  --fs-cap:12px; --fs-map:12.5px; --fs-map-s:13.5px; --fs-map-pt:16px; --fs-map-goal:19px; --fs-map-area:15px; --fs-map-area-s:13px;
+  /* no 10px tier: the smallest text is --fs-xs 11px (Material labelSmall 11sp / HIG 11pt floor). The route map is drawn at 1 user unit = 1px on phones (.routemap min-width = viewBox width), so 11 here is 11 CSS px there */
   --ja:"Zen Kaku Gothic New","Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;
   --latin:"Archivo","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono","SF Mono",Menlo,monospace;
@@ -98,7 +99,10 @@
   --fs-md:clamp(16px,1.3vw,19px);
   --fs-lg:clamp(19px,1.7vw,24px);
   --fs-h2:clamp(24px,2.6vw,36px);
+  --fs-xl:clamp(20px,2.1vw,28px);   /* card values, album head, pull quote, course title — one step above --fs-lg */
   --fs-h1:clamp(52px,9vw,116px);
+  --fs-h1-en:clamp(13px,1.4vw,18px); /* the latin line under h1: tied to --fs-h1, not a reading size */
+  --fs-display:clamp(72px,9vw,132px);/* outlined section numerals (decorative, aria-hidden by user-select) */
   --tracking-label:.18em;
   --tracking-head:-.005em;
   --lh-body:1.95;
@@ -144,7 +148,7 @@ a{color:inherit}
 /* ---------- top bar ---------- */
 .bar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);padding:0 var(--side);height:var(--bar-h);transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease);color:var(--paper-lt);border-bottom:1px solid transparent}
 .bar:not(.solid){background:linear-gradient(180deg,rgba(33,23,18,.78),rgba(33,23,18,.58) 70%,rgba(33,23,18,0))}
-.bar.solid{background:rgba(250,248,245,.94);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);color:var(--ink);border-bottom-color:var(--hairline)}
+.bar.solid{background:rgba(250,248,245,.94);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);color:var(--ink)} /* no bottom hairline: every section rule scrolls up against the bar, and a fixed hairline doubled each of them; the blur alone marks the edge */
 .brand{display:flex;align-items:center;gap:var(--space-2);text-decoration:none;flex:none;min-width:0}
 .brand img{height:24px;width:auto}
 .brand .lg-light{display:block}.brand .lg-dark{display:none}
@@ -152,7 +156,7 @@ a{color:inherit}
 .brand .bt{display:flex;align-items:baseline;gap:8px;line-height:1.2;padding-left:var(--space-2);border-left:1px solid rgba(253,252,250,.35)}
 .bar.solid .brand .bt{border-left-color:var(--hairline)}
 .brand .bt b{font-weight:700;font-size:var(--fs-sm);letter-spacing:.14em}
-.brand .bt span{font-family:var(--latin);font-size:var(--fs-micro);letter-spacing:.24em;opacity:.8}
+.brand .bt span{font-family:var(--latin);font-size:var(--fs-xs);letter-spacing:.24em;opacity:.8}
 .bar nav{display:flex;gap:2px}
 .bar:not(.solid) nav a,.bar:not(.solid) .brand .bt{text-shadow:0 0 10px rgba(33,23,18,.9),0 0 3px rgba(33,23,18,.85)}
 .bar nav a{font-size:var(--fs-cap);text-decoration:none;padding:6px 11px;border-radius:var(--radius-pill);letter-spacing:.08em;transition:background var(--dur-ui) var(--ease),color var(--dur-ui) var(--ease);white-space:nowrap}
@@ -166,7 +170,7 @@ a{color:inherit}
   :root{--bar-h:56px}
   .brand .bt{display:none}
   .bar nav{gap:0}
-  .bar nav a{padding:6px 6px;font-size:11.5px;letter-spacing:0}
+  .bar nav a{padding:6px 6px;font-size:var(--fs-xs);letter-spacing:0}
   .brand img{height:20px}
 }
 
@@ -181,7 +185,7 @@ a{color:inherit}
 @keyframes settle{to{transform:scale(1)}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
   linear-gradient(180deg,rgba(33,23,18,.42) 0%,rgba(33,23,18,0) 30%),
-  linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.52) 40%,rgba(33,23,18,0) 70%);animation:scrim 1.6s var(--ease) both}
+  linear-gradient(0deg,rgba(33,23,18,.88) 0%,rgba(33,23,18,.6) 44%,rgba(33,23,18,0) 72%); /* the 44% stop reaches the coordinate line (.obs sits 38-42% up the hero), which fell to ~4.1:1 over bright leaves at .52 */animation:scrim 1.6s var(--ease) both}
 @keyframes scrim{from{opacity:.55}to{opacity:1}}
 .hero-inner{padding:calc(var(--bar-h) + var(--space-4)) var(--side) clamp(var(--space-5),6vw,var(--space-10));max-width:var(--inner);margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);align-items:end}
 .hero .obs{display:flex;flex-wrap:wrap;gap:4px var(--space-2);color:var(--paper-lt);text-shadow:0 0 12px rgba(33,23,18,.95),0 0 3px rgba(33,23,18,.9);margin-bottom:var(--space-3);animation:fadeup .9s var(--ease) .1s both}
@@ -189,7 +193,7 @@ a{color:inherit}
 .hero .obs span+span::before{content:"·";margin-right:var(--space-2);opacity:.6}
 .hero h1{font-weight:900;font-size:var(--fs-h1);line-height:.96;letter-spacing:-.01em}
 .hero h1 .ja{display:block;animation:rise 1.2s var(--ease) .3s both}
-.hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(13px,1.4vw,18px);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star);animation:track 1.6s var(--ease) .5s both}
+.hero h1 .en{display:block;font-family:var(--latin);font-weight:300;font-size:var(--fs-h1-en);letter-spacing:.42em;margin-top:var(--space-2);color:var(--star);animation:track 1.6s var(--ease) .5s both}
 .hero .lede{margin-top:var(--space-4);max-width:var(--measure);font-size:var(--fs-md);font-weight:400;color:rgba(253,252,250,.9);line-height:1.95;animation:fadeup 1s var(--ease) .6s both}
 .hero .lede strong{font-weight:700;color:var(--white)}
 .hero-card{background:rgba(250,248,245,.96);color:var(--ink);padding:clamp(var(--space-3),2.4vw,var(--space-4));min-width:300px;border-top:1px solid var(--accent);animation:land .9s var(--ease) .8s both}
@@ -198,7 +202,7 @@ a{color:inherit}
 @keyframes track{from{opacity:0;letter-spacing:.6em}to{opacity:1;letter-spacing:.42em}}
 @keyframes land{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 /* a thin cue at the foot of the hero: one hairline that breathes (periphery, 300-700ms+ reads as calm — MID concept 161) */
-.hero .cue{position:absolute;left:var(--side);bottom:calc(var(--space-2) + env(safe-area-inset-bottom));display:flex;align-items:center;gap:var(--space-1);color:var(--star);font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;animation:fadeup 1s var(--ease) 1.6s both}
+.hero .cue{position:absolute;left:var(--side);bottom:calc(var(--space-2) + env(safe-area-inset-bottom));display:flex;align-items:center;gap:var(--space-1);color:var(--star);font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.2em;text-transform:uppercase;animation:fadeup 1s var(--ease) 1.6s both}
 .hero .cue i{display:block;width:1px;height:28px;background:var(--star-line);overflow:hidden;position:relative}
 .hero .cue i::after{content:"";position:absolute;inset:0;background:var(--ci-beige);transform:translateY(-100%);animation:cue 2.6s var(--ease) 2.6s infinite}
 @keyframes cue{0%{transform:translateY(-100%)}45%{transform:none}100%{transform:translateY(100%)}}
@@ -243,14 +247,14 @@ a{color:inherit}
 .from a:hover{background:var(--accent-wash)}
 .from li:first-child a:hover{background:linear-gradient(90deg,transparent,var(--accent-wash) 30%)}
 .from .k{font-size:var(--fs-sm);color:var(--ink-mute)}
-.from .v{font-size:clamp(20px,2vw,28px);font-weight:700;line-height:1.35;letter-spacing:.01em;margin-top:var(--space-1);word-break:auto-phrase}
+.from .v{font-size:var(--fs-xl);font-weight:700;line-height:1.35;letter-spacing:.01em;margin-top:var(--space-1);word-break:auto-phrase}
 .from .s{font-size:var(--fs-sm);color:var(--ink-soft);margin-top:2px}
 .from .go{align-self:end;display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-3);font-size:var(--fs-sm);font-weight:500;color:var(--accent)}
 .from .go svg{width:15px;height:15px;transition:transform var(--dur-ui) var(--ease)}
 .from a:hover .go svg{transform:translateY(3px)}
 .hub{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--space-1) var(--space-3);align-items:baseline;margin-top:clamp(var(--space-4),4vw,var(--space-6));padding:var(--space-3) 0 0;border-top:2px solid var(--accent);max-width:none}
 .hub .mono{color:var(--accent)}
-.hub-t{font-size:var(--fs-md);line-height:1.85;word-break:auto-phrase}
+.hub-t{font-size:var(--fs-md);line-height:1.85;word-break:auto-phrase;max-width:var(--measure)} /* 34em ≈ 33 full-width chars: inside JLREQ's ~40-char guide and the canon's 60-68ch (ch ≈ half an em) */
 .hub strong{font-weight:700;color:var(--accent-dp)}
 .hub .tlink{font-size:var(--fs-sm);white-space:nowrap}
 @media(max-width:1000px){.from{grid-template-columns:repeat(2,minmax(0,1fr))}.from li:nth-child(3){border-left:0}.from li:nth-child(3) a{padding-left:0}.from li:nth-child(n+3){border-top:1px solid var(--hairline)}}
@@ -272,7 +276,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .sec-grid{display:grid;grid-template-columns:minmax(0,3.2fr) minmax(0,8.8fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
 .sec-idx{position:sticky;top:calc(var(--bar-h) + var(--space-3))}
 /* a large outlined numeral behind the index: Archivo 300, hairline stroke, no fill — the section's "folio" */
-.sec-idx .big{display:block;font-family:var(--latin);font-weight:300;font-size:clamp(72px,9vw,132px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--hairline-dk);margin:0 0 var(--space-3) -.04em;user-select:none}
+.sec-idx .big{display:block;font-family:var(--latin);font-weight:300;font-size:var(--fs-display);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--hairline-dk);margin:0 0 var(--space-3) -.04em;user-select:none}
 .night .sec-idx .big{-webkit-text-stroke-color:var(--rule-night)}
 .js .sec-idx .big{opacity:0;transform:translateX(-12px);transition:opacity var(--dur-img) var(--ease),transform var(--dur-img) var(--ease)}
 .js .sec-idx .big.in{opacity:1;transform:none}
@@ -305,7 +309,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 /* OSM route map — geometry from tools/map/build_map.py; only presentation lives here */
 .mapscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
 .routemap{width:100%;height:auto;display:block;font-family:var(--ja)}
-@media(max-width:600px){.routemap{min-width:860px}.mapscroll::after{content:"横にスクロールすると、未来庵まで見られます →";display:block;position:sticky;left:0;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
+@media(max-width:600px){.routemap{min-width:1000px}.mapscroll::after{content:"横にスクロールすると、未来庵まで見られます →";display:block;position:sticky;left:0;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:.08em;color:var(--ink-mute);padding-top:6px}}
 .m-bg{fill:var(--map-bg)}.m-wood path{fill:var(--map-wood)}.m-campus path{fill:var(--map-campus);stroke:var(--map-campus-edge);stroke-width:1}.m-shrine path{fill:var(--map-shrine)}
 .m-water path{fill:var(--map-water)}.m-river path{fill:none;stroke:var(--map-river);stroke-width:3;stroke-linecap:round}.m-river path.river{stroke-width:5}
 .m-minor path{fill:none;stroke:var(--white);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -330,14 +334,14 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .m-goal path{fill:var(--accent);stroke:var(--paper);stroke-width:2;transition:fill var(--dur-fast)}.m-goal circle{fill:var(--paper)}
 .m-goal.on path{fill:var(--accent-dp)}
 .m-pt{font-size:var(--fs-map-pt);font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
-.m-pt-en{font:500 var(--fs-map-en) var(--mono);letter-spacing:.12em;fill:var(--map-label);paint-order:stroke;stroke:var(--map-bg);stroke-width:4}
+.m-pt-en{font:500 var(--fs-xs) var(--mono);letter-spacing:.12em;fill:var(--map-label);paint-order:stroke;stroke:var(--map-bg);stroke-width:4}
 .m-goal-l{font-size:var(--fs-map-goal);font-weight:900;fill:var(--accent-dp);paint-order:stroke;stroke:var(--map-bg);stroke-width:5}
-.m-area{font-size:var(--fs-map-area);font-weight:700;fill:var(--map-label);letter-spacing:.3em}.m-area-en{font:500 var(--fs-micro) var(--mono);letter-spacing:.2em;fill:var(--map-label)}
+.m-area{font-size:var(--fs-map-area);font-weight:700;fill:var(--map-label);letter-spacing:.3em}.m-area-en{font:500 var(--fs-xs) var(--mono);letter-spacing:.2em;fill:var(--map-label)}
 .m-area-s{font-size:var(--fs-map-area-s);font-weight:700;fill:var(--map-label);letter-spacing:.2em}
 .m-road{font-size:var(--fs-map);fill:var(--map-label-dk);letter-spacing:.2em;paint-order:stroke;stroke:var(--map-road);stroke-width:4}
 .m-water-l{font-size:var(--fs-map);fill:var(--map-water-l);letter-spacing:.3em}
 .m-north path{fill:var(--ci-brown)}.m-north text,.m-scale text{font:500 var(--fs-xs) var(--mono);fill:var(--map-label)}
-.m-scale path{stroke:var(--map-label);stroke-width:2;fill:none}.m-attr{font-size:var(--fs-micro);fill:var(--map-label-dk)}
+.m-scale path{stroke:var(--map-label);stroke-width:2;fill:none}.m-attr{font-size:var(--fs-xs);fill:var(--map-label-dk)}
 .m-goal-pulse{fill:var(--accent);opacity:.18;transform-origin:center;transform-box:fill-box;animation:pulse 2.8s var(--ease) 3}
 @keyframes pulse{0%{transform:scale(.6);opacity:.35}100%{transform:scale(2.2);opacity:0}}
 .m-sub circle{fill:var(--paper);stroke:var(--ci-terracotta);stroke-width:3}
@@ -378,7 +382,7 @@ section.sec+section.sec{border-top:1px solid var(--hairline)}
 .ways li{scroll-margin-top:calc(var(--bar-h) + var(--space-2));display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--hairline);align-items:baseline}
 .ways h4{font-size:var(--fs-md);font-weight:700;line-height:1.5;word-break:auto-phrase}
 .ways .tag{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.ways .tag span{font-family:var(--latin);font-size:11px;font-weight:600;padding:2px 9px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);color:var(--accent-dp)}
+.ways .tag span{font-family:var(--latin);font-size:var(--fs-xs);font-weight:600;padding:2px 9px;border-radius:var(--radius-pill);border:1px solid var(--hairline-dk);color:var(--accent-dp)}
 .ways p{font-size:var(--fs-base);color:var(--ink-soft);line-height:1.9}
 .ways p a{color:var(--accent)}
 .ways li:focus{outline:none}
@@ -433,7 +437,7 @@ dialog.lb .x:hover,dialog.lb .nav:hover{background:rgba(33,23,18,.85);border-col
 dialog.lb .nav:active{transform:translateY(-50%) scale(.94)}
 dialog.lb .x:active{transform:scale(.94)}
 dialog.lb p{color:var(--star);font-size:var(--fs-sm);text-align:center;margin-top:var(--space-1)}
-dialog.lb .x{position:fixed;top:var(--space-2);right:var(--space-2);width:44px;height:44px;border-radius:50%;border:1px solid var(--star-line);background:rgba(33,23,18,.6);color:var(--star);font-size:22px;cursor:pointer}
+dialog.lb .x{position:fixed;top:var(--space-2);right:var(--space-2);width:44px;height:44px;border-radius:50%;border:1px solid var(--star-line);background:rgba(33,23,18,.6);color:var(--star);font-size:22px;cursor:pointer} /* 22px / 28px below size the × and ‹ › glyphs inside fixed 44px / 48px circles; icon geometry, not the type scale, so kept local */
 dialog.lb .nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid var(--star-line);background:rgba(33,23,18,.6);color:var(--star);font-size:28px;line-height:1;cursor:pointer}
 dialog.lb .prev{left:var(--space-2)}dialog.lb .next{right:var(--space-2)}
 dialog.lb .x:focus-visible,dialog.lb .nav:focus-visible{outline:2px solid var(--ci-beige);outline-offset:3px}
@@ -444,7 +448,7 @@ dialog.lb .lb-n{color:var(--star-soft)}
 /* The mosaic above is the arrival cue; the album below is the full set. Same lightbox. */
 .album{margin-top:clamp(var(--space-6),7vw,var(--space-10))}
 .album-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:var(--space-3);padding-bottom:var(--space-3);border-bottom:1px solid var(--hairline-dk)}
-.album-head h3{font-size:clamp(20px,2vw,26px);font-weight:700;letter-spacing:.04em}
+.album-head h3{font-size:var(--fs-xl);font-weight:700;letter-spacing:.04em}
 .album-head h3 span{display:block;font-family:var(--latin);font-size:var(--fs-xs);font-weight:500;letter-spacing:var(--tracking-label);color:var(--ink-mute);text-transform:uppercase;margin-top:6px}
 .filters{display:flex;flex-wrap:wrap;gap:6px}
 .filters button{font:inherit;font-size:var(--fs-sm);padding:7px 14px;border-radius:var(--radius-pill);border:1px solid var(--hairline-ui);background:transparent;color:var(--ink-soft);cursor:pointer;min-height:44px;transition:background var(--dur-ui) var(--ease),color var(--dur-ui) var(--ease),border-color var(--dur-ui) var(--ease),transform var(--dur-fast) var(--ease)}
@@ -478,7 +482,7 @@ dialog.lb .lb-n{color:var(--star-soft)}
 .about p,.course .lead,.sec-idx p{text-wrap:pretty}
 .about p{font-size:var(--fs-base);line-height:2.1;color:var(--ink-soft);max-width:var(--measure)}
 .about p+p{margin-top:var(--space-3)}
-.about .pull{font-size:clamp(19px,1.9vw,26px);font-weight:500;line-height:1.7;color:var(--ink);max-width:22em;margin-bottom:var(--space-4);padding-left:var(--space-3);border-left:2px solid var(--accent)}
+.about .pull{font-size:var(--fs-xl);font-weight:500;line-height:1.7;color:var(--ink);max-width:22em;margin-bottom:var(--space-4);padding-left:var(--space-3);border-left:2px solid var(--accent)}
 .about .acts{display:flex;flex-wrap:wrap;gap:var(--space-1);margin-top:var(--space-4)}
 .about .album{scroll-margin-top:calc(var(--bar-h) + var(--space-2))}
 .about .album:focus{outline:none}
@@ -501,7 +505,7 @@ section.sec+section.sec.night{border-top-color:transparent}
 .course-grid>*{min-width:0}
 .course-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(var(--space-4),5vw,var(--space-10));align-items:start}
 .course .status{display:inline-block;font-family:var(--mono);font-size:var(--fs-xs);letter-spacing:var(--tracking-label);color:var(--ci-orange);border:1px solid rgba(240,166,113,.5);padding:3px 10px;border-radius:var(--radius-pill)}
-.course h3{font-weight:700;font-size:clamp(22px,2.2vw,30px);line-height:1.4;margin-top:var(--space-3);color:var(--paper-lt)}
+.course h3{font-weight:700;font-size:var(--fs-xl);line-height:1.4;margin-top:var(--space-3);color:var(--paper-lt)}
 .course h3 span{display:block;font-size:var(--fs-md);font-weight:500;color:var(--ci-beige);margin-top:6px;letter-spacing:.06em}
 .course .lead{margin-top:var(--space-3);font-size:var(--fs-base);line-height:2.05;color:var(--star-86);max-width:var(--measure)}
 .course .cb-facts{display:grid;gap:var(--space-2)}
@@ -822,7 +826,7 @@ footer ul a:hover{color:var(--accent)}
     <button class="x" type="button" aria-label="閉じる">×</button>
     <button class="nav prev" type="button" aria-label="前の写真">‹</button>
     <button class="nav next" type="button" aria-label="次の写真">›</button>
-    <div class="stage"><img alt=""><img class="ghost" alt="" aria-hidden="true"></div><p><span class="lb-cap"></span><span class="lb-n mono"></span></p>
+    <div class="stage"><img alt=""><img class="ghost" alt="" aria-hidden="true"></div><p><span class="lb-cap"></span><span class="lb-n mono" aria-live="polite" aria-atomic="true"></span></p>
   </dialog>
 </section>
 
@@ -925,7 +929,7 @@ footer ul a:hover{color:var(--accent)}
   onScroll(); addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
 
   // reveal on entry; the map svg gets .go so the route draws when it is actually seen (not on page load).
-  // Safety net: everything is revealed 4s after load regardless, so no content depends on the observer.
+  // Without IntersectionObserver everything is revealed at once; without JS nothing is hidden (.js gate); print reveals all.
   var rv=document.querySelectorAll('.rv, .sec-idx .big, .routemap');
   function reveal(el){el.classList.add('in'); if(el.classList.contains('routemap')) el.classList.add('go');}
   if('IntersectionObserver' in window){
@@ -950,7 +954,7 @@ footer ul a:hover{color:var(--accent)}
   // only the steps next to the map light it up; steps 3-4 (02) sit far below it, so linking them would point off-screen (fable review 2026-11-07)
   var steps=document.querySelectorAll('#walk .steps li');
   function mark(n){stops.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)}); steps.forEach(function(s){s.classList.toggle('on',s.dataset.step===n)});}
-  steps.forEach(function(li){li.addEventListener('mouseenter',function(){mark(li.dataset.step)}); li.addEventListener('mouseleave',function(){mark('')}); li.tabIndex=0; li.addEventListener('focusin',function(){mark(li.dataset.step)}); li.addEventListener('focusout',function(){mark('')});});
+  steps.forEach(function(li){li.addEventListener('mouseenter',function(){mark(li.dataset.step)}); li.addEventListener('mouseleave',function(){mark('')});}); // pointer only: the steps are text, not controls, so they are not Tab stops (WCAG 2.4.3 / 2.1.1)
 
   var live=document.getElementById('live');
   function copyText(t){
