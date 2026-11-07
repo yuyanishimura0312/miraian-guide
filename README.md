@@ -112,6 +112,10 @@ python3 tools/photos/test_gallery.py http://127.0.0.1:<port>/   # 動作確認�
 - title / description / canonical / OGP / Twitter カード / geo メタ
 - 構造化データ（JSON-LD）: NGO・Place（住所・座標・地図）・WebPage・BreadcrumbList
 - robots.txt・sitemap.xml・llms.txt
+- 構造化データに講座のワークショップ回（Event・会場は未来庵）を載せている。★期が変わったら、バナーの日程と一緒に Event も直す（終わった回を残さない）
+- sitemap.xml の lastmod は、ページの中身を実際に変えたときだけ更新する（中身を変えずに日付だけ上げない）
+- GitHub Pages の「Enforce HTTPS」を有効にしている（http は https へ 301 で移る。2026-11-07）
+- title は検索結果で切れにくい長さにし、施設名「未来庵」を先頭に置く
 
 ## 共有用画像の作り直し
 

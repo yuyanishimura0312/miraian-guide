@@ -127,3 +127,11 @@
 
 ## 2026-11-07 公開（v5.3）
 - 西村さんの指示（「公開して」）で b96bfef までを push。公開ページの index.html が手元と md5 一致（e1678c12…）、公開ページで test_gallery.py 14/14 PASS
+
+## 2026-11-07 SEO の手当て
+- 依頼: 西村さん「seo対策を行なってください」
+- 採った: (1) GitHub Pages の Enforce HTTPS を有効化（http が 200 で返り、同じページが2つの住所にあった）(2) title を37字に短縮し施設名を先頭に（seo-db seo_audit_checklist title_length。根拠は表示幅の目安で順位への効果は未実証）(3) 講座ワークショップ回を Event として構造化（ページに表示している日時・会場・定員だけを使用。concept 452 虚偽の構造化データを避ける）(4) sitemap の lastmod を実際に中身を変えた日（2026-11-07）へ
+- 棄却した: FAQPage／HowTo（2023-08 に一般サイトでのリッチリザルト終了・seo_serp_feature_history）／sameAs（FACTS.md に SNS・Wikidata が無く、事実を足せない）／LocalBusiness への型変更（型の優劣を示す行が DB に無い。現状の Place を維持）／geo メタの削除（効果も害も DB に根拠なし・据え置き）／ヒーロー画像の自前化（西村さんの指示で据え置き）
+- 破綻条件: 講座の期が終わっても Event が残る → 日程更新時に一緒に直す。観測点は期の切り替え時
+- SCK: no matching rule
+- 確認していないこと: Search Console での登録・インデックス状況（西村さんのアカウントでの操作が要る）。姉妹ページ（journal/miraian・futures-studies・emerging-future.org）からこのページへのリンクは0本（2026-11-07 実測）で、追加は別サイトの変更のため確認待ち
