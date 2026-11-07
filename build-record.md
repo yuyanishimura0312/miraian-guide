@@ -124,3 +124,6 @@
 - 確認事項（西村さん）: 文字色は tokens.css miratuku-earth の #2A211C と ci-check.md の #1a1a1a のどちらを正とするか
 - 公開: しない（ローカルにコミットまで）
 - 文字色: ci-check.md（#1A1A1A）と tokens.css miratuku-earth（#2A211C）の食い違いを西村さんに確認。無回答10分のため推奨 A（CI の #1A1A1A）で進めた（2026-11-07）。同名異値を避け局所名 `--ink-ci` に改名。公開は承認待ち
+
+## 2026-11-07 公開（v5.3）
+- 西村さんの指示（「公開して」）で b96bfef までを push。公開ページの index.html が手元と md5 一致（e1678c12…）、公開ページで test_gallery.py 14/14 PASS
