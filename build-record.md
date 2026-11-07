@@ -103,3 +103,23 @@
 - 採点: 81/100 Good
 - 接地: dsdb:なし（preset 未判定） / edd:pattern:なし（medium 未収録） / tokens:~/projects/research/miratuku-design-system/ds/tokens.css
 - 公開: しない（ローカルにコミットまで）
+
+## 2026-11-07 トークンを正本 miratuku-earth に揃え、preset の選択を記録（v5.3）
+- 依頼: 西村さんが選択肢 B「デザインシステムの値に揃えてから公開する」を選択。前回の再採点（81）の修正必須2件（同名異値・1違いの写し誤り／preset の選択と根拠の記録が無い）を直す。構成・ヒーロー画像・preload は変えない
+- 採った: `:root` の名前を1つずつ正本（tokens.css の基底 `:root` ＋ `[data-preset="miratuku-earth"]`）と突き合わせ（scratchpad の cmp.py。直前に同名異値17件・1違い4件、直後0件）、(a) 正本の値に合わせる／(b) 名前を変えて局所の値にし理由を書く、に分けた
+  - (a) `--ink` #1A1A1A→#2A211C、`--ink-soft` #56504A→#4A3C34、`--fs-h2` 24-36→26-38px、`--tracking-label` .18→.22em、`--tracking-head` -.005→-.015em、`--lh-body` 1.95→2.0、`--measure` 34em→64ch、`--dur-fast` .15→.2s、`--accent-dp` #5E2E1F→`--accent-deep` #5E2E1E、`--hairline` #E5DDD0→`--rule` #E4DCD2、`--map-label-dk` #5A4A40→`var(--ink-cite)` #5B4A3F
+  - 余白: 値は1px も変えず、正本の名前へ付け替えた（旧 1/2/3/10 → 正本 2/3/4/8 = 8/16/24/80）。正本に無い段は順序を崩さない名前で足した（--space-5 32・--space-7 64・--space-10 96）。40px は 32 と 48 の間に段が無いので局所 `--space-gap-min`。未使用の旧 --space-7(56) は削除
+  - (b) `--ink-mute-aa` #6E675D（正本 --ink-mute #8A7868 は地の上 3.99:1 で AA 未達）／`--side-guide` clamp(20px,5.5vw,72px)（正本 --side を入れて 390px で撮ったところ、所在地カードの「経路を調べる」が2段目へ落ちた）／`--fs-hero`・`--fs-hero-en`・`--fs-numeral`（写真上の施設名と装飾の節番号。正本の h1・display とは役割が違う）
+  - 版面の選択: `:root` 冒頭と README に、系譜と名義・読者・媒体・調子・preset の軸ごとに1行ずつ
+  - あわせて: 拡大表示の dialog が UA 既定の文字色（黒）を持っていたので `color:var(--star)`（文字を持つ子は自前の色なので見た目は不変）
+- 棄却した: (1) `--side` を正本どおり — 上記の通り所在地カードが割れる (2) 余白の全段を正本の値へ寄せる — 4px/80px の位置がずれ、全区画の間隔が変わる。値を保って名前だけ揃える方を採った (3) 40px を 32/48 に丸める — スマートフォンの区画間が変わる (4) `--ink-mute` を正本の値へ — AA 未達 (5) `--ink` を ci-check.md の #1a1a1a のまま残して名前だけ変える — 西村さんの選んだ「デザインシステムの値に揃える」に合わない。正本どうしの食い違いとして確認事項に残した
+- 見た目の変化（before/after を 390/768/1440 で撮って比較）: 本文の可読幅が約5%狭く（34em→64ch: 544→516px）、節見出しが 2px 大きく、文字が暖かい近黒に、ラベルの字間がわずかに広く、ページの高さは 390px で +48px。構成・ヒーロー・地図は不変
+- 破綻条件: (a) 正本 tokens.css の miratuku-earth が改訂される → cmp.py で再照合（写しは自動では追随しない） (b) ci-check.md の文字色 #1a1a1a を正とする決裁が出る → `--ink` を戻し、名前を変えて局所にする (c) 64ch で行が短すぎるという声 → 34em に戻し、名前を `--measure-guide` にする
+- SCK: no matching rule（静的ページのトークン整理。引いていない）
+- 自前の確認: test_gallery.py 14/14 PASS。390/768/1024/1440 × 動き on/off × JS 有無の16条件で横はみ出し0・HTML 文字の最小 11px・地図の文字の最小 11.0px 以上・イタリック0・純黒0・JS エラー0。単色の地の上の文字のコントラスト未達は0（輪郭だけの装飾の節番号を除く）
+- 委譲先: design-quality-auditor（実装は inline）
+- 採点: 82/100 Good（D1 26 / D2 13 / D3 16 / D4 14 / D5 9 / D6 4）・必須ゲート全 PASS・修正必須なし。opus 別インスタンス、build-record・過去の採点・git log は開いていないと申告
+- 接地: dsdb:なし（preset 未判定 —— miratuku-earth は DSDB の preset 集合に無い）/ edd:pattern:なし（medium 未収録）/ tokens:~/projects/research/miratuku-design-system/ds/tokens.css
+- 新しく出た「あるとよい」（未対応）: スマートフォンで地図の初期表示に目的地が入らない（1000px 幅のうち左端 313px だけ見える）／理由の無い局所色 6つ（--paper-dp ほか）／--ease-in は正本で --ease-decelerate／rgba(33,23,18,…) 24件のトークン化／--scrim が answer-warm-dark の同名と衝突／薄い罫2色の役割／Google マップ埋め込みの失敗表示／コメントの「37 tiles」（実数38）
+- 確認事項（西村さん）: 文字色は tokens.css miratuku-earth の #2A211C と ci-check.md の #1a1a1a のどちらを正とするか
+- 公開: しない（ローカルにコミットまで）
